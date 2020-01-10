@@ -1,0 +1,12 @@
+#sendingForm{
+    width: 70%;
+    margin: 50px auto;
+}
+
+#sendingForm input{
+    width: 40%;
+}
+
+#sendingForm .action-button{
+    width: auto;
+}

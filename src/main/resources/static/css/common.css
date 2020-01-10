@@ -1,0 +1,119 @@
+* {margin: 0; padding: 0;}
+.header{
+    width: 100%;
+    height: 50px;
+    background-color: #12adff;
+    text-align: center;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.fs-title {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 50px;
+}
+
+.form {
+    text-align: center;
+    position: relative;
+}
+
+.form label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #2C3E50;
+}
+
+.form fieldset {
+    background: white;
+    border: 0 none;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 70%;
+    margin: 0 10%;
+    /*stacking fieldsets above each other*/
+    position: relative;
+}
+/*Hide all except first fieldset*/
+.form fieldset:not(:first-of-type) {
+    display: none;
+}
+.form p{
+    margin-bottom: 15px;
+}
+/*inputs*/
+.form input {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-family: Verdana;
+    color: #2C3E50;
+    font-size: 12px;
+}
+/*buttons*/
+.form .action-button {
+    background: #2C3E50;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+}
+.form .action-button:hover, .formulaire .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px darkblue;
+}
+/*progressbar*/
+.multiStepProgressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+}
+.multiStepProgressbar li {
+    list-style-type: none;
+    color: grey;
+    text-transform: uppercase;
+    font-size: 9px;
+    width: 25%;
+    float: left;
+    position: relative;
+}
+.multiStepProgressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 40px;
+    line-height: 40px;
+    display: block;
+    font-size: 10px;
+    color: white;
+    background: grey;
+    border-radius: 50%;
+    margin: 0 auto 5px auto;
+}
+/*progressbar connectors*/
+.multiStepProgressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: grey;
+    position: absolute;
+    left: -50%;
+    top: 20px;
+    z-index: -1; /*put it behind the numbers*/
+}
+.multiStepProgressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+.multiStepProgressbar li.active:before,  #progressbar li.active:after{
+    background: #2C3E50;
+    color: white;
+}

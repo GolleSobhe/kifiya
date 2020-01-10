@@ -1,0 +1,54 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Créer un compte</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../../static/css/inscription.css"
+          th:href="@{/css/inscription.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div id="inscriptionContainer">
+    <form class="form" th:object="${user}" th:action="@{/user}" th:method="post">
+        <div class="letfDiv">
+            <p>
+                <label>Nom </label><br/>
+                <input th:field="*{nom}" type="text"/>
+            </p>
+            <p>
+                <label>Numero telephone </label><br/>
+                <input type="text" th:field="*{telephone}"/>
+            </p>
+            <p>
+                <label>Pays de residence </label><br/>
+                <input type="text" th:field="*{pays}"/>
+            </p>
+            <p>
+                <label>Adresse </label><br/>
+                <input type="text" th:field="*{adresse}"/>
+            </p>
+        </div>
+        <div class="rightDiv">
+            <p>
+                <label>Prénom </label><br/>
+                <input type="text" th:field="*{prenom}"/>
+            </p>
+            <p>
+                <label>Email </label><br/>
+                <input type="text" th:field="*{email}"/>
+            </p>
+            <p>
+                <label>Ville </label><br/>
+                <input type="text" th:field="*{ville}"/>
+            </p>
+            <p>
+                <label>Mot de passe </label><br/>
+                <input type="password" th:field="*{password}"/>
+            </p>
+        </div>
+        <button class="action-button">Créer mon compte</button><br/>
+    </form>
+</div>
+</body>
+</html>

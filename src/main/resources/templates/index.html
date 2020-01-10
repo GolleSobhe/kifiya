@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Sender</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../static/css/index.css"
+          th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div id="container">
+    <div>
+        <div id="identificationDiv">
+            <a th:href="@{/user/signIn}">Connexion</a>
+            <a th:href="@{/user/new}">Inscription</a>
+        </div>
+    </div>
+    <form class="form" id="indexForm" th:action="@{/envoi}" th:method="post">
+        <p>
+            <label>Quel montant souhaitez-vous envoyer:</label><br/>
+            <input type="text"/>
+            <button class="action-button">C'est parti</button>
+        </p>
+    </form>
+    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+</div>
+</body>
+</html>
