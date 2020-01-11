@@ -10,28 +10,7 @@
 
 <body>
     <div id="fiyahollo-header">
-        
-        <div id="fiyahollo-header-bar">
-            <div class="fiyahollo-wrap">
-                <a id="fiyahollo-header-logo" href="#">fiyahollo.com</a>
-
-                <div>
-                    <div class="fiyahollo-hide-under-767">
-                        <a th:href="@{/user/signIn}" class="fiyahollo-header-link">Connexion</a>
-                        <a th:href="@{/user/new}" class="fiyahollo-button fiyahollo-join-gradient">Inscription</a>
-                    </div>
-
-                    <div class="fiyahollo-show-under-767">
-                        <a href="#" class="fiyahollo-header-link">Connexion</a>
-                        <div class="fiyahollo-menu-separator"></div>
-                        <a href="#" class="dn-open-menu-btn">Menu</a>
-
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <header th:insert="fragments/header :: header"> </header>
         <div id="fiyahollo-header-menu">
             <div class="fiyahollo-wrap">
                 <ul>
@@ -56,7 +35,7 @@
 
     <nav class="fiyahollo-show-under-767">
         <div id="dn-main-menu-wrap">
-            <a id="dn-mobile-menu-logo" href="#">ezetop</a>
+            <a id="dn-mobile-menu-logo" href="#">fiyahollo</a>
     
             <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
                 <span class="icon-cancel-circled"></span>
@@ -89,7 +68,7 @@
     
                 <div class="clear"></div>
     
-                <p>Email: <a href="#" tabindex="-1">customercare@ezetop.com</a></p>
+                <p>Email: <a href="#" tabindex="-1">customercare@fiyahollo.com</a></p>
             </div>
         </div>
     

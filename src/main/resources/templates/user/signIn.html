@@ -8,9 +8,9 @@
           th:href="@{/css/connexion.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
-<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
 <div id="connexionContainer">
-    <form  class="form" th:action="@{/user/signIn}" th:method="post">
+    <form  class="form" th:action="@{/}" th:method="post">
         <p>
             <label>Email </label><br/>
             <input type="text" name="username"/>
