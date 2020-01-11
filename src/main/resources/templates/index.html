@@ -10,35 +10,12 @@
 
 <body>
     <div id="fiyahollo-header">
-        
-        <div id="fiyahollo-header-bar">
-            <div class="fiyahollo-wrap">
-                <a id="fiyahollo-header-logo" href="#">ezetop.com</a>
-
-                <div>
-                    <div class="fiyahollo-hide-under-767">
-                        <a th:href="@{/user/signIn}" class="fiyahollo-header-link">Connexion</a>
-                        <a th:href="@{/user/new}" class="fiyahollo-button fiyahollo-join-gradient">Inscription</a>
-                    </div>
-
-                    <div class="fiyahollo-show-under-767">
-                        <a href="#" class="fiyahollo-header-link">Connexion</a>
-                        <div class="fiyahollo-menu-separator"></div>
-                        <a href="#" class="dn-open-menu-btn">Menu</a>
-
-                        <div class="clear"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <header th:insert="fragments/header :: header"> </header>
         <div id="fiyahollo-header-menu">
             <div class="fiyahollo-wrap">
                 <ul>
                     <li><a href="#" class="fiyahollo-header-menu-link fiyahollo-active">Accueil</a></li>
-                    <li><a href="#" class="fiyahollo-header-menu-link ">Recharge</a></li>
-                    <li><a href="#" class="fiyahollo-header-menu-link ">Mon Compte</a></li>
-                    <li><a href="#" class="fiyahollo-header-menu-link ">Pays</a></li>
+                    <li><a href="#" class="fiyahollo-header-menu-link ">Envoyer de l'argent</a></li>
                     <li class="dn-last-dropdown">
                         <div class="fiyahollo-dropdown-menu">
                             <div class="fiyahollo-dropdown-btn ">
@@ -58,7 +35,7 @@
 
     <nav class="fiyahollo-show-under-767">
         <div id="dn-main-menu-wrap">
-            <a id="dn-mobile-menu-logo" href="#">ezetop</a>
+            <a id="dn-mobile-menu-logo" href="#">fiyahollo</a>
     
             <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
                 <span class="icon-cancel-circled"></span>
@@ -68,10 +45,7 @@
     
             <ul class="dn-margin">
                 <li><a href="#" class="dn-active" tabindex="-1">Accueil</a></li>
-                <li><a href="#" class="" tabindex="-1">Recharge</a></li>
-                <li><a href="#" class="" tabindex="-1">Mon Compte</a></li>
-    
-                <li><a href="#" class="" tabindex="-1">Pays</a></li>
+                <li><a href="#" class="" tabindex="-1">Envoyer de l'argent</a></li>
                 <li><a href="#" class="dn-submenu-btn " data-show="support" tabindex="-1">Assistance<span class="icon-angle-right"></span></a></li>
             </ul>
     
@@ -94,7 +68,7 @@
     
                 <div class="clear"></div>
     
-                <p>Email: <a href="#" tabindex="-1">customercare@ezetop.com</a></p>
+                <p>Email: <a href="#" tabindex="-1">customercare@fiyahollo.com</a></p>
             </div>
         </div>
     
@@ -156,8 +130,8 @@
                             <h1>Envoyer de l'argent mobiles dans le monde entier</h1>
                             <h2>Facile, Rapide et Fiable.</h2>
                         </div>
-    
-                        <a href="/fr/topup" class="fiyahollo-button fiyahollo-cta-gradient">Envoyer de l'argent</a>
+
+                        <a th:href="@{/envoi/}" class="fiyahollo-button fiyahollo-cta-gradient">Envoyer de l'argent</a>
                     </div>
                 </div>
             </div>

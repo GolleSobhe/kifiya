@@ -1,6 +1,6 @@
 package com.kifiya.kobiri.services;
 
-import com.kifiya.kobiri.models.User;
+import com.kifiya.kobiri.models.user.User;
 import com.kifiya.kobiri.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

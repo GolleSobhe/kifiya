@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head lang="en">
     <meta charset="UTF-8">
+    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
+
 </head>
 <body>
-<div class="container">
-    <div th:fragment="header">
-        <div class="header">
-            <a th:href="@{/}">Kobiri</a>
+<header>
+    <div id="fiyahollo-header-bar">
+        <div class="fiyahollo-wrap">
+            <a id="fiyahollo-header-logo" href="#">fiyahollo.com</a>
+
+            <div th:if="${connexion == 'connexion'}">
+                <connexion th:replace="fragments/connexion :: connexion"> </connexion>
+            </div>
+            <div th:if="${connexion == 'deconnexion'}">
+                <deconnexion th:replace="fragments/deconnexion :: deconnexion"></deconnexion>
+            </div>
+
         </div>
     </div>
-</div>
+</header>
+
+
 </body>
 </html>
