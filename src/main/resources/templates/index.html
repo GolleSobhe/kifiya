@@ -1,28 +1,176 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>My Sender</title>
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <link href="../static/css/index.css"
-          th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
+
+    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
+
+    <title>FiyaHollo</title>
 </head>
+
 <body>
-<div id="container">
-    <div>
-        <div id="identificationDiv">
-            <a th:href="@{/user/signIn}">Connexion</a>
-            <a th:href="@{/user/new}">Inscription</a>
+    <div id="fiyahollo-header">
+        
+        <div id="fiyahollo-header-bar">
+            <div class="fiyahollo-wrap">
+                <a id="fiyahollo-header-logo" href="#">fiyahollo.com</a>
+
+                <div>
+                    <div class="fiyahollo-hide-under-767">
+                        <a th:href="@{/user/signIn}" class="fiyahollo-header-link">Connexion</a>
+                        <a th:href="@{/user/new}" class="fiyahollo-button fiyahollo-join-gradient">Inscription</a>
+                    </div>
+
+                    <div class="fiyahollo-show-under-767">
+                        <a href="#" class="fiyahollo-header-link">Connexion</a>
+                        <div class="fiyahollo-menu-separator"></div>
+                        <a href="#" class="dn-open-menu-btn">Menu</a>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div id="fiyahollo-header-menu">
+            <div class="fiyahollo-wrap">
+                <ul>
+                    <li><a href="#" class="fiyahollo-header-menu-link fiyahollo-active">Accueil</a></li>
+                    <li><a href="#" class="fiyahollo-header-menu-link ">Envoyer de l'argent</a></li>
+                    <li class="dn-last-dropdown">
+                        <div class="fiyahollo-dropdown-menu">
+                            <div class="fiyahollo-dropdown-btn ">
+                                <span>Assistance</span>
+                            </div>
+
+                        </div>
+
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="clear"></div>
     </div>
-    <form class="form" id="indexForm" th:action="@{/envoi}" th:method="post">
-        <p>
-            <label>Quel montant souhaitez-vous envoyer:</label><br/>
-            <input type="text"/>
-            <button class="action-button">C'est parti</button>
-        </p>
-    </form>
-    <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+
+    <nav class="fiyahollo-show-under-767">
+        <div id="dn-main-menu-wrap">
+            <a id="dn-mobile-menu-logo" href="#">ezetop</a>
+    
+            <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
+                <span class="icon-cancel-circled"></span>
+            </div>
+    
+            <div class="clear"></div>
+    
+            <ul class="dn-margin">
+                <li><a href="#" class="dn-active" tabindex="-1">Accueil</a></li>
+                <li><a href="#" class="" tabindex="-1">Envoyer de l'argent</a></li>
+                <li><a href="#" class="dn-submenu-btn " data-show="support" tabindex="-1">Assistance<span class="icon-angle-right"></span></a></li>
+            </ul>
+    
+            <ul>
+                <li><a href="#" tabindex="-1">Connexion</a></li>
+                <li><a href="#" tabindex="-1">Inscription</a></li>
+            </ul>
+    
+            
+    
+            <div id="dn-menu-customer-care">
+                <a href="#" class="dn-chat-link" tabindex="-1">
+                    <div class="icon-chat dn-chat-icon"></div>
+    
+                    <div class="dn-live-help ">
+                        <span>Aide en direct</span>
+                        <span>24/7 Assistance</span>
+                    </div>
+                </a>
+    
+                <div class="clear"></div>
+    
+                <p>Email: <a href="#" tabindex="-1">customercare@ezetop.com</a></p>
+            </div>
+        </div>
+    
+        <div id="dn-products-menu" class="dn-submenu">
+            <div class="dn-submenu-header">
+                <h3>Services</h3>
+    
+                <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
+                    <span class="icon-cancel-circled"></span>
+                </div>
+                ;
+            </div>
+            <div class="clear"></div>
+    
+            <div class="dn-menu-back-btn">
+                <div class="icon-angle-left"></div>
+                <span>Retour</span>
+            </div>
+    
+            <ul>
+            </ul>
+        </div>
+    
+        <div id="dn-support-menu" class="dn-submenu">
+            <div class="dn-submenu-header">
+                <h3>Aide</h3>
+    
+                <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
+                    <span class="icon-cancel-circled"></span>
+                </div>
+                ;
+            </div>
+            <div class="clear"></div>
+    
+            <div class="dn-menu-back-btn">
+                <div class="icon-angle-left"></div>
+                <span>Retour</span>
+            </div>
+    
+            <ul>
+                <li><a href="#" class="" tabindex="-1">Aide</a></li>
+                <li><a href="#" class="" tabindex="-1">Comment envoyer une recharge</a></li>
+                <li><a href="#" class="" tabindex="-1">Moyens de paiement</a></li>
+            </ul>
+        </div>
+    
+    </nav>
+
+    <div id="fiyahollo-wrap">
+
+        <div id="fiyahollo-products-panel">
+                
+            <div>
+                <div class="fiyahollo-product">
+                    <div class="dn-snippet" id="dn-snippet-homepagetopupproduct">
+                            
+                        <div class="fiyahollo-product-text">
+                            <h1>FIYAHOOLO</h1>
+                            <h1>Envoyer de l'argent mobiles dans le monde entier</h1>
+                            <h2>Facile, Rapide et Fiable.</h2>
+                        </div>
+
+                        <a th:href="@{/envoi/}" class="fiyahollo-button fiyahollo-cta-gradient">Envoyer de l'argent</a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    
+        <div class="clear"></div>
+    </div>
+
+    
+    
+    <div id="fiyahollo-footer">
+    <div class="fiyahollo-wrap">
+
+        <div class="clear"></div>
+    </div>
+
 </div>
+    
 </body>
+
 </html>

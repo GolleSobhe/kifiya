@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="ez-topup-wrap">
+
+
+
+
+
+
+    <div class="ez-middle">
+        <div class="ez-form-element-wrap">
+            <label for="AirtimeInput">Saisissez le numéro de téléphone que vous voulez recharger&nbsp;:</label>
+            <div id="airtime"><div id="airtimeCountriesBtn"><div class="airtimeGlobe airtimeGlobeIcon"><div class="imagerepo-spr-flag airtimeHidden"></div></div><div class="airtimeArrowDown"></div></div><input name="AirtimeInput" autocapitalize="off" autocomplete="off" autocorrect="off" class="no-mouseflow js-set-focus" id="AirtimeInput" pattern="[0-9]*" tabindex="1" type="text" value="" maxlength="14" data-minlength="14"></div>
+            <div class="clear"></div>
+
+
+            <div id="ez-airtime-error-box" class="ez-alert-box ez-error-box" style="display:none">
+
+
+                <div class="ez-alert-box-icon"></div>
+
+
+                <ul>
+                    <li></li>
+                </ul>
+
+            </div>
+
+
+
+            <div id="ez-country-error-box" class="ez-alert-box ez-error-box" style="display:none">
+
+
+                <div class="ez-alert-box-icon"></div>
+
+
+                <ul>
+                    <li></li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <div id="ez-operators-wrap" class="ez-form-element-wrap"></div>
+
+        <div class="clear"></div>
+
+
+
+        <div id="ez-promotions-box" class="ez-alert-box ez-message-box" style="display:none">
+
+
+            <div class="ez-alert-box-icon"></div>
+
+
+            <ul>
+                <li> <div id="ez-promotion-content"></div></li>
+            </ul>
+
+        </div>
+
+
+        <div class="dn-snippet" id="dn-snippet-denominationnudgepanel"><div class="dn-snippet" id="dn-snippet-denominationnudgestyle"><style>
+
+.dn-denom-banner-wrap {
+	height: 116px;
+	border: 5px solid #d8e5f5;
+    background: #fff;
+    z-index: 304;
+    cursor: pointer;
+	position: relative;
+	margin-bottom: 20px;
+    -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
+.ribbon {
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	top: -5px;
+	left: -5px;
+	z-index: 10;
+	text-indent: -99999px;
+	background: url(/content/uploads/denominations-nudge-panel/ribbon-mostPopular.png) 0 0 no-repeat;
+}
+
+.ribbon br {
+	display: none;
+}
+
+.ez-denom .ribbon {
+	width: 35px;
+	height: 35px;
+	background: url(/content/uploads/denominations-nudge-panel/ribbon.png) 0 0 no-repeat;
+}
+
+#dn-denom-banner-left {
+	width: 134px;
+	height: 94px;
+    float: left;
+    margin-top: 10px;
+    text-align: center;
+    border-right: 1px solid #e1e1e1;
+}
+
+.dn-denom-banner-currency {
+    color: #999;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 19px 0 4px 0;
+}
+
+.dn-denom-banner-amount {
+    font-weight: bold;
+    font-size: 36px;
+ }
+
+
+
+#dn-denom-banner-right {
+	width: 302px;
+	float: right;
+    color: #656565;
+    font-size: 19px;
+    position: relative;
+
+}
+
+body.es #dn-denom-banner-right { font-size: 16px; }
+
+#dn-denom-banner-flag {
+    position: absolute;
+    top: 34px;
+    left: 30px;
+}
+
+#dn-denom-banner-text {
+    position: absolute;
+    top: 27px;
+	left: 58px;
+}
+
+
+#dn-denom-banner-check {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 65px;
+    left: 28px;
+    background: url(/content/uploads/denominations-nudge-panel/check.jpg) 0 0 no-repeat;
+    background-size: 20px 20px;
+}
+
+
+#dn-denom-banner-bonus-text {
+    position: absolute;
+    top: 63px;
+    left: 58px;
+}
+
+
+
+</style></div>
+
+            <div id="dn-denom-banner-showcase" style="display:none;">
+                <label class="dn-nudge-select-label"></label>
+                <div>
+                    <div class="dn-triplet">
+                        <div class="dn-left-triplet">
+                            <div id="dn-denom-banner-showcase0" class="dn-denom-banner-wrap">
+                                <div class="dn-denom-banner-showcase-details">
+                                    <div class="dn-denom-banner-currency">EUR</div><div class="dn-denom-banner-amount">€999.999</div>
+                                    <div class="dn-denom-banner-buys"><p><span>buys</span><br>JMD $753.48</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dn-triplet">
+                        <div class="dn-middle-triplet">
+                            <div class="dn-h-ribbon">Most popular</div>
+                            <div id="dn-denom-banner-showcase1" class="dn-denom-banner-wrap">
+                                <div class="dn-denom-banner-showcase-details">
+                                    <div class="dn-denom-banner-currency">EUR</div><div class="dn-denom-banner-amount">€999.999</div>
+                                    <div class="dn-denom-banner-buys"><p><span>buys</span><br>JMD $753.48</p></div>
+                                </div>
+                            </div>
+                        </div></div>
+                    <div class="dn-triplet">
+                        <div class="dn-right-triplet">
+                            <div id="dn-denom-banner-showcase2" class="dn-denom-banner-wrap">
+                                <div class="dn-denom-banner-showcase-details">
+                                    <div class="dn-denom-banner-currency">EUR</div><div class="dn-denom-banner-amount">€999.999</div>
+                                    <div class="dn-denom-banner-buys"><p><span>buys</span><br>JMD $753.48</p></div>
+                                </div>
+                            </div>
+                        </div></div>
+                    <div id="dn-denom-showcase-showall"><a href="#">show all</a></div>
+                </div>
+            </div>
+
+
+            <div id="dn-denom-banner-nudge" style="display:none;">
+                <label class="dn-nudge-select-label"></label>
+
+                <div class="dn-denom-banner-wrap">
+                    <div class="ribbon"></div>
+                    <div class="dn-denom-banner-nudge-details">
+                        <div id="dn-denom-banner-left">
+                            <div class="dn-denom-banner-currency"></div>
+                            <div class="dn-denom-banner-amount"></div>
+                        </div>
+
+                        <div id="dn-denom-banner-right">
+                            <!-- div id="dn-denom-banner-right-top" class="dn-denom-banner-right-section" -->
+                            <div id="dn-denom-banner-flag">
+                                <div class="dn-flag dn-flag-jm"></div>
+                            </div>
+                            <span id="dn-denom-banner-text">most popular in Jamaica</span>
+                            <!-- /div -->
+                            <!-- div id="dn-denom-banner-right-bottom" class="dn-denom-banner-right-section" -->
+                            <div id="dn-denom-banner-check"></div>
+                            <span id="dn-denom-banner-bonus-text">free sms bonus!</span>
+                            <!--/div -->
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+            </div></div>
+
+        <div id="ez-denominations-wrap" class="ez-form-element-wrap"></div>
+
+        <div class="clear"></div>
+
+
+
+        <div id="ez-receve-amount-box" class="ez-alert-box ez-message-box" style="display:none">
+
+
+            <div class="ez-alert-box-icon"></div>
+
+
+            <ul>
+                <li>Le téléphone va recevoir <span id="ez-receive-amount"></span></li>
+            </ul>
+
+        </div>
+
+
+
+
+        <div id="ez-topup-processing-loader">
+            <p>Veuillez patienter pendant que nous traitons votre demande</p>
+            <img src="/-v200103.12.0.2-/content/images/ezetop/loaders/processing-loader.gif">
+        </div>
+
+
+
+        <div class="clear"></div>
+
+        <div id="ez-topup-next" class="ez-topup-auth">
+            <a href="#" id="ez-topup-login" class="ez-button ez-login-gradient" data-page="login" data-posturl="/fr/topup/cmssavedetails">Connexion</a>
+            <a href="#" id="ez-topup-register" class="ez-button ez-join-gradient" data-page="register" data-posturl="/fr/topup/cmssavedetails">Inscription</a>
+            <label>pour procéder au paiement</label>
+        </div>
+        <div class="clear"></div>
+
+        <script src="/-v200103.12.0.2-/bundles/globalize-fr-FR?v=7D0tdg6pisn4l2GmMngH4VyrZMwXl59bxL5NhilwDW41"></script>
+
+
+
+        <div id="ez-topup-details-error" class="ez-alert-box ez-error-box" style="display:none">
+
+
+            <div class="ez-alert-box-icon"></div>
+
+
+            <ul>
+                <li></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+	    EZEAPP.topUp = {
+		    PhoneNumber:            null,
+		    OperatorCode:           null,
+		    OperatorCountryCode:    null,
+		    ProductValueNum:        null,
+		    EzeOperator:            false,
+		    PromotionId:			null,
+		    Source:					null
+	    };
+    </script>
+
+
+    <script type="text/javascript">
+	    EZEAPP.airtime = $('#AirtimeInput').airtime({
+	            source: EZEAPP.topUp.Source,
+	            instance: "TopUp",
+	            denominationSortAscending: 'True',
+	            authenticated: false,
+	            culture: 'fr-FR',
+	            defaultPhoneNumber: EZEAPP.topUp.PhoneNumber,
+	            defaultCountry: EZEAPP.topUp.OperatorCountryCode,
+	            defaultOperator: EZEAPP.topUp.OperatorCode,
+	            defaultDenomination: parseFloat(EZEAPP.topUp.ProductValueNum),
+	            operatorLookedUp: EZEAPP.topUp.EzeOperator,
+	            promotionId: EZEAPP.topUp.PromotionId,
+	            loader: '/content/images/ezetop/loaders/topup-loader.gif',
+	            countryHint: '#ez-selected-country',
+	            countryList: EZEAPP.indexedCountries,
+	            promotions: EZEAPP.airtimePromotions,
+	            displayCurrency: EZEAPP.airtimeCurrency,
+	            currencies: EZEAPP.currencies,
+	            errorElement: '#ez-airtime-error-box',
+	            errorCountryCode: 'Aucune recharge ne peut être envoyée dans ce pays pour le moment. Veuillez cliquer <a href="https://www.ezetop.com/fr/aide">sur ce lien</a> pour contacter le Service clients d\'ezetop et obtenir de l\'aide, ou bien réessayer un peu plus tard.',
+	            nextButton: '#ez-topup-next',
+	            operatorSettings: {
+	                id: 'Operators',
+	                operatorWrap: '#ez-operators-wrap',
+	                labelText: 'Sélectionnez l\'opérateur:',
+	                defaultOption: 'Sélectionnez l\'opérateur',
+	                operatorLogo: 'https://imagerepo.ding.com/logo/[operatorCode]/[countryISO].png?height=34&width=68',
+	                operatorLookupURL: "/capi/OperatorLookup?phoneNumber=[phoneNumber]&nonce=" + "8197d351-e798-4685-9e41-a8a991ead4a9"
+	            },
+	            denominationSettings: {
+	                id: 'Denominations',
+	                denominationWrap: '#ez-denominations-wrap',
+	                receiveAmountBox: '#ez-receve-amount-box',
+	                receiveAmount: '#ez-receive-amount',
+	                promotionsBox: '#ez-promotions-box',
+	                promotionsContent: '#ez-promotion-content',
+	                promotionsBtnWrap: 'ez-terms-btn-wrap',
+	                promotionsBtn: 'Les Conditions générales s\'appliquent',
+	                labelText: 'Sélectionnez le montant de la recharge:',
+	                receiveAmountBtn: 'Quelle recharge cela me permet-il d\'acheter ?',
+	                mobileReceive: 'recharge mobile',
+	                URL: '/fr-FR/capi/denominations?operatorCode=[operatorCode]&operatorCountryCode=[countryISO]&productType=[productType]&displayCurrencyIso=[displayCurrency]'
+	            },
+	            smsSettings:  {
+	                smsEnabled: false,
+	                smsWrap: '#ez-sms-wrap',
+	                checkBoxId: 'SendSms',
+	                checkBoxClass: 'ez-checkbox',
+	                labelText: 'Envoyez un message avec votre recharge !',
+	                smsHint: 'Personnalisez votre message ici',
+	                smsHintClass: 'ez-form-hint',
+	                textAreaId: 'SmsTextArea',
+	                defaultSms: 'Une recharge vous a été envoyée via www.ezetop.com. Profitez-en bien !'
+	            },
+	            contactSettings: {
+	                contacts: false,
+	                id: 'TopUpContacts',
+	                showContactsBtn: '#ez-show-contact-dropdown',
+	                contactsWrap: '.ez-contacts-wrap',
+	                conactNameHodler: '#ez-topup-contact-name',
+	                labelText: 'Sélectionner parmi mes contacts:',
+	                defaultOption: 'veuillez sélectionner'
+	            },
+	            nudgePanelSettings: {
+	                id: '#dn-denom-banner-nudge',
+	                rightText: 'Choix le plus populaire',
+	                topupsText: '{0} Recharges du mois dernier',
+	                topupsHeadlineText: 'Remplissage en 3 secondes'
+	           }
+		});
+
+	</script>
+
+    <script type="text/javascript">
+	var axel = Math.random() + "";
+	var a = axel * 10000000000000;
+	document.write('<iframe src="https://4225743.fls.doubleclick.net/activityi;src=4225743;type=ezeto408;cat=first605;u1=;ord=' + a + '?" width="1" height="1" frameborder="0" style="display:none"></iframe>');
+</script><iframe src="https://4225743.fls.doubleclick.net/activityi;src=4225743;type=ezeto408;cat=first605;u1=;ord=5813530802581.406?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+    <noscript>
+        <iframe src="https://4225743.fls.doubleclick.net/activityi;src=4225743;type=ezeto408;cat=first605;u1=;ord=1?" width="1" height="1" frameborder="0" style="display:none"></iframe>
+    </noscript>
+
+</div>
+</body>
+</html>

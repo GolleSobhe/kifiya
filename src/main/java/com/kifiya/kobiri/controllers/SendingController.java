@@ -2,12 +2,18 @@ package com.kifiya.kobiri.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SendingController {
 
-    @PostMapping("envoi")
+    @PostMapping("avoirapres")
     public String initierEnvoi(){
         return "user/envoiForm";
+    }
+
+    @RequestMapping("envoi")
+    public String evnoi(){
+        return "envoi/envoi";
     }
 }
