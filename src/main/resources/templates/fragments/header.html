@@ -11,9 +11,13 @@
         <div class="fiyahollo-wrap">
             <a id="fiyahollo-header-logo" href="#">fiyahollo.com</a>
 
-            <div>
-                <connexion th:insert="fragments/connexion :: connexion"> </connexion>
+            <div th:if="${connexion == 'connexion'}">
+                <connexion th:replace="fragments/connexion :: connexion"> </connexion>
             </div>
+            <div th:if="${connexion == 'deconnexion'}">
+                <deconnexion th:replace="fragments/deconnexion :: deconnexion"></deconnexion>
+            </div>
+
         </div>
     </div>
 </header>
