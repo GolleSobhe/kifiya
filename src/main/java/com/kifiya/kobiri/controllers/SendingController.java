@@ -1,6 +1,7 @@
 package com.kifiya.kobiri.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,7 +14,7 @@ public class SendingController {
     }
 
     @RequestMapping("envoi")
-    public String evnoi(){
+    public String evnoi(Model model){
         return "envoi/envoi";
     }
 }

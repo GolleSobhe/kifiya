@@ -151,7 +151,6 @@ button:focus {
 	background-size: 140px 48px
 }
 
-
 .fiyahollo-join-gradient {
 	background: #00ab00;
 	background: -moz-linear-gradient(top, #00ab00 0%, #007900 100%);
@@ -576,3 +575,10 @@ button:focus {
 		text-align: center
 	}
 }
+
+.fiyahollo-content {
+	margin: 0 50px;
+}
+
+
+
