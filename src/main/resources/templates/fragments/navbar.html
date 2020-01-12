@@ -1,0 +1,53 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../../static/css/navbar.css"
+          th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+</head>
+
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#toggle"
+                aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+
+        <a class="brand-navbar" href="/">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXRbBy6-SyexoQy2Mu1qM5ZEtEnsWOl2guKrdAicqz6VjtO4_j&s"
+                 alt="" height="60px">
+        </a>
+
+        <div class="collapse navbar-collapse" id="toggle">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">A propos de nous</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Envoyer l'argent</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" tabindex="-1">Nous contacter</a>
+                </li>
+            </ul>
+
+            <div class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost:8080/user/new">Créer un compte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:8080/user/signIn" tabindex="-1">Connexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
