@@ -1,155 +1,21 @@
-<!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <title>Accueil</title>
 
-    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
-
-    <title>FiyaHollo</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+    <header th:insert="fragments/navbar :: navbar"> </header>
 </head>
 
 <body>
-    <div id="fiyahollo-header">
-        <header th:insert="fragments/header :: header"> </header>
-        <div id="fiyahollo-header-menu">
-            <div class="fiyahollo-wrap">
-                <ul>
-                    <li><a href="#" class="fiyahollo-header-menu-link fiyahollo-active">Accueil</a></li>
-                    <li><a href="#" class="fiyahollo-header-menu-link ">Envoyer de l'argent</a></li>
-                    <li class="dn-last-dropdown">
-                        <div class="fiyahollo-dropdown-menu">
-                            <div class="fiyahollo-dropdown-btn ">
-                                <span>Assistance</span>
-                            </div>
+<p>Le paysage est vallonné, avec plusieurs collines dont les flancs sont localement entaillés de falaises. Ces falaises ont été creusées par des glaciers, qui sont aussi à l'origine du grand nombre de blocs rocheux dans le paysage. Ce terrain rocheux, avec un sol maigre, donne lieu à des forêts de pins avec une végétation au sol assez pauvre. Cependant, cette forêt ancienne constitue un refuge pour un grand nombre d'espèces de lichens, mousses, champignons et d'insectes, ainsi que pour certains oiseaux, dont la survie dépend de la dynamique naturelle des forêts, y compris les feux de forêts, et qui ont en grande partie disparu des forêts fortement exploitées du nord suédois. Dans les vallées, les terrains plus humides donnent lieu à des environnements différents, allant de forêts d'épicéas aux tourbières d'aapa.L'histoire du parc est liée aux populations sames qui vivaient dans la région. Ils subsistaient essentiellement de la chasse et la pêche, et n'avaient un impact que très limité sur les forêts. Progressivement, à partir du XVIIIe siècle, les Suédois commencent à s'installer, et au XIXe siècle, l'exploitation intensive des forêts de la région commence. Cependant, en partie du fait des terrains difficiles d'accès, Björnlandet parvient à échapper en grande partie à cette exploitation. L'excellent état de préservation de ses forêts est remarqué lors d'un grand inventaire national des forêts dans les années 1980, et il est immédiatement proposé de les protéger. En 1991, le parc national est créé, d'une superficie de 1 130 ha. Il est étendu à la surface actuelle en 2017. En parallèle à l'extension du parc, les infrastructures touristiques sont améliorées, et il accueille maintenant 6 500 visiteurs par an. </p>
+<p>Le paysage est vallonné, avec plusieurs collines dont les flancs sont localement entaillés de falaises. Ces falaises ont été creusées par des glaciers, qui sont aussi à l'origine du grand nombre de blocs rocheux dans le paysage. Ce terrain rocheux, avec un sol maigre, donne lieu à des forêts de pins avec une végétation au sol assez pauvre. Cependant, cette forêt ancienne constitue un refuge pour un grand nombre d'espèces de lichens, mousses, champignons et d'insectes, ainsi que pour certains oiseaux, dont la survie dépend de la dynamique naturelle des forêts, y compris les feux de forêts, et qui ont en grande partie disparu des forêts fortement exploitées du nord suédois. Dans les vallées, les terrains plus humides donnent lieu à des environnements différents, allant de forêts d'épicéas aux tourbières d'aapa.L'histoire du parc est liée aux populations sames qui vivaient dans la région. Ils subsistaient essentiellement de la chasse et la pêche, et n'avaient un impact que très limité sur les forêts. Progressivement, à partir du XVIIIe siècle, les Suédois commencent à s'installer, et au XIXe siècle, l'exploitation intensive des forêts de la région commence. Cependant, en partie du fait des terrains difficiles d'accès, Björnlandet parvient à échapper en grande partie à cette exploitation. L'excellent état de préservation de ses forêts est remarqué lors d'un grand inventaire national des forêts dans les années 1980, et il est immédiatement proposé de les protéger. En 1991, le parc national est créé, d'une superficie de 1 130 ha. Il est étendu à la surface actuelle en 2017. En parallèle à l'extension du parc, les infrastructures touristiques sont améliorées, et il accueille maintenant 6 500 visiteurs par an. </p>
+<p>Le paysage est vallonné, avec plusieurs collines dont les flancs sont localement entaillés de falaises. Ces falaises ont été creusées par des glaciers, qui sont aussi à l'origine du grand nombre de blocs rocheux dans le paysage. Ce terrain rocheux, avec un sol maigre, donne lieu à des forêts de pins avec une végétation au sol assez pauvre. Cependant, cette forêt ancienne constitue un refuge pour un grand nombre d'espèces de lichens, mousses, champignons et d'insectes, ainsi que pour certains oiseaux, dont la survie dépend de la dynamique naturelle des forêts, y compris les feux de forêts, et qui ont en grande partie disparu des forêts fortement exploitées du nord suédois. Dans les vallées, les terrains plus humides donnent lieu à des environnements différents, allant de forêts d'épicéas aux tourbières d'aapa.L'histoire du parc est liée aux populations sames qui vivaient dans la région. Ils subsistaient essentiellement de la chasse et la pêche, et n'avaient un impact que très limité sur les forêts. Progressivement, à partir du XVIIIe siècle, les Suédois commencent à s'installer, et au XIXe siècle, l'exploitation intensive des forêts de la région commence. Cependant, en partie du fait des terrains difficiles d'accès, Björnlandet parvient à échapper en grande partie à cette exploitation. L'excellent état de préservation de ses forêts est remarqué lors d'un grand inventaire national des forêts dans les années 1980, et il est immédiatement proposé de les protéger. En 1991, le parc national est créé, d'une superficie de 1 130 ha. Il est étendu à la surface actuelle en 2017. En parallèle à l'extension du parc, les infrastructures touristiques sont améliorées, et il accueille maintenant 6 500 visiteurs par an. </p>
+<p>Le paysage est vallonné, avec plusieurs collines dont les flancs sont localement entaillés de falaises. Ces falaises ont été creusées par des glaciers, qui sont aussi à l'origine du grand nombre de blocs rocheux dans le paysage. Ce terrain rocheux, avec un sol maigre, donne lieu à des forêts de pins avec une végétation au sol assez pauvre. Cependant, cette forêt ancienne constitue un refuge pour un grand nombre d'espèces de lichens, mousses, champignons et d'insectes, ainsi que pour certains oiseaux, dont la survie dépend de la dynamique naturelle des forêts, y compris les feux de forêts, et qui ont en grande partie disparu des forêts fortement exploitées du nord suédois. Dans les vallées, les terrains plus humides donnent lieu à des environnements différents, allant de forêts d'épicéas aux tourbières d'aapa.L'histoire du parc est liée aux populations sames qui vivaient dans la région. Ils subsistaient essentiellement de la chasse et la pêche, et n'avaient un impact que très limité sur les forêts. Progressivement, à partir du XVIIIe siècle, les Suédois commencent à s'installer, et au XIXe siècle, l'exploitation intensive des forêts de la région commence. Cependant, en partie du fait des terrains difficiles d'accès, Björnlandet parvient à échapper en grande partie à cette exploitation. L'excellent état de préservation de ses forêts est remarqué lors d'un grand inventaire national des forêts dans les années 1980, et il est immédiatement proposé de les protéger. En 1991, le parc national est créé, d'une superficie de 1 130 ha. Il est étendu à la surface actuelle en 2017. En parallèle à l'extension du parc, les infrastructures touristiques sont améliorées, et il accueille maintenant 6 500 visiteurs par an. </p>
+<p>Le paysage est vallonné, avec plusieurs collines dont les flancs sont localement entaillés de falaises. Ces falaises ont été creusées par des glaciers, qui sont aussi à l'origine du grand nombre de blocs rocheux dans le paysage. Ce terrain rocheux, avec un sol maigre, donne lieu à des forêts de pins avec une végétation au sol assez pauvre. Cependant, cette forêt ancienne constitue un refuge pour un grand nombre d'espèces de lichens, mousses, champignons et d'insectes, ainsi que pour certains oiseaux, dont la survie dépend de la dynamique naturelle des forêts, y compris les feux de forêts, et qui ont en grande partie disparu des forêts fortement exploitées du nord suédois. Dans les vallées, les terrains plus humides donnent lieu à des environnements différents, allant de forêts d'épicéas aux tourbières d'aapa.L'histoire du parc est liée aux populations sames qui vivaient dans la région. Ils subsistaient essentiellement de la chasse et la pêche, et n'avaient un impact que très limité sur les forêts. Progressivement, à partir du XVIIIe siècle, les Suédois commencent à s'installer, et au XIXe siècle, l'exploitation intensive des forêts de la région commence. Cependant, en partie du fait des terrains difficiles d'accès, Björnlandet parvient à échapper en grande partie à cette exploitation. L'excellent état de préservation de ses forêts est remarqué lors d'un grand inventaire national des forêts dans les années 1980, et il est immédiatement proposé de les protéger. En 1991, le parc national est créé, d'une superficie de 1 130 ha. Il est étendu à la surface actuelle en 2017. En parallèle à l'extension du parc, les infrastructures touristiques sont améliorées, et il accueille maintenant 6 500 visiteurs par an. </p>
+<p>Le paysage est vallonné, avec plusieurs collines dont les flancs sont localement entaillés de falaises. Ces falaises ont été creusées par des glaciers, qui sont aussi à l'origine du grand nombre de blocs rocheux dans le paysage. Ce terrain rocheux, avec un sol maigre, donne lieu à des forêts de pins avec une végétation au sol assez pauvre. Cependant, cette forêt ancienne constitue un refuge pour un grand nombre d'espèces de lichens, mousses, champignons et d'insectes, ainsi que pour certains oiseaux, dont la survie dépend de la dynamique naturelle des forêts, y compris les feux de forêts, et qui ont en grande partie disparu des forêts fortement exploitées du nord suédois. Dans les vallées, les terrains plus humides donnent lieu à des environnements différents, allant de forêts d'épicéas aux tourbières d'aapa.L'histoire du parc est liée aux populations sames qui vivaient dans la région. Ils subsistaient essentiellement de la chasse et la pêche, et n'avaient un impact que très limité sur les forêts. Progressivement, à partir du XVIIIe siècle, les Suédois commencent à s'installer, et au XIXe siècle, l'exploitation intensive des forêts de la région commence. Cependant, en partie du fait des terrains difficiles d'accès, Björnlandet parvient à échapper en grande partie à cette exploitation. L'excellent état de préservation de ses forêts est remarqué lors d'un grand inventaire national des forêts dans les années 1980, et il est immédiatement proposé de les protéger. En 1991, le parc national est créé, d'une superficie de 1 130 ha. Il est étendu à la surface actuelle en 2017. En parallèle à l'extension du parc, les infrastructures touristiques sont améliorées, et il accueille maintenant 6 500 visiteurs par an. </p>
 
-                        </div>
-
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-
-        <div class="clear"></div>
-    </div>
-
-    <nav class="fiyahollo-show-under-767">
-        <div id="dn-main-menu-wrap">
-            <a id="dn-mobile-menu-logo" href="#">fiyahollo</a>
-    
-            <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
-                <span class="icon-cancel-circled"></span>
-            </div>
-    
-            <div class="clear"></div>
-    
-            <ul class="dn-margin">
-                <li><a href="#" class="dn-active" tabindex="-1">Accueil</a></li>
-                <li><a href="#" class="" tabindex="-1">Envoyer de l'argent</a></li>
-                <li><a href="#" class="dn-submenu-btn " data-show="support" tabindex="-1">Assistance<span class="icon-angle-right"></span></a></li>
-            </ul>
-    
-            <ul>
-                <li><a href="#" tabindex="-1">Connexion</a></li>
-                <li><a href="#" tabindex="-1">Inscription</a></li>
-            </ul>
-    
-            
-    
-            <div id="dn-menu-customer-care">
-                <a href="#" class="dn-chat-link" tabindex="-1">
-                    <div class="icon-chat dn-chat-icon"></div>
-    
-                    <div class="dn-live-help ">
-                        <span>Aide en direct</span>
-                        <span>24/7 Assistance</span>
-                    </div>
-                </a>
-    
-                <div class="clear"></div>
-    
-                <p>Email: <a href="#" tabindex="-1">customercare@fiyahollo.com</a></p>
-            </div>
-        </div>
-    
-        <div id="dn-products-menu" class="dn-submenu">
-            <div class="dn-submenu-header">
-                <h3>Services</h3>
-    
-                <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
-                    <span class="icon-cancel-circled"></span>
-                </div>
-                ;
-            </div>
-            <div class="clear"></div>
-    
-            <div class="dn-menu-back-btn">
-                <div class="icon-angle-left"></div>
-                <span>Retour</span>
-            </div>
-    
-            <ul>
-            </ul>
-        </div>
-    
-        <div id="dn-support-menu" class="dn-submenu">
-            <div class="dn-submenu-header">
-                <h3>Aide</h3>
-    
-                <div class="dn-menu-close-btn dn-tap-area dn-tap-close">
-                    <span class="icon-cancel-circled"></span>
-                </div>
-                ;
-            </div>
-            <div class="clear"></div>
-    
-            <div class="dn-menu-back-btn">
-                <div class="icon-angle-left"></div>
-                <span>Retour</span>
-            </div>
-    
-            <ul>
-                <li><a href="#" class="" tabindex="-1">Aide</a></li>
-                <li><a href="#" class="" tabindex="-1">Comment envoyer une recharge</a></li>
-                <li><a href="#" class="" tabindex="-1">Moyens de paiement</a></li>
-            </ul>
-        </div>
-    
-    </nav>
-
-    <div id="fiyahollo-wrap">
-
-        <div id="fiyahollo-products-panel">
-                
-            <div>
-                <div class="fiyahollo-product">
-                    <div class="dn-snippet" id="dn-snippet-homepagetopupproduct">
-                            
-                        <div class="fiyahollo-product-text">
-                            <h1>FIYAHOOLO</h1>
-                            <h1>Envoyer de l'argent mobiles dans le monde entier</h1>
-                            <h2>Facile, Rapide et Fiable.</h2>
-                        </div>
-
-                        <a th:href="@{/envoi/}" class="fiyahollo-button fiyahollo-cta-gradient">Envoyer de l'argent</a>
-                    </div>
-                </div>
-            </div>
-        </div>    
-    
-        <div class="clear"></div>
-    </div>
-
-    
-    
-    <div id="fiyahollo-footer">
-    <div class="fiyahollo-wrap">
-
-        <div class="clear"></div>
-    </div>
-
-</div>
-    
 </body>
-
 </html>
