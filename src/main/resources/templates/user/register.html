@@ -2,16 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Créer un compte</title>
+   <title>Créer un compte</title>
+
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <link href="../../static/css/inscription.css"
-          th:href="@{/css/inscription.css}" rel="stylesheet" media="screen"/>
+
+    <link href="../../static/css/inscription.css" th:href="@{/css/inscription.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+    <header th:insert="fragments/navbar :: navbar"> </header>
 </head>
+
 <body>
-<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-<div class="container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:20px">
+<div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
     <h2>Créer un compte</small></h2>
         <form>
             <div class="form-row">
@@ -67,8 +68,5 @@
         </form>
     </div>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
