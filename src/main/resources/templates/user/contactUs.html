@@ -1,0 +1,57 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/css/contactUs.css" th:href="@{/css/contactUs.css}" rel="stylesheet" media="screen"/>
+
+    <header th:insert="fragments/navbar :: navbar"> </header>
+</head>
+
+<body>
+    <div class="containerc ontainer-fluid mx-auto col-xs-12 col-sm-8 col-md-7 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
+    <div class="row">
+        <div class="col-md-3 card jumbotron right-info">
+            <div style="max-width:500px; align:">
+                <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="email"/>
+            </div>
+            <h2>Contact</h2>
+            <p>Nous vous remercions pour votre message.</p>
+        </div>
+
+        <div class="col-md-9 card jumbotron">
+            <form th:action="@{/}" th:method="post">
+                <div class="form-group">
+                    <label for="prenom">Prenom</label>
+                    <input type="email" class="form-control form-control-lg" id="prenom" aria-describedby="prenom" placeholder="Entrer votre prenom">
+                </div>
+
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="password" class="form-control form-control-lg" id="nom" aria-describedby="nom" placeholder="Entrer votre nom">
+                </div>
+
+                <div class="form-group">
+                    <label for="nom">Email</label>
+                    <input type="password" class="form-control form-control-lg" id="email" aria-describedby="email" placeholder="Entrer votre email">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" rows="5" id="message" placeholder="Entrer votre message"></textarea>
+                </div>
+
+                <span>
+                    <button type="submit" class="btn btn-primary float-right btn-lg sendButton">Envoyer</button>
+                </span>
+            </form>
+        </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer.html :: footer"></div>
+</body>
+</html>

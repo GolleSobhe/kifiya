@@ -30,4 +30,9 @@ public class UserController {
     public String connexion(){
         return "user/signIn";
     }
+
+    @GetMapping(value = "user/contact-us")
+    public String contactUs(){
+        return "user/contactUs";
+    }
 }
