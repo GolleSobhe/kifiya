@@ -15,9 +15,10 @@ jobs:
           java-version: 13.0.1
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: deploy heroku
+      - name: prepare heroku deploy
         run: |
           git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-      - name: Deploy to Herok
+      - name: Deploy to Heroku
+        if: github.ref == 'refs/heads/master' && job.status == 'success'
         run: |
           git push heroku HEAD:refs/heads/master
