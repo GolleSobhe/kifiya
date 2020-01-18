@@ -1,54 +1,50 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
+    <title>FiyaHollo</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link th:href="@{/css/envoi.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+    <header th:insert="fragments/navbar :: navbar"> </header>
 </head>
+
 <body>
-    <header th:insert="fragments/header :: header"> </header>
-    <div id="fiyahollo-wrap">
-        <div class="fiyahollo-content">
-            <div><h1>Envoyer de l'argent dans le telephone mobile de vos proches</h1></div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Numero de telephone du destinateur</span>
-                </div>
-                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Prenom</span>
-                </div>
-                <input type="text" class="form-control">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Nom</span>
-                </div>
-                <input type="text" class="form-control">
-            </div>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Euros</span>
-                </div>
-                <input type="text" class="form-control">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">GNF</span>
-                </div>
-                <input type="text" class="form-control">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button">Envoyer</button>
-                </div>
-            </div>
-
+<div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"  style="margin-top:85px ">
+    
+    <form class="fy-form-envoi">
+        <h2>Envoi de l'argent</h2>
+        <div class="form-group">
+            <label for="adresse">Numero de telephone</label>
+            <input type="text" class="form-control form-control-lg" id="adresse" placeholder="Numero de telephone">
         </div>
-    </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="nom">Nom</label>
+                <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="prenom">Prenom</label>
+                <input type="text" class="form-control form-control-lg" id="prenom" placeholder="Prenom">
+            </div>
+        </div>
 
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Montant en €</span>
+            </div>
+            <input type="text" class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text">0.00 GNF</span>
+            </div>
+        </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <div>
+            <a class="btn btn-primary btn-lg" href="#">Procéder au paiement</a>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments/footer.html :: footer"></div>
 </body>
 </html>
