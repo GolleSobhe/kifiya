@@ -31,7 +31,4 @@ public class User {
     private String adresse;
     private String password;
 
-
-
-
 }
