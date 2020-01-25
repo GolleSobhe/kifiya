@@ -22,7 +22,7 @@ public class UserController {
 
     @PostMapping(value = "user")
     public String save(User user){
-        this.userService.register(user);
+        this.userService.save(user);
         return "index";
     }
 
