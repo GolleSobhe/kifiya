@@ -40,6 +40,7 @@ public class User {
     private String pays;
     @NotEmpty(message = "*Please provide an ville")
     private String ville;
+    private String codePostale;
     @NotEmpty(message = "*Please provide an adresse")
     private String adresse;
     @Length(min = 5, message = "*Your password must have at least 5 characters")
