@@ -29,9 +29,7 @@ public class User {
     private String pays;
     private String ville;
     private String adresse;
+    private String codePostale;
     private String password;
-
-
-
 
 }

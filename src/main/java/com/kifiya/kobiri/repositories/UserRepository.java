@@ -21,7 +21,7 @@ public class UserRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public User register(User user){
+    public User save(User user){
         jdbcTemplate.update(INSERT_USER,user.getNom(),user.getPrenom(),user.getEmail(),user.getPays(),user.getVille(),
                 user.getAdresse(),user.getTelephone(),user.getPassword());
         return user;

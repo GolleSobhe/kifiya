@@ -5,8 +5,8 @@ import com.kifiya.kobiri.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class UserController {
@@ -20,10 +20,10 @@ public class UserController {
         return "user/register";
     }
 
-    @PostMapping(value = "user")
-    public String save(User user){
-        this.userService.register(user);
-        return "index";
+    @RequestMapping(value = "/registration", method= RequestMethod.POST)
+    public String registration(@ModelAttribute("user") User user){
+        this.userService.save(user);
+        return "redirect:/index";
     }
 
     @GetMapping(value = "user/signIn")
