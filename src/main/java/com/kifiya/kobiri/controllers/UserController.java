@@ -31,9 +31,16 @@ public class UserController {
     @RequestMapping(value = "registration", method = RequestMethod.POST)
     public String registration(@Valid @ModelAttribute("user") User user,
                                BindingResult result){
+
+        User existing = userService.findUserByEmail(user.getEmail());
+        if (existing != null) {
+            result.rejectValue("email", null, "There is already an account registered with that email");
+        }
+
         if (result.hasErrors()) {
             return "error";
         }
+
         userService.save(user);
         return "redirect:index";
     }
