@@ -35,7 +35,7 @@ public class UserController {
             return "error";
         }
         userService.save(user);
-        return "index";
+        return "redirect:index";
     }
 
 
