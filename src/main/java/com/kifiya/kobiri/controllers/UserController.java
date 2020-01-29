@@ -31,7 +31,10 @@ public class UserController {
     @RequestMapping(value = "registration", method = RequestMethod.POST)
     public String registration(@Valid @ModelAttribute("user") User user,
                                BindingResult result){
-
+        if (result.hasErrors()) {
+            return "error";
+        }
+        userService.save(user);
         return "index";
     }
 
