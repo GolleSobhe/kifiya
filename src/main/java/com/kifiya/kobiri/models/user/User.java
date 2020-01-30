@@ -48,4 +48,6 @@ public class User {
     private String password;
     @ManyToMany(cascade = CascadeType.ALL)
     Set<Role> roles;
+    private boolean enabled;
+    private String confirmationToken;
 }

@@ -35,4 +35,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User findByConfirmationToken(String confirmationToken) {
+        return userRepository.findByConfirmationToken(confirmationToken);
+    }
+
 }

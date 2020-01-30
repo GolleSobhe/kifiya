@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>Set Your Password</h1>
+    <div th:if="${successMessage}" class="alert alert-success"
+         role="alert" th:text=${successMessage}></div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger"
+         role="alert" th:text=${errorMessage}></div>
+
+    <div th:if="${invalidToken}" class="alert alert-danger"
+         role="alert" th:text=${invalidToken}></div>
+    <form th:if="!${invalidToken}" th:object="${setPassword}" th:action="@{/confirm}" method="post">
+        <input type="hidden" name="token" th:value=${confirmationToken}  >
+        <div class="form-group input-group">
+            <input name="password" type="password" id="password"
+                   placeholder="Password" class="form-control" required />
+        </div>
+        <div class="form-group input-group has-feedback">
+
+            <input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword"
+                   data-fv-notempty-message="Please confirm password"
+                   data-fv-identical="true"
+                   data-fv-identical-field="password"
+                   data-fv-identical-message="Both passwords must be identical" />
+
+        </div>
+
+
+
+        <button type="submit"
+                class="btn btn-primary block full-width m-b">Save
+        </button>
+    </form>
+</div>
+
+</body>
+</html>

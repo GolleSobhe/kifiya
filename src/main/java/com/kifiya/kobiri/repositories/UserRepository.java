@@ -13,5 +13,6 @@ import java.sql.SQLException;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    public User findByEmail(String email);
+    User findByEmail(String email);
+    User findByConfirmationToken(String confirmationToken);
 }
