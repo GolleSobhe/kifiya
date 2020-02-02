@@ -6,7 +6,6 @@ import com.kifiya.kobiri.services.UserService;
 import com.nulabinc.zxcvbn.Strength;
 import com.nulabinc.zxcvbn.Zxcvbn;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,7 +57,7 @@ public class UserController {
         }
 
         if (result.hasErrors()) {
-            return "register";
+            return "user/register";
         }
 
         // Disable user until they click on confirmation link in email
@@ -67,17 +66,10 @@ public class UserController {
         user.setConfirmationToken(UUID.randomUUID().toString());
 
         userService.save(user);
-
-        String appUrl = request.getScheme() + "://" + request.getServerName();
-        SimpleMailMessage registrationEmail = new SimpleMailMessage();
-        registrationEmail.setTo(user.getEmail());
-        registrationEmail.setSubject("Registration Confirmation");
-        registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
-                + appUrl + "/confirm?token=" + user.getConfirmationToken());
-        registrationEmail.setFrom("noreply@domain.com");
-        emailService.sendEmail(registrationEmail);
+        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+        emailService.sendEmail(appUrl, user.getConfirmationToken(), user.getEmail());
         model.addAttribute("confirmationMessage", "Un e-mail de confirmation a été envoyé à " + user.getEmail());
-        return "register";
+        return "user/register";
     }
 
     // Process confirmation link
@@ -89,7 +81,7 @@ public class UserController {
         } else { // Token found
             model.addAttribute("confirmationToken", user.getConfirmationToken());
         }
-        return "confirm";
+        return "user/confirm";
     }
 
     // Process confirmation link
@@ -112,7 +104,7 @@ public class UserController {
         // Save user
         userService.save(user);
         model.addAttribute("successMessage", "Votre mot de passe a été défini!");
-        return "confirm";
+        return "user/confirm";
     }
 
 }
