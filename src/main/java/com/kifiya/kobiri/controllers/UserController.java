@@ -86,21 +86,14 @@ public class UserController {
 
     // Process confirmation link
     @RequestMapping(value="/confirm", method = RequestMethod.POST)
-    public String processConfirmationForm(Model model, BindingResult bindingResult, @RequestParam Map requestParams, RedirectAttributes redir) {
-        Zxcvbn passwordCheck = new Zxcvbn();
-        Strength strength = passwordCheck.measure((CharSequence) requestParams.get("password"));
+    public String processConfirmationForm(@RequestParam Map<String, String> requestParams, Model model) {
 
-        if (strength.getScore() < 3) {
-            bindingResult.reject("password");
-
-            redir.addFlashAttribute("errorMessage", "Votre mot de passe est trop faible. Choisissez-en un plus fort.");
-            System.out.println(requestParams.get("token"));
-            return "redirect:confirm?token=" + requestParams.get("token");
-        }
         // Find the user associated with the reset token
-        User user = userService.findByConfirmationToken((String) requestParams.get("token"));
+        User user = userService.findByConfirmationToken(requestParams.get("token"));
+        String password = requestParams.get("password");
         // Set user to enabled
         user.setEnabled(true);
+        user.setPassword(password);
         // Save user
         userService.save(user);
         model.addAttribute("successMessage", "Votre mot de passe a été défini!");
