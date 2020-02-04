@@ -100,4 +100,10 @@ public class UserController {
         return "user/confirm";
     }
 
+    @RequestMapping(value="/home", method = RequestMethod.GET)
+    public String loged(Model model){
+        model.addAttribute("user",new User());
+        return "user/Home";
+    }
+
 }
