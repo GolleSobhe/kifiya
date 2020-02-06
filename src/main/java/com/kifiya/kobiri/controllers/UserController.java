@@ -37,7 +37,7 @@ public class UserController {
         return "index";
     }
 
-    @GetMapping(value = "user/signIn")
+    @RequestMapping(value = "user/signIn", method = RequestMethod.GET)
     public String connexion(){
         return "user/signIn";
     }

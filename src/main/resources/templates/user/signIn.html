@@ -14,14 +14,16 @@
     <body>
             <div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
                 <h2>Connexion</h2>
-                <form th:action="@{/}" th:method="post">
+                <form th:action="@{/user/signIn}" role="form" th:method="post">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control form-control-lg" id="email" aria-describedby="emailHelp" placeholder="Email">
+                        <input type="email" class="form-control form-control-lg" id="email"
+                               aria-describedby="emailHelp" name="username" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <label for="motDePasse">Mot de passe</label>
-                        <input type="password" class="form-control form-control-lg" id="motDePasse" placeholder="Mot de passe">
+                        <input type="password" class="form-control form-control-lg" id="motDePasse"
+                               name="password" placeholder="Mot de passe">
                     </div>
 
                     <span>

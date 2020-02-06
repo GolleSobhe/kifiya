@@ -20,18 +20,23 @@
                 <th scope="col">Statut</th>
                 <th scope="col">Date</th>
                 <th scope="col">Montant envoyé</th>
-                <th scope="col">Nom et Prenom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
                 <th scope="col">Numéro de téléphone</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr  th:if="${historics.empty}">
+                <td colspan="2"> Pas de transaction disponible</td>
+            </tr>
+            <tr th:each="historic : ${historics}">
                 <td><input type="radio"></td>
-                <td>15/12/2020</td>
-                <td>100€</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+                <td><span th:text="${historic.date}"> Date </span></td>
+                <td><span th:text="${historic.montant}"> Montant envoyé </span></td>
+                <td><span th:text="${historic.nom}"> Nom </span></td>
+                <td><span th:text="${historic.prenom}"> Prenom </span></td>
+                <td><span th:text="${historic.telephone}"> Numéro de téléphone </span></td>
                 <td><a href="#">Envoyer à nouveau</a></td>
             </tr>
             <tr>

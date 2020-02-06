@@ -35,7 +35,7 @@ public class UserService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private static String QUERY_USER = "select nom,prenom from user where email = ? and password = ?";
+    private static String QUERY_USER = "select nom,prenom from user where email = ?";
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -55,7 +55,8 @@ public class UserService {
     }
 
     public User connection(String email, String password) {
-        return jdbcTemplate.query(QUERY_USER, new Object[] {email,password}, new ResultSetExtractor<User>() {
+
+        return jdbcTemplate.query(QUERY_USER, new Object[] {email}, new ResultSetExtractor<User>() {
             @Override
             public User extractData(ResultSet resultSet) throws SQLException, DataAccessException {
                 if(resultSet.next()){
