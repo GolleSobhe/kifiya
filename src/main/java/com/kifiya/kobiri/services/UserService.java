@@ -32,10 +32,11 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private static String QUERY_USER = "select nom,prenom from user where email = ?";
+    private static String QUERY_USER = "select nom,prenom,password from user where enabled='true' and email = ?";
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -63,7 +64,10 @@ public class UserService {
                     User user = new User();
                     user.setNom(resultSet.getString(1));
                     user.setPrenom(resultSet.getString(2));
-                    return user;
+                    user.setPassword(resultSet.getString(3));
+                    if(bCryptPasswordEncoder.matches(password, user.getPassword())){
+                        return user;
+                    }
                 }
                 return null;
             }
