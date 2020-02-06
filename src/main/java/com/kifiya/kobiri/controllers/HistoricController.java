@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class HistoriqueController {
+public class HistoricController {
 
-    @RequestMapping(value = "historique", method = RequestMethod.GET)
-    public String getHistory(){
-        return "historique/historique";
+    @RequestMapping(value = "historic", method = RequestMethod.GET)
+    public String getHistoric(){
+        return "historic/historic";
     }
 }

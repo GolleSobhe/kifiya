@@ -1,6 +1,7 @@
 package com.kifiya.kobiri.models.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.validator.constraints.Length;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,25 +31,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @NotEmpty(message = "*Please provide your nom")
-    private String nom;
+    String nom;
     @NotEmpty(message = "*Please provide your prenom")
-    private String prenom;
+    String prenom;
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
-    private String email;
+    String email;
     @Pattern(regexp = "(\\+33|0)[0-9]{9}")
-    private String telephone;
+    String telephone;
     @NotEmpty(message = "*Please provide an pays")
-    private String pays;
+    String pays;
     @NotEmpty(message = "*Please provide an ville")
-    private String ville;
-    private String codePostale;
+    String ville;
+    String codePostale;
     @NotEmpty(message = "*Please provide an adresse")
-    private String adresse;
-
-    private String password;
+    String adresse;
+    String password;
+    boolean enabled;
+    String confirmationToken;
     @ManyToMany(cascade = CascadeType.ALL)
     Set<Role> roles;
-    private boolean enabled;
-    private String confirmationToken;
+    @OneToMany(mappedBy = "responsable") @JsonIgnore
+    List<Historic> historics = new ArrayList<>();
 }
