@@ -31,7 +31,7 @@
                 <td colspan="2"> Pas de transaction disponible</td>
             </tr>
             <tr th:each="historic : ${historics}">
-                <td><input type="radio"></td>
+                <td><input type="checkbox" th:checked="${historic.status}"></td>
                 <td><span th:text="${historic.date}"> Date </span></td>
                 <td><span th:text="${historic.montant}"> Montant envoyé </span></td>
                 <td><span th:text="${historic.nom}"> Nom </span></td>
