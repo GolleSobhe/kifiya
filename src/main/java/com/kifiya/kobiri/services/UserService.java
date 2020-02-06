@@ -5,6 +5,9 @@ import com.kifiya.kobiri.models.user.User;
 import com.kifiya.kobiri.repositories.RoleRepository;
 import com.kifiya.kobiri.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,11 +17,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 @Service
 @Transactional
-public class UserService implements UserDetailsService {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -26,6 +31,11 @@ public class UserService implements UserDetailsService {
     private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    private static String QUERY_USER = "select nom,prenom from user where email = ? and password = ?";
 
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -44,26 +54,18 @@ public class UserService implements UserDetailsService {
         return userRepository.findByConfirmationToken(confirmationToken);
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
-        return buildUserForAuthentication(user, authorities);
+    public User connection(String email, String password) {
+        return jdbcTemplate.query(QUERY_USER, new Object[] {email,password}, new ResultSetExtractor<User>() {
+            @Override
+            public User extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                if(resultSet.next()){
+                    User user = new User();
+                    user.setNom(resultSet.getString(1));
+                    user.setPrenom(resultSet.getString(2));
+                    return user;
+                }
+                return null;
+            }
+        });
     }
-
-    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
-        Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
-        for (Role role : userRoles) {
-            roles.add(new SimpleGrantedAuthority(role.getRole()));
-        }
-
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(roles);
-        return grantedAuthorities;
-    }
-
-    private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
-    }
-
 }
