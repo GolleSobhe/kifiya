@@ -15,12 +15,9 @@ public class InitialisationService {
 
     @Autowired
     UserService userService;
-    @Autowired
-    HistoricService historicService;
 
     public void init() {
         initUsers();
-        //initHistoric();
     }
 
     private void initUsers() {
@@ -39,15 +36,6 @@ public class InitialisationService {
         userService.save(user);
     }
 
-    private void initHistoric() {
-        Historic historic = new Historic();
-        historic.setStatus(true);
-        historic.setDate(new Date());
-        //historic.setMontant((Long) 500);
-        historic.setTelephone("+224625060606");
-        historic.setNom("fiyahollo");
-        historic.setPrenom("Spbhe");
-    }
 
 
 
