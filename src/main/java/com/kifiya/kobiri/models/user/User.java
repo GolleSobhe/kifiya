@@ -1,13 +1,18 @@
 package com.kifiya.kobiri.models.user;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -17,21 +22,35 @@ import javax.persistence.Id;
 @Setter
 @EqualsAndHashCode(of = {"id", "email"})
 @ToString(of = {"id", "nom", "prenom", "email"})
+@Data
+@Builder
+@Table(name = "USER")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    private String nom;
-    private String prenom;
-    private String email;
-    private String telephone;
-    private String pays;
-    private String ville;
-    private String adresse;
-    private String password;
-
-
-
-
+    @NotEmpty(message = "*Please provide your nom")
+    String nom;
+    @NotEmpty(message = "*Please provide your prenom")
+    String prenom;
+    @Email(message = "*Please provide a valid Email")
+    @NotEmpty(message = "*Please provide an email")
+    String email;
+    @Pattern(regexp = "(\\+33|0)[0-9]{9}")
+    String telephone;
+    @NotEmpty(message = "*Please provide an pays")
+    String pays;
+    @NotEmpty(message = "*Please provide an ville")
+    String ville;
+    String codePostale;
+    @NotEmpty(message = "*Please provide an adresse")
+    String adresse;
+    String password;
+    boolean enabled;
+    String confirmationToken;
+    @ManyToMany(cascade = CascadeType.ALL)
+    Set<Role> roles;
+    @OneToMany(mappedBy = "responsable") @JsonIgnore
+    List<Historic> historics = new ArrayList<>();
 }

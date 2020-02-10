@@ -53,3 +53,14 @@ body {
 }
 
 
+
+#fiyahollo-header-logo {
+	width: 140px;
+	height: 48px;
+	float: left;
+	margin: 7px 0 0 1px;
+	text-indent: -9999px;
+	display: block;
+	background: url(../img/logo192.png) 0 0 no-repeat;
+	background-size: 140px 48px
+}
