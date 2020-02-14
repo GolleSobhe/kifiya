@@ -25,7 +25,7 @@ public class CustomUserAuthenticationProvider implements AuthenticationProvider 
         if(user == null){
             throw new BadCredentialsException("hop laa");
         }
-        return new UsernamePasswordAuthenticationToken(user.getNom(),null, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(user,null, Collections.emptyList());
     }
 
     @Override
