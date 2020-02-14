@@ -2,12 +2,13 @@ package com.kifiya.kobiri.services;
 
 
 import com.kifiya.kobiri.models.user.Historic;
+import com.kifiya.kobiri.models.user.Role;
 import com.kifiya.kobiri.models.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.util.*;
 
 @Service
 @Transactional
@@ -17,14 +18,14 @@ public class InitialisationService {
     UserService userService;
     @Autowired
     HistoricService historicService;
+    User user;
 
     public void init() {
         initUsers();
-        //initHistoric();
     }
 
     private void initUsers() {
-        User user = new User();
+        user = new User();
         user.setConfirmationToken("");
         user.setNom("Golle");
         user.setPrenom("Sobhe");
@@ -36,18 +37,9 @@ public class InitialisationService {
         user.setAdresse("Geoges pompidou");
         user.setPassword("sobhe");
         user.setEnabled(true);
-        userService.save(user);
     }
 
-    private void initHistoric() {
-        Historic historic = new Historic();
-        historic.setStatus(true);
-        historic.setDate(new Date());
-        //historic.setMontant((Long) 500);
-        historic.setTelephone("+224625060606");
-        historic.setNom("fiyahollo");
-        historic.setPrenom("Spbhe");
-    }
+
 
 
 
