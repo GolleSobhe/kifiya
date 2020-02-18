@@ -33,8 +33,6 @@ public class UserService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    EntityManager entityManager;
 
     private static String QUERY_USER = "select id, nom,prenom,password from user where enabled='true' and email = ?";
 
@@ -83,7 +81,4 @@ public class UserService {
         return null;
     }
 
-    public void persist(User user) {
-        entityManager.persist(user);
-    }
 }

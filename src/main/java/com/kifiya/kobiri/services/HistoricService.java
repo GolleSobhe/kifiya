@@ -4,6 +4,7 @@ import com.kifiya.kobiri.models.user.Historic;
 import com.kifiya.kobiri.models.user.User;
 import com.kifiya.kobiri.repositories.HistoricRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,13 +14,16 @@ import java.util.List;
 @Service
 public class HistoricService {
 
+    String INSERT_HISTORY = "insert into HISTORIC(DATE,MONTANT,NOM,PRENOM,STATUS,TELEPHONE,RESPONSABLE_ID)" +
+            "values (?,?,?,?,?,?,?)";
+
     @Autowired
-    HistoricRepository historicRepository;
+    private JdbcTemplate jdbcTemplate;
 
     public Historic save(Historic historic) {
-
-        historic.setDate(new Date());
-        return historicRepository.save(historic);
+        jdbcTemplate.update(INSERT_HISTORY, historic.getDate(), historic.getMontant(), historic.getNom(), historic.getPrenom(),
+                historic.getStatus(), historic.getTelephone(), historic.getResponsable().getId());
+        return historic;
     }
 
     public List<Historic> findByUserId(Long id) {

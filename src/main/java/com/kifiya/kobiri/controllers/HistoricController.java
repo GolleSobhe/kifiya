@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 public class HistoricController {
     @Autowired
     private HistoricService historicService;
-    @Autowired
-    private UserService userService;
+
 
     @RequestMapping(value = "historics", method = RequestMethod.GET)
     public String getHistorics(Model model){
@@ -36,21 +36,17 @@ public class HistoricController {
     @RequestMapping(value = "historics", method = RequestMethod.POST)
     public String postHistoric(@Valid @ModelAttribute("Historic") Historic historic,
                                BindingResult result, Model model){
-
-        if (result.hasErrors()) {
-            return "envoi/envoi";
-        }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User userAuth = (User) auth.getPrincipal();
-        User user = userService.findById(userAuth.getId());
-        if(user == null) {
-            return "envoi/envoi";
-        }
-        historic.setResponsable(user);
-        List<Historic> historics = user.getHistorics();
-        historics.add(historic);
-        user.setHistorics(historics);
-        userService.persist(user);
+        historic.setResponsable(userAuth);
+        historic.setDate(new Date());
+        historic.setStatus(Boolean.TRUE);
+        //if (result.hasErrors()) {
+        //    return "envoi/envoi";
+        //}
+
+        historicService.save(historic);
+
         model.addAttribute("historic", historic);
         model.addAttribute("confirmationMessage", "Argent enoyé et un e-mail de confirmation a été envoyé à ");
         return "envoi/envoi";
