@@ -19,7 +19,7 @@ import java.util.Date;
 public class Historic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Boolean status;
     Date date;

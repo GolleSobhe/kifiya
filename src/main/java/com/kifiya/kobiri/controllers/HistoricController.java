@@ -41,7 +41,7 @@ public class HistoricController {
         historic.setResponsable(userAuth);
         historic.setDate(new Date());
         historic.setStatus(Boolean.TRUE);
-        //if (result.hasErrors()) {
+        //if (result.hasErrors() || !result.hasFieldErrors("responsable")) {
         //    return "envoi/envoi";
         //}
 
