@@ -1,9 +1,7 @@
 package com.kifiya.kobiri.models.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,26 +9,34 @@ import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(of = {"id", "telephone"})
+@ToString(of = {"id", "nom", "prenom", "telephone"})
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-public class Historic {
+@Table(name = "TRANSFERT")
+public class Transfert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Boolean status;
     Date date;
-    Long montant;
     String nom;
     String prenom;
-    @Pattern(regexp = "(\\+224)[0-9]{9}")
+    @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
     String telephone;
     @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
     User responsable;
-
+    String code;
+    Long montantEuros;
+    Long montantGNF;
+    Double taux;
 }
 

@@ -27,16 +27,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr  th:if="${historics.empty}">
+            <tr  th:if="${transferts.empty}">
                 <td colspan="2"> Pas de transaction disponible</td>
             </tr>
-            <tr th:each="historic : ${historics}">
-                <td><input type="checkbox" th:checked="${historic.status}"></td>
-                <td><span th:text="${historic.date}"> Date </span></td>
-                <td><span th:text="${historic.montant}"> Montant envoyé </span></td>
-                <td><span th:text="${historic.nom}"> Nom </span></td>
-                <td><span th:text="${historic.prenom}"> Prenom </span></td>
-                <td><span th:text="${historic.telephone}"> Numéro de téléphone </span></td>
+            <tr th:each="transfert : ${transferts}">
+                <td><input type="checkbox" th:checked="${transfert.status}"></td>
+                <td><span th:text="${transfert.date}"> Date </span></td>
+                <td><span th:text="${transfert.montant}"> Montant envoyé </span></td>
+                <td><span th:text="${transfert.nom}"> Nom </span></td>
+                <td><span th:text="${transfert.prenom}"> Prenom </span></td>
+                <td><span th:text="${transfert.telephone}"> Numéro de téléphone </span></td>
                 <td><a href="#">Envoyer à nouveau</a></td>
             </tr>
             </tbody>
