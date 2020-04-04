@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -27,7 +28,9 @@ public class Transfert {
     Long id;
     Boolean status;
     Date date;
+    @NotEmpty(message = "*Please provide your nom")
     String nom;
+    @NotEmpty(message = "*Please provide your prenom")
     String prenom;
     @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
     String telephone;

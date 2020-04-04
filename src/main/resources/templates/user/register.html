@@ -13,7 +13,7 @@
 
 <body>
 <div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
-    <h2>Créer un compte</small></h2>
+    <h2>Créer un compte</h2>
     <form action="#" th:action="@{/registration}" th:object="${user}" method="post">
         <div  th:if="${confirmationMessage}" class="alert alert-success"
                 role="alert" th:text=${confirmationMessage}>
@@ -42,7 +42,7 @@
                 >
             </div>
             <div class="form-group col-md-6">
-                <label for="motDePasse">Mot de passe</label>
+                <label for="motDePasse">Numero de téléphone</label>
                 <input type="tel" class="form-control form-control-lg" id="motDePasse" placeholder="Num Tel"
                        th:field="*{telephone}"
                 >
