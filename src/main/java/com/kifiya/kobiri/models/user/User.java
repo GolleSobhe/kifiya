@@ -4,13 +4,11 @@ package com.kifiya.kobiri.models.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -52,5 +50,5 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     Set<Role> roles;
     @OneToMany(mappedBy = "responsable") @JsonIgnore
-    List<Historic> historics = new ArrayList<>();
+    List<Transfert> transferts = new ArrayList<>();
 }
