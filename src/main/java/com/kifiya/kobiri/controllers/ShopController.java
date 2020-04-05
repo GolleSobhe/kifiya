@@ -36,7 +36,8 @@ public class ShopController {
         }
 
         shopService.save(shop);
-
+        model.addAttribute("shops", shopService.findAll());
+        model.addAttribute("shop",new Shop());
         return "shop/shop";
     }
 }

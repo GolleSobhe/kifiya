@@ -30,10 +30,6 @@ public class Shop {
     String ville;
     @NotEmpty(message = "*Please provide your point de vente")
     String nom;
-    //User est u gerant á modifier apres
-    @NotNull
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    User gerant;
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     String email;

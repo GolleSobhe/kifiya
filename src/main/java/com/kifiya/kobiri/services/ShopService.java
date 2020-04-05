@@ -13,9 +13,9 @@ import java.util.List;
 @Transactional
 public class ShopService {
 
-    String INSERT = "insert into SHOP (DATE,EMAIL,NOM,TELEPHONE,VILLE,GERANT_ID)" +
-            "values (?,?,?,?,?,?)";
-    String SELECT = "select GERANT_ID, VILLE, NOM, EMAIL, TELEPHONE, DATE from SHOP";
+    String INSERT = "insert into SHOP (DATE,EMAIL,NOM,TELEPHONE,VILLE)" +
+            "values (?,?,?,?,?)";
+    String SELECT = "select VILLE, NOM, EMAIL, TELEPHONE, DATE from SHOP";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -28,7 +28,7 @@ public class ShopService {
     public Shop save(Shop shop) {
 
         shop.setDate(new Date());
-        jdbcTemplate.update(INSERT, shop.getDate(), shop.getEmail(), shop.getNom(), shop.getTelephone(), shop.getVille(), shop.getGerant().getId());
+        jdbcTemplate.update(INSERT, shop.getDate(), shop.getEmail(), shop.getNom(), shop.getTelephone(), shop.getVille());
         return shop;
     }
 }
