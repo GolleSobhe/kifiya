@@ -34,7 +34,7 @@ public class ShopController {
             //AJouter le modele error de saissie
             return "shop/shop";
         }
-
+        //assert
         shopService.save(shop);
         model.addAttribute("shops", shopService.findAll());
         model.addAttribute("shop",new Shop());
