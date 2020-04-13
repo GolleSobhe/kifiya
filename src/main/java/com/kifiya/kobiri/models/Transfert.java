@@ -1,5 +1,6 @@
-package com.kifiya.kobiri.models.user;
+package com.kifiya.kobiri.models;
 
+import com.kifiya.kobiri.models.Utilisateur;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -7,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -36,7 +36,7 @@ public class Transfert {
     String telephone;
     @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
-    User responsable;
+    Utilisateur responsable;
     String code;
     Long montantEuros;
     Long montantGNF;

@@ -1,4 +1,4 @@
-package com.kifiya.kobiri.models.user;
+package com.kifiya.kobiri.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,8 +23,8 @@ import java.util.Set;
 @ToString(of = {"id", "nom", "prenom", "email"})
 @Data
 @Builder
-@Table(name = "USER")
-public class User {
+@Table(name = "UTILISATEUR")
+public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;

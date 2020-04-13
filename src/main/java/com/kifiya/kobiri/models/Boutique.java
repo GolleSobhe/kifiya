@@ -1,13 +1,11 @@
 package com.kifiya.kobiri.models;
 
-import com.kifiya.kobiri.models.user.User;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
@@ -21,8 +19,8 @@ import java.util.Date;
 @ToString(of = {"id", "ville", "nom", "telephone"})
 @Data
 @Builder
-@Table(name = "SHOP")
-public class Shop {
+@Table(name = "BOUTIQUE")
+public class Boutique {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

@@ -1,6 +1,6 @@
 package com.kifiya.kobiri.repositories;
 
-import com.kifiya.kobiri.models.user.Role;
+import com.kifiya.kobiri.models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

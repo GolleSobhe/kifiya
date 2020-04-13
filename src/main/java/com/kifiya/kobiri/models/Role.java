@@ -1,4 +1,4 @@
-package com.kifiya.kobiri.models.user;
+package com.kifiya.kobiri.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

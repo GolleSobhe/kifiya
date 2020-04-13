@@ -1,7 +1,7 @@
 package com.kifiya.kobiri.config;
 
-import com.kifiya.kobiri.models.user.User;
-import com.kifiya.kobiri.services.UserService;
+import com.kifiya.kobiri.models.Utilisateur;
+import com.kifiya.kobiri.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -16,16 +16,16 @@ import java.util.Collections;
 public class CustomUserAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
-    UserService userService;
+    UtilisateurService utilisateurService;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
         String password = authentication.getCredentials().toString();
-        User user = userService.connection(email, password);
-        if(user == null){
+        Utilisateur utilisateur = utilisateurService.connection(email, password);
+        if(utilisateur == null){
             throw new BadCredentialsException("hop laa");
         }
-        return new UsernamePasswordAuthenticationToken(user,null, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(utilisateur,null, Collections.emptyList());
     }
 
     @Override

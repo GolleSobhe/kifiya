@@ -27,21 +27,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr  th:if="${shops.empty}">
+                <tr  th:if="${boutiques.empty}">
                     <td colspan="2"> Pas de boutique disponible</td>
                 </tr>
-                <tr th:each="shop : ${shops}">
-                    <td><span th:text="${shop.ville}"> Ville </span></td>
-                    <td><span th:text="${shop.nom}"> Point de vente </span></td>
-                    <td><span th:text="${shop.email}"> Email </span></td>
-                    <td><span th:text="${shop.telephone}"> Numéro de téléphone </span></td>
-                    <td><span th:text="${shop.date}"> Date de création </span></td>
+                <tr th:each="boutique : ${boutiques}">
+                    <td><span th:text="${boutique.ville}"> Ville </span></td>
+                    <td><span th:text="${boutique.nom}"> Point de vente </span></td>
+                    <td><span th:text="${boutique.email}"> Email </span></td>
+                    <td><span th:text="${boutique.telephone}"> Numéro de téléphone </span></td>
+                    <td><span th:text="${boutique.date}"> Date de création </span></td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
-            <form action="#" th:action="@{/shops}" th:object="${shop}" method="post">
+            <form action="#" th:action="@{/boutiques}" th:object="${boutique}" method="post">
                 <div class="form-row">
                     <div class="col-xs-12 col-md-3"></div>
                     <div class="col-xs-12 col-md-6"><h5>Ajouter point de vente</h5></div>
