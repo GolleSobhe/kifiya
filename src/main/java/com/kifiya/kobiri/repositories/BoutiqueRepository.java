@@ -4,6 +4,7 @@ import com.kifiya.kobiri.models.Boutique;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -36,5 +37,10 @@ public class BoutiqueRepository {
                 .addValue("nom",boutique.getNom())
                 .addValue("email",boutique.getEmail())
                 .addValue("telephone",boutique.getTelephone()));
+    }
+
+    public Integer nombreDeBoutiques() {
+        String sql = "SELECT COUNT(*) FROM BOUTIQUE";
+        return namedParameterJdbcTemplate.queryForObject(sql, (SqlParameterSource) null, Integer.class);
     }
 }

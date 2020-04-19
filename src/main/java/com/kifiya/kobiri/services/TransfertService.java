@@ -49,4 +49,20 @@ public class TransfertService {
         Hex = Integer.toHexString(val);
         return Hex;
     }
+
+    public List<Transfert> findAll() {
+        return this.transfertRepository.findAll();
+    }
+
+    public int determinerNombreDeTransfertsTotal() {
+        return this.transfertRepository.determinerNombreDeTransfertsTotal();
+    }
+
+    public int determinerNombreDeTransfertsEnCours() {
+        return this.transfertRepository.determinerNombreDeTransfertsEnCours();
+    }
+
+    public int determinerNombreDeTransfertsRendus() {
+        return this.transfertRepository.determinerNombreDeTransfertsRendus();
+    }
 }
