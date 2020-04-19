@@ -3,6 +3,7 @@ package com.kifiya.kobiri.repositories;
 import com.kifiya.kobiri.models.Gerant;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -43,5 +44,10 @@ public class GerantRepository {
             }
             return null;
         });
+    }
+
+    public Integer nombreDeGerants() {
+        String sql = "SELECT COUNT(*) FROM GERANT";
+        return namedParameterJdbcTemplate.queryForObject(sql, (SqlParameterSource) null, Integer.class);
     }
 }

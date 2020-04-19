@@ -13,6 +13,7 @@ public class GerantService {
 
     private static final String DEFAULT_PASSWORD = "kobiri";
 
+    @Autowired
     private final GerantRepository gerantRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -30,5 +31,8 @@ public class GerantService {
         return gerant;
     }
 
+    public int nombreDeGerants() {
+        return gerantRepository.nombreDeGerants();
+    }
 
 }

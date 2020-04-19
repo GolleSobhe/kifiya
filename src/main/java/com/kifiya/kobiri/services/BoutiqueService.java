@@ -27,4 +27,8 @@ public class BoutiqueService {
         boutiqueRepository.save(boutique);
         return boutique;
     }
+
+    public int nombreDeBoutiques() {
+        return boutiqueRepository.nombreDeBoutiques();
+    }
 }
