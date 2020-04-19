@@ -28,9 +28,10 @@ public class EmailService {
 
         SimpleMailMessage registrationEmail = new SimpleMailMessage();
         registrationEmail.setTo(email);
-        registrationEmail.setSubject("Registration Confirmation");
-        registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
-                + appUrl + "/confirm?token=" + tocken);
+        registrationEmail.setSubject("Confirmer votre inscription");
+        registrationEmail.setText("\n" +
+                "Pour confirmer votre adresse e-mail, veuillez cliquer sur le lien ci-dessous:\n"
+                + appUrl + "/utilisateur/confirmation?token=" + tocken);
         registrationEmail.setFrom("noreply@fiyahollo.com");
         mailSender.send(registrationEmail);
     }

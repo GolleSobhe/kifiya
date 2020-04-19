@@ -1,10 +1,9 @@
-package com.kifiya.kobiri.models.user;
+package com.kifiya.kobiri.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,9 +23,8 @@ import java.util.Set;
 @ToString(of = {"id", "nom", "prenom", "email"})
 @Data
 @Builder
-@Table(name = "USER")
-public class User {
-
+@Table(name = "UTILISATEUR")
+public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
@@ -52,5 +50,5 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     Set<Role> roles;
     @OneToMany(mappedBy = "responsable") @JsonIgnore
-    List<Historic> historics = new ArrayList<>();
+    List<Transfert> transferts = new ArrayList<>();
 }

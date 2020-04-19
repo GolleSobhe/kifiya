@@ -29,7 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/templates/user/envoiForm.html
+/src/main/resources/templates/utilisateur/envoiForm.html
 /.mvn/wrapper/maven-wrapper.jar
 /.mvn/wrapper/maven-wrapper.properties
 /.mvn/wrapper/MavenWrapperDownloader.java

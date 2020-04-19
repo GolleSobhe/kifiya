@@ -12,8 +12,5 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = "/403", method = RequestMethod.GET)
-    public String error403(){
-        return "error/403";
-    }
+
 }

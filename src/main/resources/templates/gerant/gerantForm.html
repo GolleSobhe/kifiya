@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un gerant</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+    <header th:insert="fragments/navbar :: navbar"></header>
+</head>
+<body>
+<div align="center" style="margin-top: 40px">
+    <h2>Ajouter un Gerant</h2><br/>
+    <form th:object="${gerant}" th:action="@{/gerant}" method="post">
+        <p>
+            <label>Nom :</label>
+            <input type="text" style="width:50%" th:field="*{nom}"/></p>
+        <p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Erreur sur le nom</p>
+        <p>
+            <label>Prenom :</label>
+            <input type="text" style="width:50%" th:field="*{prenom}"/></p>
+        <p th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}">Erreur sur le prenom</p>
+        <p>
+            <label>Telephone :</label>
+            <input type="text" style="width:50%" th:field="*{telephone}"/></p>
+        <p th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Erreur sur le prenom</p>
+        <button>Envoyer</button>
+    </form>
+</div>
+</body>
+</html>
