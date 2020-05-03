@@ -20,21 +20,21 @@ public class BoutiqueController {
     private BoutiqueService boutiqueService;
 
     @RequestMapping(value = "boutiques", method = RequestMethod.GET)
-    public String getBoutiques(Model model){
+    public String obtenir(Model model){
         model.addAttribute("boutiques", boutiqueService.findAll());
         model.addAttribute("boutique",new Boutique());
         return "boutique/boutique";
     }
 
     @RequestMapping(value = "boutiques", method = RequestMethod.POST)
-    public String ajouterBoutique(@Valid @ModelAttribute("boutique") Boutique boutique,
+    public String ajouter(@Valid @ModelAttribute("boutique") Boutique boutique,
                               BindingResult result, HttpServletRequest request, Model model){
         if (result.hasErrors()) {
             //AJouter le modele error de saissie
             return "boutique/boutique";
         }
         //assert
-        boutiqueService.save(boutique);
+        boutiqueService.ajouter(boutique);
         model.addAttribute("boutiques", boutiqueService.findAll());
         model.addAttribute("boutique",new Boutique());
         return "boutique/boutique";

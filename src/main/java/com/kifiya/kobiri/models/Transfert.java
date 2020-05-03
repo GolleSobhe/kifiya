@@ -1,6 +1,5 @@
 package com.kifiya.kobiri.models;
 
-import com.kifiya.kobiri.models.Utilisateur;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -26,8 +25,7 @@ public class Transfert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    Boolean status;
-    Date date;
+    Date dateTransfert;
     @NotEmpty(message = "*Please provide your nom")
     String nom;
     @NotEmpty(message = "*Please provide your prenom")
@@ -37,9 +35,11 @@ public class Transfert {
     @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
     Utilisateur responsable;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    Gerant gerant;
     String code;
     Long montantEuros;
-    Long montantGNF;
     Double taux;
+    Date dateValidation;
 }
 

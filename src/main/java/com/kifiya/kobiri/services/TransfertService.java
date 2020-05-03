@@ -4,12 +4,12 @@ import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.repositories.TransfertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,16 +23,14 @@ public class TransfertService {
     TransfertRepository transfertRepository;
 
 
-    public Transfert save(Transfert transfert) {
+    public Transfert ajouter(Transfert transfert) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Utilisateur utilisateurAuth = (Utilisateur) auth.getPrincipal();
         transfert.setResponsable(utilisateurAuth);
-        transfert.setDate(new Date());
-        transfert.setStatus(Boolean.TRUE);
+        transfert.setDateTransfert(new Date());
         transfert.setTaux((double) 10600);
-        transfert.setCode(getHexa());
-        transfert.setMontantGNF((long) (transfert.getMontantEuros()*transfert.getTaux()));
-        transfertRepository.save(transfert);
+        transfert.setCode(getHexa(8));
+        transfertRepository.ajouter(transfert);
         return transfert;
     }
 
@@ -42,12 +40,22 @@ public class TransfertService {
         return new ArrayList<Transfert>();
     }
 
-    private String getHexa(){
+    private String getHexa(int nombreCaractere){
         Random random = new Random();
-        int val = random.nextInt();
-        String Hex = new String();
-        Hex = Integer.toHexString(val);
-        return Hex;
+        StringBuffer sb = new StringBuffer();
+        while(sb.length() < nombreCaractere){
+            sb.append(Integer.toHexString(random.nextInt()));
+        }
+        return sb.toString().substring(0, nombreCaractere);
+    }
+
+    //Supprimer apres
+    public void init(Transfert transfert) {
+
+        transfert.setDateTransfert(new Date());
+        transfert.setTaux((double) 10600);
+        transfert.setCode(getHexa(8));
+        transfertRepository.ajouter(transfert);
     }
 
     public List<Transfert> findAll() {
