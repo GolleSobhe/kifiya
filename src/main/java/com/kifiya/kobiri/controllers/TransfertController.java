@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,7 +20,7 @@ public class TransfertController {
 
 
     @RequestMapping(value = "transferts", method = RequestMethod.GET)
-    public String getTransfert(Model model){
+    public String faireTransfert(Model model){
         model.addAttribute("transfert", new Transfert());
         return "transfert/transfert";
     }
@@ -34,7 +33,7 @@ public class TransfertController {
     //        return"transfert/transfert";
     //    }
 
-        transfertService.save(transfert);
+        transfertService.ajouter(transfert);
 
         model.addAttribute("transfert", transfert);
         model.addAttribute("confirmationMessage", "Argent enoyé et un e-mail de confirmation a été envoyé à ");

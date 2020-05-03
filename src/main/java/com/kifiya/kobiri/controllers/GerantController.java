@@ -1,15 +1,16 @@
 package com.kifiya.kobiri.controllers;
 
 import com.kifiya.kobiri.models.Gerant;
+import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.GerantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 @Controller
 public class GerantController {
@@ -37,4 +38,17 @@ public class GerantController {
         return "index";
     }
 
+    @RequestMapping(value = "gerant/transferts", method = RequestMethod.GET)
+    public String rechercherTransferts(@RequestParam(value = "search", required = false) String code, Model model){
+        model.addAttribute("transferts", gerantService.rechercherTransfert(code));
+        return "gerant/gestionTransfert";
+    }
+
+    @RequestMapping(value = "gerant/transferts", method = RequestMethod.POST)
+    public String validerTransferts(@RequestParam(value = "search", required = false) String code, @Valid @ModelAttribute("transfert") Transfert transfert,
+                                    BindingResult result, Model model){
+        gerantService.validerTransfert(transfert);
+        model.addAttribute("transferts", gerantService.rechercherTransfert(code));
+        return "gerant/gestionTransfert";
+    }
 }

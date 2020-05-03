@@ -31,7 +31,7 @@ public class BoutiqueRepository {
         });
     }
 
-    public void save(Boutique boutique) {
+    public void ajouter(Boutique boutique) {
         namedParameterJdbcTemplate.update(INSERT, new MapSqlParameterSource().addValue("date",boutique.getDate())
                 .addValue("ville",boutique.getVille())
                 .addValue("nom",boutique.getNom())

@@ -2,10 +2,7 @@ package com.kifiya.kobiri.services;
 
 import com.kifiya.kobiri.models.Boutique;
 import com.kifiya.kobiri.repositories.BoutiqueRepository;
-import com.kifiya.kobiri.repositories.GerantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
@@ -22,9 +19,9 @@ public class BoutiqueService {
         return boutiqueRepository.findAll();
     }
 
-    public Boutique save(Boutique boutique) {
+    public Boutique ajouter(Boutique boutique) {
         boutique.setDate(new Date());
-        boutiqueRepository.save(boutique);
+        boutiqueRepository.ajouter(boutique);
         return boutique;
     }
 
