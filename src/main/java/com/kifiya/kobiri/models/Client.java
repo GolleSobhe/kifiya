@@ -20,8 +20,9 @@ import java.util.List;
 @Data
 @Table(name = "CLIENT")
 public class Client extends Utilisateur{
+    Double promo;
     @OneToMany(mappedBy = "client") @JsonIgnore
-    List<Beneficiaire> beneficiaires = new ArrayList<Beneficiaire>();
+    List<Beneficiaire> beneficiaires = new ArrayList<>();
     @OneToMany(mappedBy = "client") @JsonIgnore
-    List<Transfert> transferts = new ArrayList<Transfert>();
+    List<Transfert> transferts = new ArrayList<>();
 }

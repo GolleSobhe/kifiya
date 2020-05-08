@@ -14,7 +14,8 @@ import java.util.Random;
 @Service
 @Transactional
 public class TransfertService {
-
+    private Random random = new Random();
+    private StringBuilder sb = new StringBuilder();
     @Autowired
     TransfertRepository transfertRepository;
 
@@ -38,14 +39,10 @@ public class TransfertService {
     }
 
     public List<Transfert> findByUserId() {
-        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //Utilisateur utilisateur = (Utilisateur) auth.getPrincipal();
-        return new ArrayList<Transfert>();
+        return new ArrayList<>();
     }
 
     private String getHexa(int nombreCaractere){
-        Random random = new Random();
-        StringBuffer sb = new StringBuffer();
         while(sb.length() < nombreCaractere){
             sb.append(Integer.toHexString(random.nextInt()));
         }

@@ -6,8 +6,8 @@ import com.kifiya.kobiri.models.Role;
 import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.repositories.RoleRepository;
 import com.kifiya.kobiri.repositories.UtilisateurRepository;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Service;
@@ -22,20 +22,16 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UtilisateurService {
-
+    private static Logger logger = Logger.getLogger(UtilisateurService.class);
     @Autowired
     private UtilisateurRepository utilisateurRepository;
     @Autowired
     private RoleRepository roleRepository;
-    //@Autowired
-    //private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
 
-    private static String SELECT = "select id, nom,prenom,password from UTILISATEUR where enabled='true' and email = ?";
+    private static final String SELECT = "select id, nom,prenom,password from UTILISATEUR where enabled='true' and email = ?";
 
     public Utilisateur findUtilisateurByEmail(String email) {
         return utilisateurRepository.findByEmail(email);
@@ -47,12 +43,12 @@ public class UtilisateurService {
             utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
         }
          */
-        Role userRole = roleRepository.findByRole("ADMIN");
+        Role userRole = roleRepository.findByDroit("ADMIN");
         if (utilisateur instanceof Client){
-            userRole = roleRepository.findByRole("CLIENT");
+            userRole = roleRepository.findByDroit("CLIENT");
         }
         if (utilisateur instanceof Gerant){
-            userRole = roleRepository.findByRole("GERANT");
+            userRole = roleRepository.findByDroit("GERANT");
         }
         utilisateur.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return utilisateurRepository.save(utilisateur);
@@ -62,22 +58,26 @@ public class UtilisateurService {
         return utilisateurRepository.findByConfirmationToken(confirmationToken);
     }
 
-    public Utilisateur connection(String email, String password) {
+    public Utilisateur connection(String email) {
 
         return jdbcTemplate.query(SELECT, new Object[] {email}, new ResultSetExtractor<Utilisateur>() {
             @Override
-            public Utilisateur extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                if(resultSet.next()){
-                    Utilisateur utilisateur = new Utilisateur();
-                    utilisateur.setId(resultSet.getLong(1));
-                    utilisateur.setNom(resultSet.getString(2));
-                    utilisateur.setPrenom(resultSet.getString(3));
-                    utilisateur.setPassword(resultSet.getString(4));
-                    /**
-                    if(bCryptPasswordEncoder.matches(password, utilisateur.getPassword())){
-                        return utilisateur;
+            public Utilisateur extractData(ResultSet resultSet) {
+                try {
+                    if(resultSet.next()){
+                        Utilisateur utilisateur = new Utilisateur();
+                        utilisateur.setId(resultSet.getLong(1));
+                        utilisateur.setNom(resultSet.getString(2));
+                        utilisateur.setPrenom(resultSet.getString(3));
+                        utilisateur.setPassword(resultSet.getString(4));
+                        /**
+                        if(bCryptPasswordEncoder.matches(password, utilisateur.getPassword())){
+                            return utilisateur;
+                        }
+                         */
                     }
-                     */
+                } catch (SQLException e) {
+                    logger.error(e.getSQLState());
                 }
                 return null;
             }

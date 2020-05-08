@@ -2,7 +2,6 @@ package com.kifiya.kobiri.services;
 
 
 import com.kifiya.kobiri.models.Client;
-import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.models.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,6 @@
 package com.kifiya.kobiri.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -9,8 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,8 +16,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id", "email"})
-@ToString(of = {"id", "nom", "prenom", "email"})
+@EqualsAndHashCode(of = {"email", "telephone"})
+@ToString(of = {"id", "nom", "prenom", "telephone", "email"})
 @Data
 @Builder
 @Table(name = "UTILISATEUR")
