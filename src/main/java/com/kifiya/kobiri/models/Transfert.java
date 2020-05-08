@@ -4,9 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity
@@ -21,7 +19,6 @@ import java.util.Date;
 @Builder
 @Table(name = "TRANSFERT")
 public class Transfert {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

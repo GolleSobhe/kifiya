@@ -15,9 +15,9 @@ public class BoutiqueRepository {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     
-    String INSERT = "insert into BOUTIQUE (date, email, nom, telephone, ville)" +
+    private static final String INSERT = "insert into BOUTIQUE (date, email, nom, telephone, ville)" +
             "values (:date, :email, :nom, :telephone, :ville)";
-    String SELECT = "select VILLE, NOM, EMAIL, TELEPHONE, DATE from BOUTIQUE";
+    private static final String SELECT = "select VILLE, NOM, EMAIL, TELEPHONE, DATE from BOUTIQUE";
 
     public List<Boutique> findAll() {
         return namedParameterJdbcTemplate.query(SELECT, (resultSet, i) -> {
