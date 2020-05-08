@@ -46,7 +46,7 @@ public class UtilisateurController {
         // Generate random 36-character string token for confirmation link
         utilisateur.setConfirmationToken(UUID.randomUUID().toString());
 
-        utilisateurService.save(utilisateur);
+        utilisateurService.ajouter(utilisateur);
         String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
         emailService.sendEmail(appUrl, utilisateur.getConfirmationToken(), utilisateur.getEmail());
         model.addAttribute("confirmationMessage", "Un e-mail de confirmation a été envoyé à " + utilisateur.getEmail());
@@ -88,7 +88,7 @@ public class UtilisateurController {
         utilisateur.setEnabled(true);
         utilisateur.setPassword(password);
         // Save utilisateur
-        utilisateurService.save(utilisateur);
+        utilisateurService.ajouter(utilisateur);
         model.addAttribute("successMessage", "Votre mot de passe a été défini!");
         return "utilisateur/confirmation";
     }

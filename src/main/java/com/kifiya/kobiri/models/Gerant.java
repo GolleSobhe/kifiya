@@ -15,28 +15,16 @@ import java.util.UUID;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"email"})
+@ToString(of = {"id", "nom", "prenom", "email"})
 @Data
 @Table(name = "GERANT")
-public class Gerant {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    @NotNull
-    @NotEmpty
-    private String nom;
-    @NotNull
-    @NotEmpty
-    private String prenom;
-    @NotNull
-    @NotEmpty
-    private String telephone;
-    private String password;
+public class Gerant extends Utilisateur{
     @Size(min = 8, max = 8)
     private String code;
-    @OneToMany(mappedBy = "gerant") @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
     List<Transfert> transferts = new ArrayList<>();
-
 }

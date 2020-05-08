@@ -25,18 +25,13 @@ public class Transfert {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+    @NotNull
     Date dateTransfert;
-    @NotEmpty(message = "*Please provide your nom")
-    String nom;
-    @NotEmpty(message = "*Please provide your prenom")
-    String prenom;
-    @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
-    String telephone;
+    @OneToOne
+    Beneficiaire beneficiaire;
     @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
-    Utilisateur responsable;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    Gerant gerant;
+    Client client;
     String code;
     Long montantEuros;
     Double taux;
