@@ -1,5 +1,7 @@
 package com.kifiya.kobiri.services;
 
+import com.kifiya.kobiri.models.Client;
+import com.kifiya.kobiri.models.Gerant;
 import com.kifiya.kobiri.models.Role;
 import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.repositories.RoleRepository;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +27,8 @@ public class UtilisateurService {
     private UtilisateurRepository utilisateurRepository;
     @Autowired
     private RoleRepository roleRepository;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    //@Autowired
+    //private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Autowired
@@ -40,11 +41,19 @@ public class UtilisateurService {
         return utilisateurRepository.findByEmail(email);
     }
 
-    public Utilisateur save(Utilisateur utilisateur) {
+    public Utilisateur ajouter(Utilisateur utilisateur) {
+        /**
         if(utilisateur.getPassword() != null){
             utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
         }
+         */
         Role userRole = roleRepository.findByRole("ADMIN");
+        if (utilisateur instanceof Client){
+            userRole = roleRepository.findByRole("CLIENT");
+        }
+        if (utilisateur instanceof Gerant){
+            userRole = roleRepository.findByRole("GERANT");
+        }
         utilisateur.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return utilisateurRepository.save(utilisateur);
     }
@@ -64,9 +73,11 @@ public class UtilisateurService {
                     utilisateur.setNom(resultSet.getString(2));
                     utilisateur.setPrenom(resultSet.getString(3));
                     utilisateur.setPassword(resultSet.getString(4));
+                    /**
                     if(bCryptPasswordEncoder.matches(password, utilisateur.getPassword())){
                         return utilisateur;
                     }
+                     */
                 }
                 return null;
             }

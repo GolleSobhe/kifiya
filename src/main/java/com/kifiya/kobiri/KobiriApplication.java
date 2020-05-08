@@ -8,6 +8,7 @@ public class KobiriApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(KobiriApplication.class, args);
+
     }
 
 }

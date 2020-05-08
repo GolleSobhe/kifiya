@@ -24,12 +24,12 @@ public class Boutique {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @NotEmpty(message = "*Please provide your ville")
+    @NotEmpty(message = "*veuillez fournir votre ville")
     String ville;
-    @NotEmpty(message = "*Please provide your point de vente")
+    @NotEmpty(message = "*veuillez fournir votre point de vente")
     String nom;
-    @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
+    @Email(message = "*veuillez fournir un email valide")
+    @NotEmpty(message = "*veuillez fournir votre email")
     String email;
     @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
     String telephone;

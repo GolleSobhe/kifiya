@@ -1,15 +1,11 @@
 package com.kifiya.kobiri.services;
 
 import com.kifiya.kobiri.models.Transfert;
-import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.repositories.TransfertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,11 +18,18 @@ public class TransfertService {
     @Autowired
     TransfertRepository transfertRepository;
 
-
     public Transfert ajouter(Transfert transfert) {
+        /**
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Utilisateur utilisateurAuth = (Utilisateur) auth.getPrincipal();
-        transfert.setResponsable(utilisateurAuth);
+        Client client = new Client();
+        client.setId(utilisateurAuth.getId());
+        client.setPrenom(utilisateurAuth.getPrenom());
+        client.setNom(utilisateurAuth.getNom());
+        client.setEmail(utilisateurAuth.getEmail());
+        client.setPassword(utilisateurAuth.getPassword());
+        transfert.setResponsable(client);
+        */
         transfert.setDateTransfert(new Date());
         transfert.setTaux((double) 10600);
         transfert.setCode(getHexa(8));
@@ -35,8 +38,8 @@ public class TransfertService {
     }
 
     public List<Transfert> findByUserId() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Utilisateur utilisateur = (Utilisateur) auth.getPrincipal();
+        //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        //Utilisateur utilisateur = (Utilisateur) auth.getPrincipal();
         return new ArrayList<Transfert>();
     }
 

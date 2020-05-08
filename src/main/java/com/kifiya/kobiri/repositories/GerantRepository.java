@@ -55,9 +55,9 @@ public class GerantRepository {
     public List<Transfert> trouverTransfertParStatus() {
         return namedParameterJdbcTemplate.query(SELECT, (resultSet, i) ->{
             Transfert transfert = new Transfert();
-            transfert.setPrenom(resultSet.getString("prenom"));
-            transfert.setNom(resultSet.getString("nom"));
-            transfert.setTelephone(resultSet.getString("telephone"));
+            //transfert.setPrenom(resultSet.getString("prenom"));
+            //transfert.setNom(resultSet.getString("nom"));
+            //transfert.setTelephone(resultSet.getString("telephone"));
             transfert.setDateTransfert(resultSet.getDate("date_transfert"));
             transfert.setDateValidation(resultSet.getDate("date_validation"));
             transfert.setMontantEuros(resultSet.getLong("montant_euros"));
@@ -70,9 +70,9 @@ public class GerantRepository {
         parameters.addValue("code", code);
         return namedParameterJdbcTemplate.query(SELECT_CODE, parameters, (resultSet, i) ->{
             Transfert transfert = new Transfert();
-            transfert.setPrenom(resultSet.getString("prenom"));
-            transfert.setNom(resultSet.getString("nom"));
-            transfert.setTelephone(resultSet.getString("telephone"));
+            //transfert.setPrenom(resultSet.getString("prenom"));
+            //transfert.setNom(resultSet.getString("nom"));
+            //transfert.setTelephone(resultSet.getString("telephone"));
             transfert.setDateTransfert(resultSet.getDate("date_transfert"));
             transfert.setDateValidation(resultSet.getDate("date_validation"));
             transfert.setMontantEuros(resultSet.getLong("montant_euros"));
@@ -83,7 +83,7 @@ public class GerantRepository {
     }
 
     public void validerTransfert(Transfert transfert) {
-        parameters.addValue("gerant_id", transfert.getGerant().getId());
+        //parameters.addValue("gerant_id", transfert.getGerant().getId());
         parameters.addValue("date_validation", transfert.getDateValidation());
         parameters.addValue("code", transfert.getCode());
         namedParameterJdbcTemplate.update(UPDATE, parameters);
