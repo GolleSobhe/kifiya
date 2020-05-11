@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private TransfertService transfertService;
@@ -19,12 +22,12 @@ public class AdminController {
     @Autowired
     private GerantService gerantService;
 
-    @GetMapping("/admins")
+    @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String index(){
         return "admin/admin";
     }
 
-    @GetMapping("/admins/accueil")
+    @RequestMapping(value = "/accueil", method = RequestMethod.GET)
     public String getAdminStatistiques(Model model) {
         int nbTransfertsEncours = transfertService.determinerNombreDeTransfertsEnCours();
         int nbTransfertsRendus = transfertService.determinerNombreDeTransfertsRendus();

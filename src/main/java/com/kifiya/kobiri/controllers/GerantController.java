@@ -10,26 +10,26 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 @Controller
+@RequestMapping("/gerant")
 public class GerantController {
 
     @Autowired
     GerantService gerantService;
 
-    @GetMapping(value = "/gerant")
+    @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String connexion(){
         return "gerant/signIn";
     }
 
-    @GetMapping(value = "/gerant/new")
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String ajouterGerant(Model model){
         model.addAttribute("gerant",new Gerant());
         return "gerant/gerantForm";
     }
 
-    @PostMapping("/gerant")
+    @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
     public String sauverGerant(@Valid Gerant gerant, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "gerant/gerantForm";
@@ -38,13 +38,13 @@ public class GerantController {
         return "index";
     }
 
-    @RequestMapping(value = "gerant/transferts", method = RequestMethod.GET)
+    @RequestMapping(value = "/transferts", method = RequestMethod.GET)
     public String rechercherTransferts(@RequestParam(value = "search", required = false) String code, Model model){
         model.addAttribute("transferts", gerantService.rechercherTransfert(code));
         return "gerant/gestionTransfert";
     }
 
-    @RequestMapping(value = "gerant/transferts", method = RequestMethod.POST)
+    @RequestMapping(value = "transferts", method = RequestMethod.POST)
     public String validerTransferts(@RequestParam(value = "search", required = false) String code, @Valid @ModelAttribute("transfert") Transfert transfert,
                                     BindingResult result, Model model){
         gerantService.validerTransfert(transfert);
