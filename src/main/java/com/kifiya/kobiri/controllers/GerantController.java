@@ -45,8 +45,10 @@ public class GerantController {
     }
 
     @RequestMapping(value = "transferts", method = RequestMethod.POST)
-    public String validerTransferts(@RequestParam(value = "search", required = false) String code, @Valid @ModelAttribute("transfert") Transfert transfert,
+    public String validerTransferts(@RequestParam(value = "search", required = false) String code,
+                                    @Valid @ModelAttribute("transfert") Transfert transfert,
                                     BindingResult result, Model model){
+
         gerantService.validerTransfert(transfert);
         model.addAttribute("transferts", gerantService.rechercherTransfert(code));
         return "gerant/gestionTransfert";
