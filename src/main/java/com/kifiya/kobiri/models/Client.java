@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -21,8 +21,8 @@ import java.util.List;
 @Table(name = "CLIENT")
 public class Client extends Utilisateur{
     Double promo;
-    @OneToMany(mappedBy = "client") @JsonIgnore
-    List<Beneficiaire> beneficiaires = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    Set<Beneficiaire> beneficiaires;
     @OneToMany(mappedBy = "client") @JsonIgnore
     List<Transfert> transferts = new ArrayList<>();
 }

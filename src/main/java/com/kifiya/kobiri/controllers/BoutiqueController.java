@@ -32,7 +32,7 @@ public class BoutiqueController {
                               BindingResult result, HttpServletRequest request, Model model){
         if (result.hasErrors()) {
             //AJouter le modele error de saissie
-            return "boutique/boutique";
+            return "error/400";
         }
         //assert
         boutiqueService.ajouter(boutique);

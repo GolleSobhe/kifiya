@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -30,9 +31,10 @@ public class TransfertController {
     public String postHistoric(@Valid @ModelAttribute("transfert") Transfert transfert,
                                BindingResult result, Model model){
 
-    //    if (result.hasErrors() || !result.hasFieldErrors("responsable")) {
-    //        return"transfert/transfert";
-    //    }
+        if (result.hasErrors() || !result.hasFieldErrors("client") || !result.hasFieldErrors("beneficiaire")) {
+            //Ajouter le message d'erreur sur le model
+            return"transfert/transfert";
+        }
 
         transfertService.ajouter(transfert);
 
