@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <h4>Tableau Statistique</h4>
+    <table class="table table-bordered stats">
+        <thead>
+        <tr class="m-0">
+            <th class="w-25">Titre</th>
+            <th class="w-25">Statistique</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="m-0">
+            <td class="w-25">
+                Somme argent en GNF
+            </td>
+            <td class="w-25">
+                <span th:text="${statistique.get('montant')}"> Montant total</span>
+            </td>
+        </tr>
+        <tr class="m-0">
+            <td class="w-25">
+                Nombre de transaction
+            </td>
+            <td class="w-25">
+                <span th:text="${statistique.get('nombre')}"> Nombre de transaction </span>
+            </td>
+        </tr>
+        <tr class="m-0">
+            <td class="w-25">
+                L'argent total perçu
+            </td>
+            <td class="w-25">
+                <span th:text="${statistique.get('nombre')}"> Votre argent </span>
+            </td>
+        </tr>
+        <tr class="m-0">
+            <td class="w-25">
+                Votre dû encours
+            </td>
+            <td class="w-25">
+                <span th:text="${statistique.get('nombre')}"> Votre argent </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

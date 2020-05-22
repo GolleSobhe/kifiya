@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FiyaHollo</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../../static/css/mdb-css/bootstrap.min.css" th:href="@{/css/mdb-css/bootstrap.min.css}">
+    <!-- Material Design Bootstrap -->
+    <link rel="stylesheet" href="../../static/css/mdb-css/mdb.min.css" th:href="@{/css/mdb-css/mdb.min.css}">
+    <link th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
+    <script type="text/javascript" src="../static/js/kobiri.js" th:src="@{/js/kobiri.js}"></script>
+</head>
+<body>
+<header th:insert="fragments/navbar :: navbar"> </header>
+
+<div class="containerc ontainer-fluid mx-auto col-xs-12 col-sm-8 col-md-7 col-sm-offset-2 col-md-offset-3" style="margin-top:90px">
+    <div class="row">
+        <div class="col">
+            <ul class="nav nav-tabs mt-5" id="myTabs">
+                <li class="nav-item"><a href="#accueil" data-url="/gerant/accueil" class="nav-link active">Accueil</a></li>
+                <li class="nav-item"><a href="#historique" data-url="/gerant/historique" class="nav-link">Historique</a></li>
+                <li class="nav-item"><a href="#statistique" data-url="/gerant/statistique" class="nav-link">Statistique</a></li>
+                <li class="nav-item"><a href="#profil" data-url="/gerant/profil" class="nav-link">Mon profil</a></li>
+            </ul>
+
+            <div class="tab-content pt-3">
+                <div class="tab-pane active" id="accueil">Accueil</div>
+                <div class="tab-pane" id="historique"></div>
+                <div class="tab-pane" id="statistique"></div>
+                <div class="tab-pane" id="profil"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer>
+    <div th:replace="fragments/footer.html :: footer"></div>
+</footer>
+<!-- jQuery -->
+<script type="text/javascript" th:src="@{/js/mdb-js/jquery.min.js}"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" th:src="@{/js/mdb-js/popper.min.js}"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" th:src="@{/js/mdb-js/bootstrap.min.js}"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" th:src="@{/js/mdb-js/mdb.min.js}"></script>
+<script>
+    $('#myTabs a').click(function (e) {
+        e.preventDefault();
+
+        var url = $(this).attr("data-url");
+        var href = this.hash;
+        var pane = $(this);
+
+        // ajax load from data-url
+        $(href).load(url, function (result) {
+            pane.tab('show');
+        });
+    });
+
+    // load first tab content
+    $('#accueil').load($('.nav-link.active').attr("data-url"), function (result) {
+    });
+
+</script>
+</body>
+</html>

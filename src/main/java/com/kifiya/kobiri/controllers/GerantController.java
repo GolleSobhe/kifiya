@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/gerant")
@@ -18,39 +20,73 @@ public class GerantController {
     @Autowired
     GerantService gerantService;
 
-    @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
-    public String connexion(){
-        return "gerant/signIn";
+    @RequestMapping(method = RequestMethod.GET)
+    public String acceuil(Model model){
+        return "gerant/index";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
+
+    @GetMapping("{tab}")
+    public String tab(@PathVariable String tab, Model model) {
+        if (Arrays.asList("accueil","historique", "statistique", "profil")
+                .contains(tab)) {
+            switch (tab){
+                case "accueil": {
+                    model.addAttribute("transferts", gerantService.rechercherTransfert());
+                    break;
+                }
+                case "historique": {
+                    model.addAttribute("historiques", gerantService.rechercherTransfert());
+                    break;
+                }
+                case "statistique": {
+                    model.addAttribute("statistique", gerantService.obtenirStatistique());
+                    break;
+                }
+                case "profil": {
+                    model.addAttribute("profil", new ArrayList<>());
+                    break;
+                }
+                default: break;
+            }
+            return "gerant/"+ tab;
+        }
+
+        return "gerant/vide";
+    }
+
+
+    @RequestMapping(value = "/gerant/new", method = RequestMethod.GET)
     public String ajouterGerant(Model model){
         model.addAttribute("gerant",new Gerant());
         return "gerant/gerantForm";
     }
 
-    @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/gerant/", "/gerant"}, method = RequestMethod.POST)
     public String sauverGerant(@Valid Gerant gerant, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "gerant/gerantForm";
         }
-        gerantService.ajouterGerant(gerant);
+        gerantService.ajouter(gerant);
         return "index";
     }
 
-    @RequestMapping(value = "/transferts", method = RequestMethod.GET)
+    @RequestMapping(value = "/gerant/transferts", method = RequestMethod.GET)
     public String rechercherTransferts(@RequestParam(value = "search", required = false) String code, Model model){
         model.addAttribute("transferts", gerantService.rechercherTransfert(code));
-        return "gerant/gestionTransfert";
+        return "gerant/accueil";
     }
 
-    @RequestMapping(value = "transferts", method = RequestMethod.POST)
+    @RequestMapping(value = "/gerant/transferts", method = RequestMethod.POST)
     public String validerTransferts(@RequestParam(value = "search", required = false) String code,
                                     @Valid @ModelAttribute("transfert") Transfert transfert,
-                                    BindingResult result, Model model){
-
-        gerantService.validerTransfert(transfert);
-        model.addAttribute("transferts", gerantService.rechercherTransfert(code));
-        return "gerant/gestionTransfert";
+                                    BindingResult bindingResult, Model model){
+        if(!bindingResult.hasErrors()) {
+            gerantService.validerTransfert(transfert);
+            model.addAttribute("transferts", gerantService.rechercherTransfert(code));
+            return "gerant/accueil";
+        }
+        return "gerant/accueil";
     }
+
 }
