@@ -1,8 +1,8 @@
 package com.kifiya.kobiri.controllers;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -11,23 +11,25 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-@Tag("erreurhttp")
+@Tag("index")
 @Tag("junit5")
 @ExtendWith(SpringExtension.class)
-public class GestionErreurTest {
+class IndexControllerTest {
+
     private MockMvc mockMvc;
 
-    @Before
-    public void setUp(){
-        mockMvc = MockMvcBuilders.standaloneSetup(new GestionErreur()).build();
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(new IndexController()).build();
     }
 
     @Test
-    public void erreur404() throws Exception {
-        mockMvc.perform(get("/404"))
-                .andExpect(status().isNotFound())
+    void testIndex() throws Exception {
+        this.mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"))
                 .andDo(print());
     }
-
 }

@@ -1,0 +1,149 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
+	min-height: 530px;
+    height: 100%;
+    background: #f5f8fa;
+    font-size: 16px;
+    color: #444
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
+
+.button {
+    border-width: 4px;
+    cursor: pointer;
+    line-height: 36px!important;
+    background: #bd2130;
+    padding: 0 25px;
+    text-align: center;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    border: 5px solid #e1e1e1;
+    font-size: 17px;
+}
+
+.gerant .titre-bar {
+   height: 40px;
+}
+
+.gerant .titre-bar .custom-select {
+    display: none;
+}
+
+
+
+/*
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+
+    .gerant table.table-bordered.stats {
+        width: 50%;
+        text-align: center;
+    }
+}
+
+/*
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+  .gerant table.table-bordered.stats {
+      width: 50%;
+      text-align: center;
+  }
+
+}
+
+/*
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  .gerant table.table-bordered.stats {
+      width: 50%;
+      text-align: center;
+  }
+
+}
+
+/*
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+     .gerant {
+            background: green;
+       }
+}
+
+/*
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+     .gerant {
+            background: yellow;
+
+       }
+       .gerant .titre-bar .nav {
+                  display: none;
+              }
+       .gerant .titre-bar .custom-select {
+           display: block;
+       }
+}
+
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+     .gerant {
+            background: gray;
+       }
+      .gerant .titre-bar .nav {
+           display: none;
+       }
+       .gerant .titre-bar .custom-select {
+            display: block;
+       }
+}
+
+@media (max-width: 320px) {
+     .gerant {
+            background: gray;
+       }
+      .gerant .titre-bar .nav {
+           display: none;
+       }
+       .gerant .titre-bar .custom-select {
+            display: block;
+       }
+}
+
+
+
