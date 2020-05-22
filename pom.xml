@@ -100,7 +100,12 @@
             <artifactId>zxcvbn</artifactId>
             <version>1.3.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.4.0</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -109,6 +114,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <properties>
+                        <includeTags>junit5</includeTags>
+                    </properties>
+                </configuration>
             </plugin>
         </plugins>
     </build>

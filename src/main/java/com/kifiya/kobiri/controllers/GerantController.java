@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -18,7 +21,14 @@ public class GerantController {
     @Autowired
     GerantService gerantService;
 
-    @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
+    @RequestMapping(value ={"/", ""}, method = RequestMethod.GET)
+    public String acceuil(Model model){
+        model.addAttribute("statistique", gerantService.obtenirStatistique());
+        return "gerant/index";
+    }
+
+
+    @RequestMapping(value ="/connexion", method = RequestMethod.GET)
     public String connexion(){
         return "gerant/signIn";
     }
@@ -34,7 +44,7 @@ public class GerantController {
         if(bindingResult.hasErrors()){
             return "gerant/gerantForm";
         }
-        gerantService.ajouterGerant(gerant);
+        gerantService.ajouter(gerant);
         return "index";
     }
 
@@ -47,10 +57,18 @@ public class GerantController {
     @RequestMapping(value = "transferts", method = RequestMethod.POST)
     public String validerTransferts(@RequestParam(value = "search", required = false) String code,
                                     @Valid @ModelAttribute("transfert") Transfert transfert,
-                                    BindingResult result, Model model){
-
-        gerantService.validerTransfert(transfert);
-        model.addAttribute("transferts", gerantService.rechercherTransfert(code));
+                                    BindingResult bindingResult, Model model){
+        if(!bindingResult.hasErrors()) {
+            gerantService.validerTransfert(transfert);
+            model.addAttribute("transferts", gerantService.rechercherTransfert(code));
+            return "gerant/gestionTransfert";
+        }
         return "gerant/gestionTransfert";
+    }
+
+    @RequestMapping(value = "/historique", method = RequestMethod.GET)
+    public String historique(Model model){
+        model.addAttribute("transferts", gerantService.rechercherTransfert());
+        return "gerant/historique";
     }
 }

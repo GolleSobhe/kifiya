@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -43,7 +46,7 @@ public class UtilisateurController {
         }
 
         // Disable utilisateur until they click on confirmation link in email
-        utilisateur.setEnabled(false);
+        utilisateur.setActive(false);
         // Generate random 36-character string token for confirmation link
         utilisateur.setConfirmationToken(UUID.randomUUID().toString());
 
@@ -86,7 +89,7 @@ public class UtilisateurController {
         Utilisateur utilisateur = utilisateurService.findByConfirmationToken(requestParams.get("token"));
         String password = requestParams.get("password");
         // Set utilisateur to enabled
-        utilisateur.setEnabled(true);
+        utilisateur.setActive(true);
         utilisateur.setPassword(password);
         // Save utilisateur
         utilisateurService.ajouter(utilisateur);

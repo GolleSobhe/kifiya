@@ -3,48 +3,50 @@ package com.kifiya.kobiri.models;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"email", "telephone"})
+@EqualsAndHashCode(of = {"email"})
 @ToString(of = {"id", "nom", "prenom", "telephone", "email"})
 @Data
-@Builder
+@SuperBuilder
 @Table(name = "UTILISATEUR")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    @NotEmpty(message = "*veuillez fournir votre nom")
+
+    @NonNull
+    @NotBlank(message = "*veuillez fournir votre nom")
     String nom;
-    @NotEmpty(message = "*veuillez fournir votre prenom")
+
+    @NonNull
+    @NotBlank(message = "*veuillez fournir votre prenom")
     String prenom;
+
+    @NonNull
     @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*veuillez fournir votre email")
+    @NotBlank(message = "*veuillez fournir votre email")
     String email;
-    @Pattern(regexp = "(\\+33|0)[0-9]{9}")
-    String telephone;
-    @NotEmpty(message = "*veuillez fournir votre pays")
-    String pays;
-    @NotEmpty(message = "*veuillez fournir votre ville")
-    String ville;
-    String codePostale;
-    @NotEmpty(message = "*veuillez fournir votre adresse")
-    String adresse;
+
     String password;
-    boolean enabled;
+
+    boolean active;
+
     String confirmationToken;
-    @ManyToMany(cascade = CascadeType.ALL)
-    Set<Role> roles;
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    List<Role> roles;
+
 }
