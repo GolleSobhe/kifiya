@@ -13,19 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/transferts")
 public class TransfertController {
 
     @Autowired
     private TransfertService transfertService;
 
 
-    @RequestMapping(value = "transferts", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
     public String faireTransfert(Model model){
         model.addAttribute("transfert", new Transfert());
         return "transfert/transfert";
     }
 
-    @RequestMapping(value = "transferts", method = RequestMethod.POST)
+    @RequestMapping(value =  {"/", ""}, method = RequestMethod.POST)
     public String postHistoric(@Valid @ModelAttribute("transfert") Transfert transfert,
                                BindingResult result, Model model){
 

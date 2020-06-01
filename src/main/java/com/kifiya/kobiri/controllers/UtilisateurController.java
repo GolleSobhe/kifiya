@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Controller
+@RequestMapping("/utilisateur")
 public class UtilisateurController {
 
     @Autowired
@@ -22,13 +23,13 @@ public class UtilisateurController {
     @Autowired
     private EmailService emailService;
 
-    @RequestMapping(value = "utilisateur/inscription", method = RequestMethod.GET)
+    @RequestMapping(value = "/inscription", method = RequestMethod.GET)
     public String inscription(Model model){
         model.addAttribute("utilisateur",new Utilisateur());
         return "utilisateur/inscription";
     }
 
-    @RequestMapping(value = "utilisateur/inscription", method = RequestMethod.POST)
+    @RequestMapping(value = "/inscription", method = RequestMethod.POST)
     public String inscription(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
                                BindingResult result, HttpServletRequest request, Model model){
 
@@ -53,12 +54,12 @@ public class UtilisateurController {
         return "utilisateur/inscription";
     }
 
-    @RequestMapping(value = "utilisateur/connexion", method = RequestMethod.GET)
+    @RequestMapping(value = "/connexion", method = RequestMethod.GET)
     public String connexion(){
         return "utilisateur/connexion";
     }
 
-    @RequestMapping(value = "utilisateur/contact", method = RequestMethod.GET)
+    @RequestMapping(value = "/contact", method = RequestMethod.GET)
     public String contact(){
         return "utilisateur/contact";
     }
@@ -66,7 +67,7 @@ public class UtilisateurController {
 
 
     // Process confirmation link
-    @RequestMapping(value="utilisateur/confirmation", method = RequestMethod.GET)
+    @RequestMapping(value="/confirmation", method = RequestMethod.GET)
     public String confirmation(Model model, @RequestParam("token") String token){
         Utilisateur utilisateur = utilisateurService.findByConfirmationToken(token);
         if (utilisateur == null) { // No token found in DB
@@ -78,7 +79,7 @@ public class UtilisateurController {
     }
 
     // Process confirmation link
-    @RequestMapping(value="utilisateur/confirmation", method = RequestMethod.POST)
+    @RequestMapping(value="/confirmation", method = RequestMethod.POST)
     public String confirmation(@RequestParam Map<String, String> requestParams, Model model) {
 
         // Find the utilisateur associated with the reset token
