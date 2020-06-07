@@ -1,8 +1,5 @@
 package com.kifiya.kobiri.services;
 
-import com.kifiya.kobiri.models.Client;
-import com.kifiya.kobiri.models.Gerant;
-import com.kifiya.kobiri.models.Role;
 import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.repositories.RoleRepository;
 import com.kifiya.kobiri.repositories.UtilisateurRepository;
@@ -15,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Optional;
 
 @Service
@@ -43,14 +38,7 @@ public class UtilisateurService {
             utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
         }
          */
-        Role userRole = roleRepository.findByDroit("ADMIN");
-        if (utilisateur instanceof Client){
-            userRole = roleRepository.findByDroit("CLIENT");
-        }
-        if (utilisateur instanceof Gerant){
-            userRole = roleRepository.findByDroit("GERANT");
-        }
-        utilisateur.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
         return utilisateurRepository.save(utilisateur);
     }
 

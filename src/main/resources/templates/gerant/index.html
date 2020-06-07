@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FiyaHollo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../static/js/kobiri.js" th:src="@{/js/kobiri.js}"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <header> En tetete</header>
+        <div class="main">
+            <div class="gerant">
+                <div class="container">
+                    <div class="titre-bar">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Vue d'ensemble</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/gerant/historique}">Historique</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/gerant/transferts}">Transfer en cours</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Mon Profil</a>
+                            </li>
+                        </ul>
+                        <select class="custom-select">
+                            <option selected>Vue d'ensemble</option>
+                            <option value="1">Historique</option>
+                            <option value="2">Transfer en cours</option>
+                            <option value="3">Mon Profil</option>
+                        </select>
+                    </div>
+                    <h4>Tableau Statistique</h4>
+                    <table class="table table-bordered stats">
+                        <thead>
+                            <tr class="m-0">
+                                <th class="w-25">Titre</th>
+                                <th class="w-25">Statistique</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="m-0">
+                                <td class="w-25">
+                                    Somme argent en GNF
+                                </td>
+                                <td class="w-25">
+                                    <span th:text="${statistique.get('montant')}"> Montant total</span>
+                                </td>
+                            </tr>
+                            <tr class="m-0">
+                                <td class="w-25">
+                                    Nombre de transaction
+                                </td>
+                                <td class="w-25">
+                                    <span th:text="${statistique.get('nombre')}"> Nombre de transaction </span>
+                                </td>
+                            </tr>
+                            <tr class="m-0">
+                                <td class="w-25">
+                                    L'argent total perçu
+                                </td>
+                                <td class="w-25">
+                                    <span th:text="${statistique.get('nombre')}"> Votre argent </span>
+                                </td>
+                            </tr>
+                            <tr class="m-0">
+                                <td class="w-25">
+                                    Votre dû encours
+                                </td>
+                                <td class="w-25">
+                                    <span th:text="${statistique.get('nombre')}"> Votre argent </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-primary button"  th:href="@{/gerant/transferts}">Valider un transfert</a>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div th:replace="fragments/footer.html :: footer"></div>
+        </footer>
+    </div>
+</body>
+</html>
