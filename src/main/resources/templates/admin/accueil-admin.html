@@ -8,47 +8,48 @@
 
     <link href="../../static/css/inscription.css" th:href="@{/css/inscription.css}" rel="stylesheet" media="screen"/>
     <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/css/kobiri.css" th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
     <header th:insert="fragments/navbar :: navbar"> </header>
 </head>
 
 
 <body>
-<div class="containerc ontainer-fluid mx-auto col-xs-12 col-sm-8 col-md-7 col-sm-offset-2 col-md-offset-3" style="margin-top:90px">
-    <div class="row">
-    <div class="col-md-5">
-        <div class="list-group">
-            <li class="list-group-item list-group-item-action active">
-               Ajouter un gérant ou une boutique
-            </li>
-            <a th:href="@{/gerant/new}" class="list-group-item list-group-item-action">Ajouter un gérant</a>
-            <a th:href="@{/boutiques}" class="list-group-item list-group-item-action">Ajouter une boutique</a>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-5" style="padding-bottom: 15px;">
+            <div class="list-group">
+                <li class="list-group-item list-group-item-action active list-group-active">
+                   Ajouter un gérant ou une boutique
+                </li>
+                <a th:href="@{/gerant/new}" class="list-group-item list-group-item-action">Ajouter un gérant</a>
+                <a th:href="@{/boutiques}" class="list-group-item list-group-item-action">Ajouter une boutique</a>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action active list-group-active">
+                    Statistiques
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Nombre de transferts en cours
+                    <span class="badge badge-primary badge-pill" th:text="${nbTransfertsEncours}"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Nombre de transferts rendus
+                    <span class="badge badge-primary badge-pill" th:text="${nbTransfertsRendus}"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Nombre de gérants
+                    <span class="badge badge-primary badge-pill" th:text="${nbGerants}"></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Nombre de boutiques
+                    <span class="badge badge-primary badge-pill" th:text="${nbBoutiques}"></span>
+                </li>
+            </ul>
+        </div>
         </div>
     </div>
-    <div class="col-md-7">
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-action active">
-                Statistiques
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nombre de transferts en cours
-                <span class="badge badge-primary badge-pill" th:text="${nbTransfertsEncours}"></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nombre de transferts rendus
-                <span class="badge badge-primary badge-pill" th:text="${nbTransfertsRendus}"></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nombre de gérants
-                <span class="badge badge-primary badge-pill" th:text="${nbGerants}"></span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Nombre de boutiques
-                <span class="badge badge-primary badge-pill" th:text="${nbBoutiques}"></span>
-            </li>
-        </ul>
-    </div>
-    </div>
-</div>
 </body>
 
 <div style="margin-top:90px"></div>
