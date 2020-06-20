@@ -18,26 +18,170 @@
 </head>
 <body>
 <header th:insert="fragments/navbar :: navbar"> </header>
-
 <div class="containerc ontainer-fluid mx-auto col-xs-12 col-sm-8 col-md-7 col-sm-offset-2 col-md-offset-3" style="margin-top:90px">
-    <div class="row">
-        <div class="col">
-            <ul class="nav nav-tabs mt-5" id="myTabs">
-                <li class="nav-item"><a href="#accueil" data-url="/gerant/accueil" class="nav-link active">Accueil</a></li>
-                <li class="nav-item"><a href="#historique" data-url="/gerant/historique" class="nav-link">Historique</a></li>
-                <li class="nav-item"><a href="#statistique" data-url="/gerant/statistique" class="nav-link">Statistique</a></li>
-                <li class="nav-item"><a href="#profil" data-url="/gerant/profil" class="nav-link">Mon profil</a></li>
-            </ul>
-
-            <div class="tab-content pt-3">
-                <div class="tab-pane active" id="accueil">Accueil</div>
-                <div class="tab-pane" id="historique"></div>
-                <div class="tab-pane" id="statistique"></div>
-                <div class="tab-pane" id="profil"></div>
+    <ul class="nav nav-tabs" id="gerant" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="accueil-tab" data-toggle="tab" href="#accueil" role="tab" aria-controls="home"
+               aria-selected="true">Accueil</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="historique-tab" data-toggle="tab" href="#historique" role="tab" aria-controls="historique"
+               aria-selected="false">Historique</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="statistique-tab" data-toggle="tab" href="#statistique" role="tab" aria-controls="statistique"
+               aria-selected="false">statistique</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+               aria-selected="false">Profile</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="accueil" role="tabpanel" aria-labelledby="home-tab">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <h1>Rendre argent</h1>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div th:if="${transferts.empty}">
+                        <h4>Pas de transfert disponible</h4>
+                    </div>
+                    <div th:if="${not #lists.isEmpty(transferts)}">
+                        <form class="col-md-4"  th:action="@{/gerant/transferts}" method="get">
+                            <div class="input-group">
+                        <span class="input-group-prepend">
+                            <div class="input-group-text bg-transparent border-right-0"><i class="fa fa-search"></i></div>
+                        </span>
+                                <input class="form-control py-2 border-left-0 border" type="search"
+                                       name="search" th:value="${search}"
+                                >
+                                <span class="input-group-append">
+                            <button class="btn btn-outline-secondary border-left-0 border" type="submit">
+                                Rechercher
+                            </button>
+                        </span>
+                            </div>
+                        </form>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Status</th>
+                                <th scope="col">Nom et prenom</th>
+                                <th scope="col">Téléphone</th>
+                                <th scope="col">Date de transfert</th>
+                                <th scope="col">Date de Validation</th>
+                                <th scope="col">Montant GNF</th>
+                                <th scope="col">Code</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="transfert : ${transferts}">
+                                <form class="row" th:object="${transfert}" th:action="@{/gerant/transferts}" method="post">
+                                    <td><input type="checkbox" th:checked="${transfert.dateValidation}">  Non traité</td>
+                                    <td><span th:text="${transfert.nom + ' ' + transfert.prenom}"> Nom et prenom </span></td>
+                                    <td><span th:text="${transfert.telephone}"> Téléphone </span></td>
+                                    <td><span th:text="${transfert.dateTransfert}"> Date de création </span></td>
+                                    <td><span th:text="${transfert.dateValidation}"> Date de validation </span></td>
+                                    <td><span th:text="${transfert.montantEuros * transfert.taux} "> Montant GNF</span></td>
+                                    <td><span th:text="${transfert.code}"> Code</span></td>
+                                    <td><button type="submit">Valider</button></td>
+                                </form>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="historique" role="tabpanel" aria-labelledby="historique-tab">
+                <div class="container">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Status</th>
+                            <th scope="col">Nom et prenom</th>
+                            <th scope="col">Téléphone</th>
+                            <th scope="col">Date de transfert</th>
+                            <th scope="col">Date de Validation</th>
+                            <th scope="col">Montant GNF</th>
+                            <th scope="col">Code</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  th:if="${historiques.empty}">
+                            <td colspan="8"> Pas de historique disponible</td>
+                        </tr>
+                        <tr th:each="historique : ${hostoriques}">
+                            <td><input type="checkbox" th:checked="${historique.dateValidation}">  Non traité</td>
+                            <td><span th:text="${historique.nom + ' ' + historique.prenom}"> Nom et prenom </span></td>
+                            <td><span th:text="${historique.telephone}"> Téléphone </span></td>
+                            <td><span th:text="${historique.datehistorique}"> Date de création </span></td>
+                            <td><span th:text="${historique.dateValidation}"> Date de validation </span></td>
+                            <td><span th:text="${historique.montantEuros * historique.taux} "> Montant GNF</span></td>
+                            <td><span th:text="${historique.code}"> Code</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+        <div class="tab-pane fade" id="statistique" role="tabpanel" aria-labelledby="statistique-tab">
+            <div class="container">
+                <h4>Tableau Statistique</h4>
+                <table class="table table-bordered stats">
+                    <thead>
+                    <tr class="m-0">
+                        <th class="w-25">Titre</th>
+                        <th class="w-25">Statistique</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="m-0">
+                        <td class="w-25">
+                            Somme argent en GNF
+                        </td>
+                        <td class="w-25">
+                            <span th:text="${statistique.get('montant')}"> Montant total</span>
+                        </td>
+                    </tr>
+                    <tr class="m-0">
+                        <td class="w-25">
+                            Nombre de transaction
+                        </td>
+                        <td class="w-25">
+                            <span th:text="${statistique.get('nombre')}"> Nombre de transaction </span>
+                        </td>
+                    </tr>
+                    <tr class="m-0">
+                        <td class="w-25">
+                            L'argent total perçu
+                        </td>
+                        <td class="w-25">
+                            <span th:text="${statistique.get('nombre')}"> Votre argent </span>
+                        </td>
+                    </tr>
+                    <tr class="m-0">
+                        <td class="w-25">
+                            Votre dû encours
+                        </td>
+                        <td class="w-25">
+                            <span th:text="${statistique.get('nombre')}"> Votre argent </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="container">
+                <div>
+                    <h1>Votre email: <span>sobhe@yahoo.fr</span></h1>
+                    <button class="button button--secondary button--large button--solid">Définir / réinitialiser le mot de passe</button>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
 <footer>
     <div th:replace="fragments/footer.html :: footer"></div>
@@ -50,24 +194,5 @@
 <script type="text/javascript" th:src="@{/js/mdb-js/bootstrap.min.js}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" th:src="@{/js/mdb-js/mdb.min.js}"></script>
-<script>
-    $('#myTabs a').click(function (e) {
-        e.preventDefault();
-
-        var url = $(this).attr("data-url");
-        var href = this.hash;
-        var pane = $(this);
-
-        // ajax load from data-url
-        $(href).load(url, function (result) {
-            pane.tab('show');
-        });
-    });
-
-    // load first tab content
-    $('#accueil').load($('.nav-link.active').attr("data-url"), function (result) {
-    });
-
-</script>
 </body>
 </html>

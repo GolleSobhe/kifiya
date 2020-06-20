@@ -33,6 +33,7 @@ body, html {
     font-weight: bold;
     border: 5px solid #e1e1e1;
     font-size: 17px;
+    linear-gradient(to bottom,#56b1ea 0%,#447bb1 100%);
 }
 
 .gerant .titre-bar {

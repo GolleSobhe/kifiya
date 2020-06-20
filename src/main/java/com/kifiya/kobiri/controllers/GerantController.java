@@ -22,39 +22,12 @@ public class GerantController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String acceuil(Model model){
+        model.addAttribute("transferts", gerantService.rechercherTransfert());
+        model.addAttribute("historiques", gerantService.rechercherTransfert());
+        model.addAttribute("statistique", gerantService.obtenirStatistique());
+        model.addAttribute("profil", new ArrayList<>());
         return "gerant/index";
     }
-
-
-    @GetMapping("{tab}")
-    public String tab(@PathVariable String tab, Model model) {
-        if (Arrays.asList("accueil","historique", "statistique", "profil")
-                .contains(tab)) {
-            switch (tab){
-                case "accueil": {
-                    model.addAttribute("transferts", gerantService.rechercherTransfert());
-                    break;
-                }
-                case "historique": {
-                    model.addAttribute("historiques", gerantService.rechercherTransfert());
-                    break;
-                }
-                case "statistique": {
-                    model.addAttribute("statistique", gerantService.obtenirStatistique());
-                    break;
-                }
-                case "profil": {
-                    model.addAttribute("profil", new ArrayList<>());
-                    break;
-                }
-                default: break;
-            }
-            return "gerant/"+ tab;
-        }
-
-        return "gerant/vide";
-    }
-
 
     @RequestMapping(value = "/gerant/new", method = RequestMethod.GET)
     public String ajouterGerant(Model model){
