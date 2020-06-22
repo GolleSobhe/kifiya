@@ -4,23 +4,17 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-@Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id", "email"})
-@ToString(of = {"id", "nom", "prenom", "email"})
 @Data
 @SuperBuilder
-@Table(name = "ADMIN")
 public class Admin extends Utilisateur{
 
     @NonNull

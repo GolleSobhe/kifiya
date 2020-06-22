@@ -16,7 +16,7 @@ public class Bootstrap {
     @PostConstruct
     public void init() {
         try{
-            initialisationService.init();
+            //initialisationService.init();
         }catch (Exception e){
             logger.error(e.getMessage());
         }

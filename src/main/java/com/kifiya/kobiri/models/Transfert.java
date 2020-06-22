@@ -3,35 +3,51 @@ package com.kifiya.kobiri.models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id", "telephone"})
-@ToString(of = {"id", "nom", "prenom", "telephone"})
 @Data
 @Builder
-@Table(name = "TRANSFERT")
 public class Transfert {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    @NotNull
-    Date dateTransfert;
-    @OneToOne
+
+    LocalDateTime dateTransfert = LocalDateTime.now();
+
+    LocalDateTime dateValidation;
+
     Beneficiaire beneficiaire;
-    @NotNull
-    @ManyToOne(cascade = CascadeType.PERSIST)
+
     Client client;
+
     String code;
+
+    @NotNull
+    Long montant;
+
+    @NotNull
     Long montantEuros;
+
     Double taux;
-    Date dateValidation;
+
+    public UUID getClientId() {
+        return null;
+    }
+
+    public String getPrenomBeneficiaire(){
+        return beneficiaire.getPrenom();
+    }
+
+    public String getNomBeneficiaire(){
+        return beneficiaire.getNom();
+    }
+
+    public String getTelephoneBeneficiaire(){
+        return beneficiaire.getTelephone();
+    }
 }
 
