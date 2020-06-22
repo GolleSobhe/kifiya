@@ -1,12 +1,11 @@
 package com.kifiya.kobiri.services;
 
+import com.kifiya.kobiri.models.Gerant;
 import com.kifiya.kobiri.models.Transfert;
-import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.repositories.GerantRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kifiya.kobiri.repositories.TransfertRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,30 +14,18 @@ public class GerantService {
 
     private static final String DEFAULT_PASSWORD = "kobiri";
 
-    @Autowired
-    private GerantRepository gerantRepository;
-    @Autowired
-    private UtilisateurService utilisateurService;
+    private final GerantRepository gerantRepository;
 
-    /**
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder
-    */
-    public Utilisateur ajouter(Utilisateur gerant){
+    private final TransfertRepository transfertRepository;
+
+    public GerantService(GerantRepository gerantRepository,TransfertRepository transfertRepository) {
+        this.gerantRepository = gerantRepository;
+        this.transfertRepository = transfertRepository;
+    }
+
+    public void ajouter(Gerant gerant){
         //gerant.setPassword(bCryptPasswordEncoder.encode(DEFAULT_PASSWORD));
-        gerant = utilisateurService.ajouter(gerant);
-        return gerant;
-    }
-
-    public List<Transfert> trouverTransfertParStatus() {
-        return gerantRepository.trouverTransfertParStatus();
-    }
-
-
-    public List<Transfert> rechercherTransfert(String code) {
-        if(code != null)
-            return  gerantRepository.rechercherTransfert(code);
-        return gerantRepository.trouverTransfertParStatus();
+        gerantRepository.creer(gerant);
     }
 
     public void validerTransfert(Transfert transfert) {
@@ -49,12 +36,7 @@ public class GerantService {
         gerant.setId(utilisateur.getId());
         transfert.setGerant(gerant);
          */
-        transfert.setDateValidation(new Date());
-        gerantRepository.validerTransfert(transfert);
-    }
-
-    public int nombreDeGerants() {
-        return 0;
+        transfertRepository.rendreTransfert(transfert.getCode(),"gerantId");
     }
 
     public List<Transfert> rechercherTransfert() {

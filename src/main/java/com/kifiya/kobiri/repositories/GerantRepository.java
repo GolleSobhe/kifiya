@@ -20,8 +20,10 @@ public class GerantRepository {
 
     MapSqlParameterSource parameters = new MapSqlParameterSource();
 
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    private static final String CREER = "insert into GERANT(login,nom,prenom,password,adresse,code,telephone,ville) " +
+            "values (:login, :nom, :prenom, :password, :adresse, :code, :telephone, :ville)";
 
     private static final String SELECT ="Select B.prenom, B.nom, B.telephone, T.date_transfert, T.date_validation, T.montant_euros, T.taux " +
             "From TRANSFERT T, BENEFICIAIRE B  where T.BENEFICIAIRE_ID = B.ID And T.date_validation IS NULL";
@@ -33,22 +35,22 @@ public class GerantRepository {
 
     private static final String CONNEXION = "Select nom,prenom,password from GERANT where login = :login";
 
-    private static final String INSERT = "INSERT into GERANT(id,nom,prenom,telephone,password) " +
-            "VALUES(:id,:nom,:prenom,:telephone,:password)";
-
-    private static final String SELECT_CODE ="Select prenom, nom, telephone, date_transfert, date_validation, montant_euros, taux, code " +
-            "From TRANSFERT Where code = :code";
-    private static final String UPDATE = "UPDATE TRANSFERT SET date_validation = :date_validation, gerant_id = :gerant_id Where code = :code";
-
-    public void ajouterGerant(Gerant gerant){
-        parameters.addValue("id",gerant.getId());
-        parameters.addValue("nom",gerant.getNom());
-        parameters.addValue("prenom",gerant.getPrenom());
-        parameters.addValue("telephone",gerant.getTelephone());
-        parameters.addValue("password",gerant.getPassword());
-        namedParameterJdbcTemplate.update(INSERT,parameters);
+    public GerantRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
+    public void creer(Gerant gerant){
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("login",gerant.getLogin());
+        params.addValue("nom",gerant.getNom());
+        params.addValue("prenom",gerant.getPrenom());
+        params.addValue("telephone",gerant.getTelephone());
+        params.addValue("password",gerant.getPassword());
+        params.addValue("code",gerant.getCode());
+        params.addValue("adresse",gerant.getAdresse());
+        params.addValue("ville",gerant.getVille());
+        namedParameterJdbcTemplate.update(CREER,parameters);
+    }
 
     public Gerant connexion(String login) {
         parameters.addValue("login", login);
@@ -70,42 +72,18 @@ public class GerantRepository {
             //transfert.setPrenom(resultSet.getString("prenom"));
             //transfert.setNom(resultSet.getString("nom"));
             //transfert.setTelephone(resultSet.getString("telephone"));
-            transfert.setDateTransfert(resultSet.getDate("date_transfert"));
-            transfert.setDateValidation(resultSet.getDate("date_validation"));
+            transfert.setDateTransfert(resultSet.getTimestamp("date_transfert").toLocalDateTime());
+            transfert.setDateValidation(resultSet.getTimestamp("date_validation").toLocalDateTime());
             transfert.setMontantEuros(resultSet.getLong("montant_euros"));
             transfert.setTaux(resultSet.getDouble("taux"));
             return transfert;
         });
-    }
-
-    public List<Transfert> rechercherTransfert(String code) {
-        parameters.addValue("code", code);
-        return namedParameterJdbcTemplate.query(SELECT_CODE, parameters, (resultSet, i) ->{
-            Transfert transfert = new Transfert();
-            //transfert.setPrenom(resultSet.getString("prenom"));
-            //transfert.setNom(resultSet.getString("nom"));
-            //transfert.setTelephone(resultSet.getString("telephone"));
-            transfert.setDateTransfert(resultSet.getDate("date_transfert"));
-            transfert.setDateValidation(resultSet.getDate("date_validation"));
-            transfert.setMontantEuros(resultSet.getLong("montant_euros"));
-            transfert.setTaux(resultSet.getDouble("taux"));
-            transfert.setCode(resultSet.getString("code"));
-            return transfert;
-        });
-    }
-
-    public void validerTransfert(Transfert transfert) {
-        //parameters.addValue("gerant_id", transfert.getGerant().getId());
-        parameters.addValue("date_validation", transfert.getDateValidation());
-        parameters.addValue("code", transfert.getCode());
-        namedParameterJdbcTemplate.update(UPDATE, parameters);
     }
 
     public List<Transfert> rechercherTransfert(Long id) {
         parameters.addValue("idGenant", id);
         return namedParameterJdbcTemplate.query(SELECT_HISTORIQUE, parameters, (resultSet,i) -> {
             Transfert transfert = new Transfert();
-
             return transfert;
         });
     }

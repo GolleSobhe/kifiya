@@ -1,8 +1,8 @@
 package com.kifiya.kobiri.controllers;
 
-import com.kifiya.kobiri.models.Utilisateur;
+import com.kifiya.kobiri.models.Client;
+import com.kifiya.kobiri.services.ClientService;
 import com.kifiya.kobiri.services.EmailService;
-import com.kifiya.kobiri.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,33 +10,31 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Map;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/utilisateur")
 public class UtilisateurController {
 
     @Autowired
-    private UtilisateurService utilisateurService;
+    private ClientService clientService;
+
     @Autowired
     private EmailService emailService;
 
     @RequestMapping(value = "/inscription", method = RequestMethod.GET)
     public String inscription(Model model){
-        model.addAttribute("utilisateur",new Utilisateur());
+        model.addAttribute("utilisateur",new Client());
         return "utilisateur/inscription";
     }
 
     @RequestMapping(value = "/inscription", method = RequestMethod.POST)
-    public String inscription(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
+    public String inscription(@Valid @ModelAttribute("utilisateur") Client client,
                                BindingResult result, HttpServletRequest request, Model model){
 
-        Utilisateur existing = utilisateurService.findUtilisateurByEmail(utilisateur.getEmail());
+        Client existing = clientService.findUtilisateurByEmail(client.getEmail());
         if (existing != null) {
             result.rejectValue("email", null, "There is already an account registered with that email");
         }
@@ -46,14 +44,15 @@ public class UtilisateurController {
         }
 
         // Disable utilisateur until they click on confirmation link in email
-        utilisateur.setActive(false);
+        //client.setActive(false);
         // Generate random 36-character string token for confirmation link
-        utilisateur.setConfirmationToken(UUID.randomUUID().toString());
+        //client.setConfirmationToken(UUID.randomUUID().toString());
 
-        utilisateurService.ajouter(utilisateur);
+        clientService.ajouter(client);
         String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        emailService.sendEmail(appUrl, utilisateur.getConfirmationToken(), utilisateur.getEmail());
-        model.addAttribute("confirmationMessage", "Un e-mail de confirmation a été envoyé à " + utilisateur.getEmail());
+        emailService.sendEmail(appUrl, "qq", client.getEmail());
+        //emailService.sendEmail(appUrl, client.getConfirmationToken(), client.getEmail());
+        model.addAttribute("confirmationMessage", "Un e-mail de confirmation a été envoyé à " + client.getEmail());
         return "utilisateur/inscription";
     }
 
@@ -70,9 +69,9 @@ public class UtilisateurController {
 
 
     // Process confirmation link
-    @RequestMapping(value="/confirmation", method = RequestMethod.GET)
+    /*@RequestMapping(value="/confirmation", method = RequestMethod.GET)
     public String confirmation(Model model, @RequestParam("token") String token){
-        Utilisateur utilisateur = utilisateurService.findByConfirmationToken(token);
+        Utilisateur utilisateur = clientService.findByConfirmationToken(token);
         if (utilisateur == null) { // No token found in DB
             model.addAttribute("invalidToken", "Oups! Il s'agit d'un lien de confirmation non valide.");
         } else { // Token found
@@ -86,15 +85,15 @@ public class UtilisateurController {
     public String confirmation(@RequestParam Map<String, String> requestParams, Model model) {
 
         // Find the utilisateur associated with the reset token
-        Utilisateur utilisateur = utilisateurService.findByConfirmationToken(requestParams.get("token"));
+        Utilisateur utilisateur = clientService.findByConfirmationToken(requestParams.get("token"));
         String password = requestParams.get("password");
         // Set utilisateur to enabled
         utilisateur.setActive(true);
         utilisateur.setPassword(password);
         // Save utilisateur
-        utilisateurService.ajouter(utilisateur);
+        clientService.ajouter(utilisateur);
         model.addAttribute("successMessage", "Votre mot de passe a été défini!");
         return "utilisateur/confirmation";
-    }
+    }*/
 
 }

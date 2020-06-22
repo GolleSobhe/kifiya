@@ -3,11 +3,9 @@ package com.kifiya.kobiri.models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-@Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +15,8 @@ import javax.validation.constraints.Pattern;
 @ToString(of = {"nom", "prenom"})
 @Data
 @Builder
-@Table(name = "BENEFICIAIRE")
 public class Beneficiaire {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     Long id;
     @NotEmpty(message = "*veuillez fournir le nom")
     String nom;
