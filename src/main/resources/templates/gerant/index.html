@@ -3,18 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>FiyaHollo</title>
-    <!-- MDB icon -->
-    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!-- Google Fonts Roboto -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="../../static/css/mdb-css/bootstrap.min.css" th:href="@{/css/mdb-css/bootstrap.min.css}">
-    <!-- Material Design Bootstrap -->
-    <link rel="stylesheet" href="../../static/css/mdb-css/mdb.min.css" th:href="@{/css/mdb-css/mdb.min.css}">
-    <link th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
-    <script type="text/javascript" src="../static/js/kobiri.js" th:src="@{/js/kobiri.js}"></script>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    <header th:insert="fragments/header :: header"> </header>
 </head>
 <body>
 <header th:insert="fragments/header :: header"> </header>
@@ -183,16 +174,7 @@
         </div>
     </div>
 </div>
-<footer>
-    <div th:replace="fragments/footer.html :: footer"></div>
-</footer>
-<!-- jQuery -->
-<script type="text/javascript" th:src="@{/js/mdb-js/jquery.min.js}"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" th:src="@{/js/mdb-js/popper.min.js}"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" th:src="@{/js/mdb-js/bootstrap.min.js}"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" th:src="@{/js/mdb-js/mdb.min.js}"></script>
 </body>
+<div style="margin-top:90px"></div>
+<div th:replace="fragments/footer.html :: footer"></div>
 </html>
