@@ -1,27 +1,54 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
+<head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
+    <title>Connexion</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 
 </head>
+
 <body>
-<header>
-    <div id="fiyahollo-header-bar">
-        <div class="fiyahollo-wrap">
-            <a id="fiyahollo-header-logo" href="#">fiyahollo.com</a>
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <button aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-target="#toggle" data-toggle="collapse" type="button">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
 
-            <div th:if="${connexion == 'connexion'}">
-                <connexion th:replace="fragments/connexion :: connexion"> </connexion>
-            </div>
-            <div th:if="${connexion == 'deconnexion'}">
-                <deconnexion th:replace="fragments/deconnexion :: deconnexion"></deconnexion>
-            </div>
+        <a id="header-logo" class="brand-navbar" href="/"></a>
 
+        <div class="collapse navbar-collapse" id="toggle">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Vue d'ensenble</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">A propos de nous</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/utilisateur/contact}" tabindex="-1">Nous contacter</a>
+                </li>
+            </ul>
+
+            <div class="form-inline my-2 my-lg-0">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link button-link" th:href="@{/utilisateur/inscription}">Créer un compte</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link button-link" th:href="@{/utilisateur/connexion}" tabindex="-1">Connexion</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</header>
+    </nav>
+    <div style="padding-bottom: 100px"></div>
+</div>
 
 
+
+<div th:replace="fragments/footer.html :: footer"></div>
 </body>
 </html>

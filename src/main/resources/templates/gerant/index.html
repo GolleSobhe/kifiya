@@ -17,7 +17,7 @@
     <script type="text/javascript" src="../static/js/kobiri.js" th:src="@{/js/kobiri.js}"></script>
 </head>
 <body>
-<header th:insert="fragments/navbar :: navbar"> </header>
+<header th:insert="fragments/header :: header"> </header>
 <div class="containerc ontainer-fluid mx-auto col-xs-12 col-sm-8 col-md-7 col-sm-offset-2 col-md-offset-3" style="margin-top:90px">
     <ul class="nav nav-tabs" id="gerant" role="tablist">
         <li class="nav-item">
@@ -177,7 +177,7 @@
             <div class="container">
                 <div>
                     <h1>Votre email: <span>sobhe@yahoo.fr</span></h1>
-                    <button class="button button--secondary button--large button--solid">Définir / réinitialiser le mot de passe</button>
+                    <button class="button button--secondary button--large button--solid button-link">Définir / réinitialiser le mot de passe</button>
                 </div>
             </div>
         </div>
