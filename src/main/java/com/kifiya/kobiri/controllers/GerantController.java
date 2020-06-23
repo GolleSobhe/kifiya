@@ -26,7 +26,7 @@ public class GerantController {
         model.addAttribute("historiques", gerantService.rechercherTransfert());
         model.addAttribute("statistique", gerantService.obtenirStatistique());
         model.addAttribute("profil", new ArrayList<>());
-        return "gerant/index";
+        return "gerant/accueil-gerant";
     }
 
     @RequestMapping(value = "/gerant/new", method = RequestMethod.GET)
