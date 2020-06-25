@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>fiyahollo</title>
-
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
-    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
-    <header th:insert="fragments/navbar :: navbar"> </header>
+    <header th:insert="fragments/header :: header"> </header>
 </head>
 
 <body>
@@ -17,7 +14,7 @@
         <h1>Envoyer de l'argent mobiles dans le monde entier</h1>
         <h2>Facile, Rapide et Fiable.</h2>
     </div>
-    <a th:href="@{/transferts/}" class="fy-button">Envoyer de l'argent</a>
+    <a th:href="@{/transferts/}" class="button-link">Envoyer de l'argent</a>
 </div>
 <div th:replace="fragments/footer.html :: footer"></div>
 </body>

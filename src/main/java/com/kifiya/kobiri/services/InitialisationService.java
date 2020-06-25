@@ -25,7 +25,7 @@ public class InitialisationService {
 
     private void initUsers() {
 
-        client = Client.builder().nom("Golle").prenom("Sobhe").email("sobhe@gmail.com").password("sobhe").telephone("0606060606")
+        client = Client.builder().nom("Golle").prenom("Sobhe").email("sobhe@gmail.com").password("sobhe")
                 .pays("No Houdha").ville("No Feti").adresse("Ham mayi").codePostale("06000").active(true).confirmationToken("")
                 .roles(Arrays.asList(new Role("client"))).build();
         client= utilisateurService.ajouter(client);
