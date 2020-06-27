@@ -1,89 +1,88 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    </head>
-
-    <body>
-        <div th:fragment="footer">
-
-        <footer class="page-footer font-small mdb-color pt-4" style="color: rgb(255, 255, 255); background: rgb(85, 87, 83);">
-            <div class="container text-center text-md-left">
-                <div class="row text-center text-md-left mt-3 pb-3">
-                    <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Nom de l'entreprise</h6>
-                        <p>Petite description de l'entreprise</p>
-                    </div>
-                    <hr class="w-100 clearfix d-md-none">
-                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">Produits</h6>
-                            <p> <a href="#!" style="color: white;">Produit 1</a> </p>
-                            <p> <a href="#!" style="color: white;">Produit 2</a> </p>
-                        </div>
-
-                        <hr class="w-100 clearfix d-md-none">
-
-                        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">Liens utiles</h6>
-                            <p> <a href="#!" style="color: white;">Lien 1</a> </p>
-                            <p> <a href="#!" style="color: white;">Lien 2</a> </p>
-                        </div>
-
-                        <hr class="w-100 clearfix d-md-none">
-
-                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                            <p> <i class="fas fa-home mr-3"></i> Toulouse, France</p>
-                            <p> <i class="fas fa-envelope mr-3"></i> info@samakala.com</p>
-                            <p> <i class="fas fa-phone mr-3"></i> + 224 XX XX XX XX</p>
-                        </div>
-                    </div>
-
-                    <hr>
+</head>
+<body>
+    <div th:fragment="footer">
+    <footer class="page-footer special-color-dark pt-4">
+        <div class="container text-center text-md-left">
+            <div class="row text-center text-md-left mt-3 pb-3">
+                <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
+                    <a id="header-logo" class="brand-navbar" href="/"></a>
+                    <h6 class="text-uppercase mb-4 font-weight-bold">FiyaHollo Transfert</h6>
+                    <p>Fiyahollo est une entreprise de tranfers d'argent vers la Guinée</p>
+                </div>
 
                 <hr class="w-100 clearfix d-md-none">
 
-                    <div class="row d-flex align-items-center">
-                        <div class="col-md-7 col-lg-8">
+                <div class="col-md-4 col-lg-5 col-xl-5 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4">Produits</h6>
+                    <p> <a href="#!">Payer les factures de l'electricité pour vos proches</a> </p>
+                    <p> <a href="#!">Payer les factures d'eau pour vos proches</a> </p>
+                    <p> <a href="#!">Recharger les telephones de vos proches</a> </p>
+                </div>
 
-                            <!--Copyright-->
-                            <p class="text-center text-md-left">© 2020 Copyright:
-                                <a href="/" style="color: white;">
-                                <strong> samakala.com</strong>
-                                </a>
-                            </p>
+                <hr class="w-100 clearfix d-md-none">
 
-                        </div>
-                        <div class="col-md-5 col-lg-4 ml-lg-0">
-                            <div class="text-center text-md-right">
-                                <ul class="list-unstyled list-inline">
-                                    <li class="list-inline-item">
-                                        <a  href="/" class="btn-floating btn-sm rgba-white-slight mx-1" style="color: white;">
-                                        <i class="fab fa-facebook-f"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="/" class="btn-floating btn-sm rgba-white-slight mx-1" style="color: white;">
-                                        <i class="fab fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="/" class="btn-floating btn-sm rgba-white-slight mx-1" style="color: white;">
-                                        <i class="fab fa-google-plus-g"></i>
-                                        </a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="/" class="btn-floating btn-sm rgba-white-slight mx-1" style="color: white;">
-                                        <i class="fab fa-linkedin-in"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h6 class="text-uppercase mb-4">Contact</h6>
+                    <p> <i class="fas fa-home mr-3"></i> Toulouse, France</p>
+                    <p> <i class="fas fa-envelope mr-3"></i> info@samakala.com</p>
+                    <p> <i class="fas fa-phone mr-3"></i> + 224 XX XX XX XX</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="container-fluid text-center">
+                <div>
+                    Envoyez de l'argent en ligne á vos proches en Guinée
+                </div>
+                <hr>
+                <div>
+                    <a class="nav-link button-link" th:href="@{/utilisateur/inscription}">Inscrivez-vous maintenant</a>
+                </div>
+            </div>
+
+            <hr>
+
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="row d-flex align-items-center">
+                <div class="col-md-6 col-lg-6">
+                    <!--Copyright-->
+                    <p class="text-center text-md-left">© 2020 Copyright:
+                        <a href="/" style="color: white;"><strong> samakala.com</strong></a>
+                    </p>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="mb-5 flex-center">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f fa-lg blue-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter fa-lg blue-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Google +-->
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-g fa-lg red-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Linkedin -->
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in fa-lg blue-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
                     </div>
                 </div>
-        </footer>
+            </div>
         </div>
-    </body>
+    </footer>
+    </div>
+</body>
 </html>
