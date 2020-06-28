@@ -11,7 +11,7 @@
 <body>
 <div align="center" style="margin-top: 40px">
     <h2>Ajouter un Gerant</h2><br/>
-    <form th:object="${gerant}" th:action="@{/gerant}" method="post">
+    <form th:object="${gerant}" th:action="@{/admin/gerant}" method="post">
         <p>
             <label>Nom :</label>
             <input type="text" style="width:50%" th:field="*{nom}"/></p>

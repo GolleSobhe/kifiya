@@ -18,6 +18,9 @@ public class InitialisationService {
     @Autowired
     private  GerantService gerantService;
 
+    @Autowired
+    private AdminService adminService;
+
     Client client;
     Client client1;
     Client client2;
@@ -48,6 +51,6 @@ public class InitialisationService {
 
         gerant = Gerant.builder().nom("Golle").prenom("Sobhe").password("sobhe").telephone("00224622000000")
                 .ville("No Feti").adresse("Ham mayi").code("FFFF4444").build();
-        gerantService.ajouter(gerant);
+        adminService.ajouterGerant(gerant);
     }
 }

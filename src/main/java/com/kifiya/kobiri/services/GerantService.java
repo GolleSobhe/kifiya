@@ -23,11 +23,6 @@ public class GerantService {
         this.transfertRepository = transfertRepository;
     }
 
-    public void ajouter(Gerant gerant){
-        //gerant.setPassword(bCryptPasswordEncoder.encode(DEFAULT_PASSWORD));
-        gerantRepository.creer(gerant);
-    }
-
     public void validerTransfert(Transfert transfert) {
         /**
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -37,6 +32,11 @@ public class GerantService {
         transfert.setGerant(gerant);
          */
         transfertRepository.rendreTransfert(transfert.getCode(),"gerantId");
+    }
+
+    public List<Transfert> rechercherTransfert(String code) {
+        Long id = (long) 1;
+        return gerantRepository.rechercherTransfert(id);
     }
 
     public List<Transfert> rechercherTransfert() {

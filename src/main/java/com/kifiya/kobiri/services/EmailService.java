@@ -30,6 +30,6 @@ public class EmailService {
                 "Pour confirmer votre adresse e-mail, veuillez cliquer sur le lien ci-dessous:\n"
                 + appUrl + "/utilisateur/confirmation?token=" + tocken);
         registrationEmail.setFrom("noreply@fiyahollo.com");
-        mailSender.send(registrationEmail);
+        //_mailSender.send(registrationEmail);
     }
 }

@@ -1,7 +1,9 @@
 package com.kifiya.kobiri.services;
 
 import com.kifiya.kobiri.models.Boutique;
+import com.kifiya.kobiri.models.Gerant;
 import com.kifiya.kobiri.repositories.BoutiqueRepository;
+import com.kifiya.kobiri.repositories.GerantRepository;
 import com.kifiya.kobiri.repositories.TransfertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,18 @@ public class AdminService {
 
     private final TransfertRepository transfertRepository;
 
-    public AdminService(BoutiqueRepository boutiqueRepository, TransfertRepository transfertRepository) {
+    private final GerantRepository gerantRepository;
+
+    public AdminService(BoutiqueRepository boutiqueRepository, TransfertRepository transfertRepository, GerantRepository gerantRepository) {
         this.boutiqueRepository = boutiqueRepository;
         this.transfertRepository = transfertRepository;
+        this.gerantRepository = gerantRepository;
+    }
+
+    public void ajouterGerant(Gerant gerant){
+        //gerant.setPassword(bCryptPasswordEncoder.encode(DEFAULT_PASSWORD));
+        gerant.setLogin("login");
+        gerantRepository.creer(gerant);
     }
 
     public Boutique ajouterBoutique(Boutique boutique) {
