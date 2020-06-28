@@ -49,7 +49,7 @@ public class GerantRepository {
         params.addValue("code",gerant.getCode());
         params.addValue("adresse",gerant.getAdresse());
         params.addValue("ville",gerant.getVille());
-        namedParameterJdbcTemplate.update(CREER,parameters);
+        namedParameterJdbcTemplate.update(CREER,params);
     }
 
     public Gerant connexion(String login) {

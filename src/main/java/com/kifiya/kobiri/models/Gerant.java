@@ -33,16 +33,16 @@ public class Gerant{
     @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
     String telephone;
 
-    @NonNull
-    @NotEmpty(message = "*veuillez fournir votre ville")
+    //@NonNull
+    //@NotEmpty(message = "*veuillez fournir votre ville")
     String ville;
 
-    @NonNull
-    @NotEmpty(message = "*veuillez fournir votre adresse")
+    //@NonNull
+    //@NotEmpty(message = "*veuillez fournir votre adresse")
     String adresse;
 
-    @NonNull
-    @Size(min = 8, max = 8)
+    //@NonNull
+    //@Size(min = 8, max = 8)
     private String code;
 
 }

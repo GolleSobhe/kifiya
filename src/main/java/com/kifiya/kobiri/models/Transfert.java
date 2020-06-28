@@ -26,7 +26,7 @@ public class Transfert {
 
     String code;
 
-    @NotNull
+    //@NotNull
     Long montant;
 
     @NotNull
@@ -34,8 +34,8 @@ public class Transfert {
 
     Double taux;
 
-    public UUID getClientId() {
-        return null;
+    public String getClientId() {
+        return client.getEmail();
     }
 
     public String getPrenomBeneficiaire(){

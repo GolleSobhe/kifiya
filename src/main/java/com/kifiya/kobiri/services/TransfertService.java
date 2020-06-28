@@ -1,5 +1,6 @@
 package com.kifiya.kobiri.services;
 
+import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.repositories.TransfertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class TransfertService {
         transfert.setDateTransfert(LocalDateTime.now());
         transfert.setTaux((double) 10600);
         transfert.setCode(getHexa(8));
+        transfert.setMontant(10000L);
+        Client c = new Client();
+        c.setEmail("email");
+        transfert.setClient(c);
         transfertRepository.creer(transfert);
         return transfert;
     }
