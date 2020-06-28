@@ -14,9 +14,7 @@ body, html {
 	box-sizing: border-box;
 	min-height: 530px;
     height: 100%;
-    background: #f5f8fa;
     font-size: 16px;
-    color: #444
 }
 
 .wrapper {
@@ -27,20 +25,6 @@ body, html {
 
 .main {
   flex: 1;
-}
-
-.button {
-    border-width: 4px;
-    cursor: pointer;
-    line-height: 36px!important;
-    background: #bd2130;
-    padding: 0 25px;
-    text-align: center;
-    border-radius: 12px;
-    color: white;
-    font-weight: bold;
-    border: 5px solid #e1e1e1;
-    font-size: 17px;
 }
 
 .gerant .titre-bar {
@@ -154,4 +138,26 @@ body, html {
 }
 
 
+.form-envoie-argent {
+    background: white;
+}
+
+.form-envoie-argent :hover {
+    color: white;
+}
+
+.couleur-bouton-principal {
+    background-color:  #45526e;
+    color: white;
+}
+
+.btn {
+    border-radius: 10em !important;
+}
+
+.button-envoyer-argent {
+    border:  1px solid;
+    color: white;
+    font-weight: bold;
+}
 
