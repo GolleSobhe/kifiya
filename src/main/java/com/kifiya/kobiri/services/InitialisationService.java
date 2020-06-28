@@ -31,12 +31,10 @@ public class InitialisationService {
     }
 
     private void initUsers() {
-
         client = Client.builder().nom("Golle").prenom("Sobhe").email("sobhe@gmail.com").password("sobhe").telephone("0606060606")
                 .pays("No Houdha").ville("No Feti").adresse("Ham mayi").codePostale("06000").
                 build();
         clientService.ajouter(client);
-
         client1 = Client.builder().nom("Golle").prenom("Sobhe").email("sobhe1@gmail.com").password("sobhe")
                     .pays("No Houdha").ville("No Feti").adresse("Ham mayi").build();
         clientService.ajouter(client1);
