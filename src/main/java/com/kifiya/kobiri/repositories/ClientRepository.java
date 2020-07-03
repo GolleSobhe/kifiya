@@ -1,10 +1,14 @@
 package com.kifiya.kobiri.repositories;
 
+import com.kifiya.kobiri.models.Beneficiaire;
 import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Utilisateur;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class ClientRepository {
@@ -41,4 +45,7 @@ public class ClientRepository {
         return null;
     }
 
+    public List<Beneficiaire> getBeneficiaires() {
+        return new ArrayList<>();
+    }
 }

@@ -5,7 +5,6 @@ import com.kifiya.kobiri.models.Gerant;
 import com.kifiya.kobiri.repositories.BoutiqueRepository;
 import com.kifiya.kobiri.repositories.GerantRepository;
 import com.kifiya.kobiri.repositories.TransfertRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

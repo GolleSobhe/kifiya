@@ -1,10 +1,13 @@
 package com.kifiya.kobiri.services;
 
+import com.kifiya.kobiri.models.Beneficiaire;
 import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -34,4 +37,7 @@ public class ClientService {
         return clientRepository.findByConfirmationToken(confirmationToken);
     }
 
+    public List<Beneficiaire> getBeneficiaires() {
+        return clientRepository.getBeneficiaires();
+    }
 }

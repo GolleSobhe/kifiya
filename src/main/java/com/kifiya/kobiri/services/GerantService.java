@@ -1,6 +1,5 @@
 package com.kifiya.kobiri.services;
 
-import com.kifiya.kobiri.models.Gerant;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.repositories.GerantRepository;
 import com.kifiya.kobiri.repositories.TransfertRepository;
