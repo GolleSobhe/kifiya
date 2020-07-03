@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>FiyaHollo</title>
-
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
     <header th:insert="fragments/header :: header"> </header>
 </head>
 
@@ -14,27 +14,25 @@
         <div  th:if="${confirmationMessage}" class="alert alert-success"
               role="alert" th:text=${confirmationMessage}>
         </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-7">
+                    <select class="browser-default custom-select">
+                        <option selected>Select un bénéficiaire</option>
+                        <option value="622040404">Abdou BAH 622222222</option>
+                        <option value="625000000">Fiya Hollo 643600000</option>
+                        <option value="666666666">No Feti Ham Mayi</option>
+                    </select>
+                </div>
+                <div class="col-xs-6 col-md-5">
+                    <a class="nav-link button-link" th:href="@{/client/beneficiaires}">Ajouter bénéficiaire</a>
+                </div>
+            </div>
+
+        </div>
+
         <h2>Envoi de l'argent</h2>
-        <div class="form-group">
-            <label for="telephone">Beneficiaire</label>
-            <input type="text" class="form-control form-control-lg" id="telephone" placeholder="Numero de telephone"
-                   th:field="*{beneficiaire.telephone}"
-            >
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="nom">Nom</label>
-                <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom"
-                       th:field="*{beneficiaire.nom}"
-                >
-            </div>
-            <div class="form-group col-md-6">
-                <label for="prenom">Prenom</label>
-                <input type="text" class="form-control form-control-lg" id="prenom" placeholder="Prenom"
-                       th:field="*{beneficiaire.prenom}"
-                >
-            </div>
-        </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
