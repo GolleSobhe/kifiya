@@ -6,10 +6,7 @@
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 
-    <link href="../../static/css/inscription.css" th:href="@{/css/inscription.css}" rel="stylesheet" media="screen"/>
-    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
-    <link href="../../static/css/kobiri.css" th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
-    <header th:insert="fragments/navbar :: navbar"> </header>
+    <header th:insert="fragments/header :: header"> </header>
 </head>
 
 <div style="padding-bottom: 100px"></div>
@@ -22,8 +19,8 @@
                 <li class="list-group-item list-group-item-action active list-group-active">
                    Ajouter un gérant ou une boutique
                 </li>
-                <a th:href="@{/gerant/new}" class="list-group-item list-group-item-action">Ajouter un gérant</a>
-                <a th:href="@{/boutiques}" class="list-group-item list-group-item-action">Ajouter une boutique</a>
+                <a th:href="@{/admin/gerant}" class="list-group-item list-group-item-action">Ajouter un gérant</a>
+                <a th:href="@{/admin/boutiques}" class="list-group-item list-group-item-action">Ajouter une boutique</a>
             </div>
         </div>
         <div class="col-md-7">

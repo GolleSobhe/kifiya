@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <title>Ajouter un gerant</title>
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <link th:href="@{/css/index.css}" rel="stylesheet" media="screen"/>
-    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
-    <header th:insert="fragments/navbar :: navbar"></header>
+
+    <header th:insert="fragments/header :: header"></header>
 </head>
 <body>
 <div align="center" style="margin-top: 40px">
     <h2>Ajouter un Gerant</h2><br/>
-    <form th:object="${gerant}" th:action="@{/gerant}" method="post">
+    <form th:object="${gerant}" th:action="@{/admin/gerant}" method="post">
         <p>
             <label>Nom :</label>
             <input type="text" style="width:50%" th:field="*{nom}"/></p>

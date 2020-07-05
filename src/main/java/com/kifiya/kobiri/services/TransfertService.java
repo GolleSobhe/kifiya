@@ -1,11 +1,13 @@
 package com.kifiya.kobiri.services;
 
+import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.repositories.TransfertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +33,14 @@ public class TransfertService {
         client.setPassword(utilisateurAuth.getPassword());
         transfert.setResponsable(client);
         */
-        transfert.setDateTransfert(new Date());
+        transfert.setDateTransfert(LocalDateTime.now());
         transfert.setTaux((double) 10600);
         transfert.setCode(getHexa(8));
-        transfertRepository.ajouter(transfert);
+        transfert.setMontant(10000L);
+        Client c = new Client();
+        c.setEmail("email");
+        transfert.setClient(c);
+        transfertRepository.creer(transfert);
         return transfert;
     }
 
@@ -52,25 +58,10 @@ public class TransfertService {
     //Supprimer apres
     public void init(Transfert transfert) {
 
-        transfert.setDateTransfert(new Date());
+        transfert.setDateTransfert(LocalDateTime.now());
         transfert.setTaux((double) 10600);
         transfert.setCode(getHexa(8));
-        transfertRepository.ajouter(transfert);
+        transfertRepository.creer(transfert);
     }
 
-    public List<Transfert> findAll() {
-        return this.transfertRepository.findAll();
-    }
-
-    public int determinerNombreDeTransfertsTotal() {
-        return this.transfertRepository.determinerNombreDeTransfertsTotal();
-    }
-
-    public int determinerNombreDeTransfertsEnCours() {
-        return this.transfertRepository.determinerNombreDeTransfertsEnCours();
-    }
-
-    public int determinerNombreDeTransfertsRendus() {
-        return this.transfertRepository.determinerNombreDeTransfertsRendus();
-    }
 }
