@@ -11,6 +11,24 @@ body, html {
     color: #444
 }
 
+input[type="number"] {
+  -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+          appearance: textfield;
+    max-width: 8rem;
+    min-width: 5 rem;
+    padding: .5rem;
+    border: solid #ddd;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
 #header-logo {
 	width: 140px;
 	height: 48px;
@@ -44,6 +62,12 @@ body, html {
     background: #00ab00;
     text-align: center;
 }
+
+#montantEuros {
+    text-align: center;
+    height: calc(4.5em + -0.25rem + 2px);
+}
+
 
 /* ********************************************************************************************************************
  Contact

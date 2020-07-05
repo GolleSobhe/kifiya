@@ -75,7 +75,7 @@ public class GerantRepository {
             transfert.setDateTransfert(resultSet.getTimestamp("date_transfert").toLocalDateTime());
             transfert.setDateValidation(resultSet.getTimestamp("date_validation").toLocalDateTime());
             transfert.setMontantEuros(resultSet.getLong("montant_euros"));
-            transfert.setTaux(resultSet.getDouble("taux"));
+            transfert.setTaux(resultSet.getLong("taux"));
             return transfert;
         });
     }
