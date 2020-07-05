@@ -6,9 +6,7 @@ body, html {
 	box-sizing: border-box;
 	min-height: 530px;
     height: 100%;
-    background: #f5f8fa;
     font-size: 16px;
-    color: #444
 }
 
 #header-logo {
@@ -185,4 +183,26 @@ body, html {
 }
 
 
+.form-envoie-argent {
+    background: white;
+}
+
+.form-envoie-argent :hover {
+    color: white;
+}
+
+.couleur-bouton-principal {
+    background-color:  #45526e;
+    color: white;
+}
+
+.btn {
+    border-radius: 10em !important;
+}
+
+.button-envoyer-argent {
+    border:  1px solid;
+    color: white;
+    font-weight: bold;
+}
 
