@@ -50,3 +50,24 @@ create table BOUTIQUE
 	primary key (nom)
 );
 
+create table ADMIN
+(
+    email varchar(60),
+	nom varchar(55),
+	prenom varchar(100),
+	password varchar(50),
+	telephone varchar(30),
+	adresse varchar(100),
+	ville varchar(50),
+	pays varchar(50),
+	est_valide varchar(3),
+	primary key(email)
+);
+
+create table VERIFICATION_TOKEN
+(
+    token varchar(50),
+    idUser varchar(50),
+    expirationDate datetime,
+    primary key(token)
+);

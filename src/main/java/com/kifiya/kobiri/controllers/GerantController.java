@@ -1,9 +1,7 @@
 package com.kifiya.kobiri.controllers;
 
-import com.kifiya.kobiri.models.Gerant;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.GerantService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +24,6 @@ public class GerantController {
         model.addAttribute("statistique", gerantService.obtenirStatistique());
         return "gerant/index";
     }
-
 
     @GetMapping(value ="/connexion")
     public String connexion(){
