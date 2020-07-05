@@ -3,9 +3,9 @@ package com.kifiya.kobiri.models;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -20,19 +20,20 @@ public class Transfert {
 
     LocalDateTime dateValidation;
 
+    @NotNull(message = "*Veuillez selectionner un bénéficiaire")
     Beneficiaire beneficiaire;
 
+    @NotNull(message = "*Veuillez selectionner un bénéficiaire")
     Client client;
 
+    @NotNull(message = "*Code de recuperation")
     String code;
 
-    //@NotNull
-    Long montant;
-
     @NotNull
+    @DecimalMin("10.00")
     Long montantEuros;
 
-    Double taux;
+    Long taux;
 
     public String getClientId() {
         return client.getEmail();

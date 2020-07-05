@@ -38,6 +38,7 @@
                 <label for="nom">Nom</label>
                 <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom"
                        th:field="*{nom}">
+                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
             </div>
         </div>
         <div class="form-row">
@@ -45,6 +46,7 @@
                 <label for="prenom">Prenom</label>
                 <input type="text" class="form-control form-control-lg" id="prenom" placeholder="Prenom"
                        th:field="*{prenom}">
+                <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
             </div>
         </div>
         <div class="form-row">
@@ -52,6 +54,7 @@
                 <label for="telephone">Telephone</label>
                 <input type="text" class="form-control form-control-lg" id="telephone" placeholder="Telephone"
                        th:field="*{telephone}">
+                <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
             </div>
         </div>
         <div class="form-row">
@@ -62,6 +65,7 @@
 
     </form>
 </div>
-
 </body>
+<div style="margin-top:90px"></div>
+<div th:replace="fragments/footer.html :: footer"></div>
 </html>

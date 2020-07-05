@@ -10,47 +10,22 @@
 <body>
 <div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"  style="margin-top:85px ">
 
-    <form class="fy-form-envoi" th:action="@{/transferts}" th:object="${transfert}" method="post">
-        <div  th:if="${confirmationMessage}" class="alert alert-success"
-              role="alert" th:text=${confirmationMessage}>
-        </div>
-
+    <form class="fy-form-envoi" th:action="@{client/transferts}" method="post">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-7">
-                    <select class="browser-default custom-select">
-                        <option selected>Select un bénéficiaire</option>
-                        <option value="622040404">Abdou BAH 622222222</option>
-                        <option value="625000000">Fiya Hollo 643600000</option>
-                        <option value="666666666">No Feti Ham Mayi</option>
-                    </select>
+            <h2>Envoi de l'argent</h2>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Montant en €</span>
                 </div>
-                <div class="col-xs-6 col-md-5">
-                    <a class="nav-link button-link" th:href="@{/client/beneficiaires}">Ajouter bénéficiaire</a>
+                <input type="number" min="0" th:name="montantEuros">
+                <div class="input-group-append">
+                    <span class="input-group-text" th:text="${'1€ = '+taux+' GNF'}">1€ = 10600 GNF</span>
+                </div>
+                <div class="input-group-append">
+                    <input type="submit" class="btn btn-primary btn-lg" value="C'est parti!">
                 </div>
             </div>
 
-        </div>
-
-        <h2>Envoi de l'argent</h2>
-
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">Montant en €</span>
-            </div>
-            <input type="text" class="form-control"
-                   th:field="*{montantEuros}"
-            >
-            <div class="input-group-append">
-                <span class="input-group-text">1€ = 10600 GNF</span>
-            </div>
-            <div class="input-group-append">
-                <span class="input-group-text">0.00 GNF</span>
-            </div>
-        </div>
-
-        <div>
-            <input type="submit" class="btn btn-primary btn-lg" value="Procéder au paiement">
         </div>
     </form>
 

@@ -1,6 +1,7 @@
 package com.kifiya.kobiri.controllers;
 
 import com.kifiya.kobiri.models.Beneficiaire;
+import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.ClientService;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/client")
@@ -22,25 +26,38 @@ public class ClientController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String acceuil(Model model){
-        model.addAttribute("transfert", new Transfert());
+        /**
+         * recuperer le taux apres
+         */
+        model.addAttribute("taux", 10600);
         return "client/accueil-client";
     }
 
-    @PostMapping(value =  "transferts")
-    public String postHistoric(@Valid @ModelAttribute("transfert") Transfert transfert,
-                               BindingResult result, Model model){
-
-
-        /*if (result.hasErrors() || !result.hasFieldErrors("client") || !result.hasFieldErrors("beneficiaire")) {
-            //Ajouter le message d'erreur sur le model
-            return"transfert/transfert";
-        }*/
-
-     //   transfertService.ajouter(transfert);
-
+    @RequestMapping(value = {"/transferts"}, method = RequestMethod.POST)
+    public String initierTransfert(@RequestParam(value = "montantEuros") Long montant, Model model){
+        /**
+         * recuperer le taux apres
+         */
+        Transfert transfert = new Transfert();
+        transfert.setMontantEuros(montant);
+        transfert.setTaux((long) 10600);
+        /**
+         * Recuperer l'utilisateur connecter
+         * id
+         * email
+         * droit{client}
+         * list beneficiaire
+         */
+        Client client = new Client();
+        List<Beneficiaire> beneficiaires = new ArrayList<Beneficiaire>
+                (Arrays.asList(new Beneficiaire[]{
+                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000"),
+                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222"),
+                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222")}));
+        client.setBeneficiaires(beneficiaires);
+        transfert.setClient(client);
         model.addAttribute("transfert", transfert);
-        model.addAttribute("confirmationMessage", "Argent enoyé et un e-mail de confirmation a été envoyé à ");
-        return "client/accueil-client";
+        return "client/transfert";
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.GET)
@@ -51,9 +68,14 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
-    public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire, BindingResult bindingResult, Model model){
+    public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
+                                      BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()){
+            return "client/beneficiaire";
+        }
+        //clientService.ajouter(beneficiaire);
         model.addAttribute("transfert", new Transfert());
-        return "client/accueil-client";
+        return "redirect:/client/transferts";
     }
 
 }
