@@ -30,54 +30,71 @@
         </div>
     </div>
 
-    <form role="form" action="" method="post">
+    <form name="transfert-client" action="" th:object="${transfert}" method="post">
+        <input type="hidden" name="beneficiaire">
         <div class="row setup-content" id="step-1">
             <div class="col-xs-6 col-md-offset-3">
                 <div class="col-md-12">
-                    <h3> Step 1</h3>
-                    <div class="form-group">
-                        <label class="control-label">First Name</label>
-                        <input  maxlength="100" type="text" class="form-control" placeholder="Enter First Name"  />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Last Name</label>
-                        <input maxlength="100" type="text" class="form-control" placeholder="Enter Last Name" />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Email</label>
-                        <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Email" />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Address</label>
-                        <textarea required="required" class="form-control" placeholder="Enter your address" ></textarea>
-                    </div>
-                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+                    <h1>Liste des bénéficiaire</h1>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nom et prenom</th>
+                                <th scope="col">Numéro de téléphone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  th:if="${transfert.client.beneficiaires.empty}">
+                                <td colspan="2"> Pas de beneficiaire disponible</td>
+                            </tr>
+                            <tr th:each="beneficiaire : ${transfert.client.beneficiaires}">
+
+                                <td><span th:text="${beneficiaire.nom  + ' ' + beneficiaire.prenom}"> Nom et prenom </span></td>
+                                <td><span th:text="${beneficiaire.telephone}"> numero de telephone </span></td>
+                                <td>
+                                    <button th:attr="data-id=${beneficiaire.id},
+                                                     data-nom=${beneficiaire.nom},
+                                                     data-prenom=${beneficiaire.prenom},
+                                                     data-telephone=${beneficiaire.telephone}"
+                                            class="btn btn-primary nextBtn btn-lg pull-right beneficiaire" type="button" >Choisir</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12">
+                    <a class="btn btn-success" href="#" th:href="@{/books/create}"> Ajouter Bénéficiaire </a>
                 </div>
             </div>
         </div>
         <div class="row setup-content" id="step-2">
             <div class="col-xs-6 col-md-offset-3">
                 <div class="col-md-12">
-                    <h3> Step 2</h3>
-                    <div class="form-group">
-                        <label class="control-label">Company Name</label>
-                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Company Address</label>
-                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-                    </div>
-                    <button class="btn btn-primary backBtn btn-lg pull-left" type="button" >Back</button>
-                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+                    <h3> RÉCAPITULATIF</h3>
+                    <table class="table table-striped table-bordered">
+                        <tbody>
+                            <tr>
+                                <td><span id="nom-prenom"> Beneficiaire</span><span id="telephone"> numero de telephone </span></td>
+                                <td><span th:text="${transfert.montantEuros * transfert.taux}">0 GNF</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Frais de transfert </span></td>
+                                <td><span>+ 2,50 €</span></td>
+                            </tr>
+                            <tr><td>Point de retrait</td><td>Mamou Petel 622000000</td></tr>
+                        </tbody>
+                    </table>
                 </div>
+                <button class="btn btn-primary backBtn btn-lg pull-left" type="button" >Précédent</button>
+                <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Suivant</button>
             </div>
         </div>
         <div class="row setup-content" id="step-3">
             <div class="col-xs-6 col-md-offset-3">
                 <div class="col-md-12">
                     <h3> Step 3</h3>
-                    <button class="btn btn-primary backBtn btn-lg pull-left" type="button" >Back</button>
-                    <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+                    <button class="btn btn-primary backBtn btn-lg pull-left" type="button" >Précédent</button>
+                    <button class="btn btn-success btn-lg pull-right" type="submit">Suivant</button>
                 </div>
             </div>
         </div>
@@ -85,5 +102,21 @@
 
 </div>
 </div>
+<script>
+        $( document ).ready(function () {
+            $( ".beneficiaire" ).click(function (e) {
+                e.preventDefault();
+                var beneficiaire = {
+                                    "id":        $('.beneficiaire[data-id]').data('id'),
+                                    "nom":       $('.beneficiaire[data-nom]').data('nom'),
+                                    "prenom":    $('.beneficiaire[data-prenom]').data('prenom'),
+                                    "telephone": $('.beneficiaire[data-id]').data('telephone')
+                                    };
+                $("input[name=beneficiaire]").val(beneficiaire);
+                $("#nom-prenom").html(beneficiaire.nom +" "+ beneficiaire.nom);
+                $("#telephone").html(beneficiaire.telephone);
+            });
+        })
+    </script>
 </body>
 </html>
