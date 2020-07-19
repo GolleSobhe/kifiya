@@ -57,25 +57,42 @@ public class ClientController {
         client.setBeneficiaires(beneficiaires);
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
-        return "client/transfert";
-    }
-
-    @RequestMapping(value = "/beneficiaires", method = RequestMethod.GET)
-    public String beneficiaire(Model model){
-        model.addAttribute("beneficiaires", clientService.getBeneficiaires());
         model.addAttribute("beneficiaire", new Beneficiaire());
-        return "client/beneficiaire";
+        return "client/transfert";
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
     public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
                                       BindingResult bindingResult, Model model){
+        /**
+         * recuperer le taux apres
+         */
+        Transfert transfert = new Transfert();
+        transfert.setMontantEuros((long) 500);
+        transfert.setTaux((long) 10600);
+        /**
+         * Recuperer l'utilisateur connecter
+         * id
+         * email
+         * droit{client}
+         * list beneficiaire
+         */
+        Client client = new Client();
+        List<Beneficiaire> beneficiaires = new ArrayList<Beneficiaire>
+                (Arrays.asList(new Beneficiaire[]{
+                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000"),
+                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222"),
+                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222")}));
+        beneficiaires.add(beneficiaire);
+        client.setBeneficiaires(beneficiaires);
+        transfert.setClient(client);
+        model.addAttribute("transfert", transfert);
+        model.addAttribute("beneficiaire", new Beneficiaire());
         if(bindingResult.hasErrors()){
-            return "client/beneficiaire";
+            return "client/transfert";
         }
         //clientService.ajouter(beneficiaire);
-        model.addAttribute("transfert", new Transfert());
-        return "redirect:/client/transferts";
+        return "client/transfert";
     }
 
 }
