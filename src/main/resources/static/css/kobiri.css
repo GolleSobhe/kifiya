@@ -111,11 +111,6 @@ input[type=number]::-webkit-outer-spin-button {
 #formAddBeneficiaire {
     display: none;
 }
-.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
 /* ****************************************************************************************************
