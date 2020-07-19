@@ -71,3 +71,19 @@ create table VERIFICATION_TOKEN
     expirationDate datetime,
     primary key(token)
 );
+
+create table BENEFICIAIRE
+(
+    nom varchar(50),
+    prenom varchar(100),
+    telephone varchar(15),
+    client_id varchar(60)
+);
+
+create table CONNEXION
+(
+ login varchar(50) not null,
+ password varchar(100) not null,
+ role varchar(10) not null,
+ primary key(login)
+);

@@ -12,13 +12,16 @@ import java.util.List;
 @Repository
 public class BoutiqueRepository {
 
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     
     private static final String INSERT = "insert into BOUTIQUE (nom, ville, description) " +
             "values (:nom, :ville, :description)";
 
     private static final String SELECT = "select nom,ville,description  from BOUTIQUE";
+
+    public BoutiqueRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
 
     public List<Boutique> findAll() {
         return namedParameterJdbcTemplate.query(SELECT, (resultSet, i) -> {
