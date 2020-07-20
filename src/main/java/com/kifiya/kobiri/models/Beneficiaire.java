@@ -24,4 +24,6 @@ public class Beneficiaire {
     String prenom;
     @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
     String telephone;
+
+    String clientId;
 }
