@@ -34,9 +34,8 @@ public class TransfertService {
         transfert.setResponsable(client);
         */
         transfert.setDateTransfert(LocalDateTime.now());
-        transfert.setTaux((double) 10600);
+        transfert.setTaux((long) 10600);
         transfert.setCode(getHexa(8));
-        transfert.setMontant(10000L);
         Client c = new Client();
         c.setEmail("email");
         transfert.setClient(c);
@@ -59,7 +58,7 @@ public class TransfertService {
     public void init(Transfert transfert) {
 
         transfert.setDateTransfert(LocalDateTime.now());
-        transfert.setTaux((double) 10600);
+        transfert.setTaux((long) 10600);
         transfert.setCode(getHexa(8));
         transfertRepository.creer(transfert);
     }

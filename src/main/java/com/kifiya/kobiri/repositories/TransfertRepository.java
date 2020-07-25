@@ -38,7 +38,6 @@ public class TransfertRepository {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("code", transfert.getCode());
         params.addValue("date_transfert", LocalDateTime.now());
-        params.addValue("montant", transfert.getMontant());
         params.addValue("montant_euros", transfert.getMontantEuros());
         params.addValue("prenom", transfert.getPrenomBeneficiaire());
         params.addValue("nom", transfert.getNomBeneficiaire());
@@ -66,7 +65,7 @@ public class TransfertRepository {
             transfert.setDateTransfert(resultSet.getTimestamp("date_transfert").toLocalDateTime());
             transfert.setDateValidation(resultSet.getTimestamp("date_validation").toLocalDateTime());
             transfert.setMontantEuros(resultSet.getLong("montant_euros"));
-            transfert.setTaux(resultSet.getDouble("taux"));
+            transfert.setTaux(resultSet.getLong("taux"));
             transfert.setCode(resultSet.getString("code"));
             return transfert;
         });

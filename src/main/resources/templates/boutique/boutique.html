@@ -2,11 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>FiyaHollo</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>FiyaHollo</title>
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 
-    <header th:insert="fragments/header :: header"> </header>
+        <header th:insert="fragments/header :: header"> </header>
+    </head>
 </head>
 <body>
     <div class="container">
@@ -67,5 +70,6 @@
         </div>
     </div>
 </body>
+<div style="margin-top:90px"></div>
 <div th:replace="fragments/footer.html :: footer"></div>
 </html>
