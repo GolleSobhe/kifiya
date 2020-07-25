@@ -51,9 +51,9 @@ public class ClientController {
         Client client = new Client();
         List<Beneficiaire> beneficiaires = new ArrayList<Beneficiaire>
                 (Arrays.asList(new Beneficiaire[]{
-                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000"),
-                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222"),
-                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222")}));
+                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000", ""),
+                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222", ""),
+                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222", "")}));
         client.setBeneficiaires(beneficiaires);
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
@@ -80,9 +80,9 @@ public class ClientController {
         Client client = new Client();
         List<Beneficiaire> beneficiaires = new ArrayList<Beneficiaire>
                 (Arrays.asList(new Beneficiaire[]{
-                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000"),
-                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222"),
-                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222")}));
+                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000", ""),
+                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222", ""),
+                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222", "")}));
         beneficiaires.add(beneficiaire);
         client.setBeneficiaires(beneficiaires);
         transfert.setClient(client);
