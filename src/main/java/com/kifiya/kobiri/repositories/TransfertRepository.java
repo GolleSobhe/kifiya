@@ -1,16 +1,11 @@
 package com.kifiya.kobiri.repositories;
 
 import com.kifiya.kobiri.models.Transfert;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Repository
 public class TransfertRepository {

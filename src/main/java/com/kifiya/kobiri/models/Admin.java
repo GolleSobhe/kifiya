@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
@@ -16,6 +17,21 @@ import javax.validation.constraints.Pattern;
 @Data
 @SuperBuilder
 public class Admin extends Utilisateur{
+
+    @NonNull
+    @NotBlank(message = "*veuillez fournir votre nom")
+    String nom;
+
+    @NonNull
+    @NotBlank(message = "*veuillez fournir votre prenom")
+    String prenom;
+
+    @NonNull
+    @Email(message = "*Please provide a valid Email")
+    @NotBlank(message = "*veuillez fournir votre email")
+    String email;
+
+    String password;
 
     @NonNull
     @Pattern(regexp = "(\\+33|0033|0|\\+224|00224)[0-9]{9}")
