@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>FiyaHollo</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+
+    <header th:insert="fragments/header :: header"> </header>
+</head>
+<body>
+<div class="containerc ontainer-fluid mx-auto col-xs-12 col-sm-8 col-md-7 col-sm-offset-2 col-md-offset-3" style="margin-top:90px">
+    <div class="container">
+        <h2>Ce service est en cours implementation</h2>
+        <a th:href="@{/}">Page d'acceuil</a>
+    </div>
+</div>
+
+</body>
+<div th:replace="fragments/footer.html :: footer"></div>
+</html>

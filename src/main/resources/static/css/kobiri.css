@@ -1,10 +1,22 @@
-body, html {
+html, body {
 	margin: 0;
 	padding: 0;
 	outline: none;
 	font-family: Arial, sans-serif;
 	box-sizing: border-box;
-	min-height: 530px;
+	min-height: 700px;
+    height: 100%;
+    background: #f5f8fa;
+    font-size: 16px;
+    color: #444
+}
+
+footer {
+    margin: 0;
+	padding: 0;
+	outline: none;
+	font-family: Arial, sans-serif;
+	box-sizing: border-box;
     height: 100%;
     font-size: 16px;
 }
@@ -143,6 +155,7 @@ input[type=number]::-webkit-outer-spin-button {
 /*
 ***********************************************************************************************************************
 */
+
 .gerant .titre-bar {
    height: 40px;
 }

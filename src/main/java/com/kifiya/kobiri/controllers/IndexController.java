@@ -12,5 +12,10 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping(value = {"/service-non-disponible"}, method = RequestMethod.GET)
+    public String payement(){
+        return "erreur/payement-facture";
+    }
+
 
 }
