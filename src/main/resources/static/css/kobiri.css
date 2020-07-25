@@ -18,9 +18,7 @@ footer {
 	font-family: Arial, sans-serif;
 	box-sizing: border-box;
     height: 100%;
-    background: #f5f8fa;
     font-size: 16px;
-    color: #444
 }
 
 #header-logo {
@@ -198,4 +196,26 @@ footer {
 }
 
 
+.form-envoie-argent {
+    background: white;
+}
+
+.form-envoie-argent :hover {
+    color: white;
+}
+
+.couleur-bouton-principal {
+    background-color:  #45526e;
+    color: white;
+}
+
+.btn {
+    border-radius: 10em !important;
+}
+
+.button-envoyer-argent {
+    border:  1px solid;
+    color: white;
+    font-weight: bold;
+}
 

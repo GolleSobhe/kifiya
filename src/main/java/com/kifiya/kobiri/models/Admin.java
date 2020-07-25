@@ -4,24 +4,34 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-@Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id", "email"})
-@ToString(of = {"id", "nom", "prenom", "email"})
 @Data
 @SuperBuilder
-@Table(name = "ADMIN")
 public class Admin extends Utilisateur{
+
+    @NonNull
+    @NotBlank(message = "*veuillez fournir votre nom")
+    String nom;
+
+    @NonNull
+    @NotBlank(message = "*veuillez fournir votre prenom")
+    String prenom;
+
+    @NonNull
+    @Email(message = "*Please provide a valid Email")
+    @NotBlank(message = "*veuillez fournir votre email")
+    String email;
+
+    String password;
 
     @NonNull
     @Pattern(regexp = "(\\+33|0033|0|\\+224|00224)[0-9]{9}")

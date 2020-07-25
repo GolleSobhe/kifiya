@@ -12,31 +12,33 @@ import java.util.List;
 @Repository
 public class BoutiqueRepository {
 
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     
-    private static final String INSERT = "insert into BOUTIQUE (date, email, nom, telephone, ville)" +
-            "values (:date, :email, :nom, :telephone, :ville)";
-    private static final String SELECT = "select VILLE, NOM, EMAIL, TELEPHONE, DATE from BOUTIQUE";
+    private static final String INSERT = "insert into BOUTIQUE (nom, ville, description) " +
+            "values (:nom, :ville, :description)";
+
+    private static final String SELECT = "select nom,ville,description  from BOUTIQUE";
+
+    public BoutiqueRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
 
     public List<Boutique> findAll() {
         return namedParameterJdbcTemplate.query(SELECT, (resultSet, i) -> {
             Boutique boutique = new Boutique();
-            boutique.setDate(resultSet.getDate("DATE"));
-            boutique.setEmail(resultSet.getString("EMAIL"));
-            boutique.setNom(resultSet.getString("NOM"));
-            boutique.setTelephone(resultSet.getString("TELEPHONE"));
-            boutique.setVille(resultSet.getString("VILLE"));
+            boutique.setNom(resultSet.getString("nom"));
+            boutique.setVille(resultSet.getString("ville"));
+            boutique.setDescription(resultSet.getString("description"));
             return boutique;
         });
     }
 
     public void ajouter(Boutique boutique) {
-        namedParameterJdbcTemplate.update(INSERT, new MapSqlParameterSource().addValue("date",boutique.getDate())
-                .addValue("ville",boutique.getVille())
-                .addValue("nom",boutique.getNom())
-                .addValue("email",boutique.getEmail())
-                .addValue("telephone",boutique.getTelephone()));
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("ville",boutique.getVille());
+        params.addValue("nom",boutique.getNom());
+        params.addValue("description",boutique.getDescription());
+        namedParameterJdbcTemplate.update(INSERT, params);
     }
 
     public Integer nombreDeBoutiques() {

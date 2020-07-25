@@ -1,99 +1,96 @@
 package com.kifiya.kobiri.controllers;
 
-import com.kifiya.kobiri.models.Utilisateur;
-import com.kifiya.kobiri.services.EmailService;
-import com.kifiya.kobiri.services.UtilisateurService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kifiya.kobiri.exception.ExpiryTokenException;
+import com.kifiya.kobiri.exception.InvalidTokenException;
+import com.kifiya.kobiri.models.Client;
+import com.kifiya.kobiri.models.Transfert;
+import com.kifiya.kobiri.services.ClientService;
+import com.kifiya.kobiri.services.TransfertService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Map;
-import java.util.UUID;
 
 @Controller
-@RequestMapping("/utilisateur")
 public class UtilisateurController {
 
-    @Autowired
-    private UtilisateurService utilisateurService;
-    @Autowired
-    private EmailService emailService;
+    private final ClientService clientService;
 
-    @RequestMapping(value = "/inscription", method = RequestMethod.GET)
+    private final TransfertService transfertService;
+
+    public UtilisateurController(ClientService clientService,TransfertService transfertService) {
+        this.clientService = clientService;
+        this.transfertService = transfertService;
+    }
+
+    @GetMapping(value = "utilisateur/inscription")
     public String inscription(Model model){
-        model.addAttribute("utilisateur",new Utilisateur());
+        model.addAttribute("utilisateur",new Client());
         return "utilisateur/inscription";
     }
 
-    @RequestMapping(value = "/inscription", method = RequestMethod.POST)
-    public String inscription(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur,
+    @PostMapping(value = "utilisateur/inscription")
+    public String inscription(@Valid @ModelAttribute("utilisateur") Client client,
                                BindingResult result, HttpServletRequest request, Model model){
-
-        Utilisateur existing = utilisateurService.findUtilisateurByEmail(utilisateur.getEmail());
-        if (existing != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email");
-        }
-
         if (result.hasErrors()) {
             return "utilisateur/inscription";
         }
-
-        // Disable utilisateur until they click on confirmation link in email
-        utilisateur.setActive(false);
-        // Generate random 36-character string token for confirmation link
-        utilisateur.setConfirmationToken(UUID.randomUUID().toString());
-
-        utilisateurService.ajouter(utilisateur);
-        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        emailService.sendEmail(appUrl, utilisateur.getConfirmationToken(), utilisateur.getEmail());
-        model.addAttribute("confirmationMessage", "Un e-mail de confirmation a été envoyé à " + utilisateur.getEmail());
+        if (clientService.clientExists(client.getEmail())) {
+            result.rejectValue("email", null, "There is already an account registered with that email");
+            return "utilisateur/inscription";
+        }
+        String appUrl = request.getScheme() + "://" + request.getServerName() + ":" +
+                request.getServerPort() + request.getContextPath();
+        clientService.ajouter(client,appUrl);
+        model.addAttribute("confirmationMessage", "Un e-mail de confirmation a été envoyé à " + client.getEmail());
         return "utilisateur/inscription";
     }
 
-    @RequestMapping(value = "/connexion", method = RequestMethod.GET)
+    @GetMapping(value = "utilisateur/connexion")
     public String connexion(){
         return "utilisateur/connexion";
     }
 
-    @RequestMapping(value = "/contact", method = RequestMethod.GET)
+    @GetMapping(value = "utilisateur/contact")
     public String contact(){
         return "utilisateur/contact";
     }
 
-
-
-    // Process confirmation link
-    @RequestMapping(value="/confirmation", method = RequestMethod.GET)
-    public String confirmation(Model model, @RequestParam("token") String token){
-        Utilisateur utilisateur = utilisateurService.findByConfirmationToken(token);
-        if (utilisateur == null) { // No token found in DB
-            model.addAttribute("invalidToken", "Oups! Il s'agit d'un lien de confirmation non valide.");
-        } else { // Token found
-            model.addAttribute("confirmationToken", utilisateur.getConfirmationToken());
-        }
-        return "utilisateur/confirmation";
+    @GetMapping(value = "transferts")
+    public String faireTransfert(Model model){
+        model.addAttribute("transfert", new Transfert());
+        return "transfert/transfert";
     }
 
-    // Process confirmation link
-    @RequestMapping(value="/confirmation", method = RequestMethod.POST)
-    public String confirmation(@RequestParam Map<String, String> requestParams, Model model) {
+    @PostMapping(value =  "transferts")
+    public String postHistoric(@Valid @ModelAttribute("transfert") Transfert transfert,
+                               BindingResult result, Model model){
+        /*if (result.hasErrors() || !result.hasFieldErrors("client") || !result.hasFieldErrors("beneficiaire")) {
+            //Ajouter le message d'erreur sur le model
+            return"transfert/transfert";
+        }*/
+        transfertService.ajouter(transfert);
+        model.addAttribute("transfert", transfert);
+        model.addAttribute("confirmationMessage", "Argent enoyé et un e-mail de confirmation a été envoyé à ");
+        return "transfert/transfert";
+    }
 
-        // Find the utilisateur associated with the reset token
-        Utilisateur utilisateur = utilisateurService.findByConfirmationToken(requestParams.get("token"));
-        String password = requestParams.get("password");
-        // Set utilisateur to enabled
-        utilisateur.setActive(true);
-        utilisateur.setPassword(password);
-        // Save utilisateur
-        utilisateurService.ajouter(utilisateur);
-        model.addAttribute("successMessage", "Votre mot de passe a été défini!");
+    @GetMapping(value="utilisateur/confirmation")
+    public String confirmation(Model model, @RequestParam("token") String token){
+        try {
+            clientService.validerInscription(token);
+            model.addAttribute("confirmationToken", token);
+        } catch (InvalidTokenException e) {
+            model.addAttribute("invalidToken", "Oups! Il s'agit d'un lien de confirmation non valide.");
+        } catch (ExpiryTokenException e) {
+            model.addAttribute("invalidToken", "Oups! le token a expiré.");
+        }
         return "utilisateur/confirmation";
     }
 

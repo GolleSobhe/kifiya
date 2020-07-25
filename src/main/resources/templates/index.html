@@ -3,20 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>fiyahollo</title>
+
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <header th:insert="fragments/header :: header"> </header>
+    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
+    <link href="../../static/css/kobiri.css" th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
+    <header th:insert="fragments/navbar :: navbar"> </header>
 </head>
 
-<body>
-<div class="container">
-    <div class="fy-wrap">
-        <h1>FIYAHOOLO</h1>
-        <h1>Envoyer de l'argent mobiles dans le monde entier</h1>
-        <h2>Facile, Rapide et Fiable.</h2>
+<body style="padding-top: 50px;">
+<div class="view img-fluid" style="width: 100%; background-size: cover; background-image: url(https://webv2cmsprod.aws.moneygram.com/WEB/V11/MGO/FR/UNAUTHHOME/FR/pmp_MG_19-06239_MGO_v2_landmark_hero_France_1440x660-min-min.jpg);">
+
+    <div style="padding-bottom: 80px"></div>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6" style="padding-bottom: 15px;">
+            <h1 style="color: white; font-weight: bold;">Envoyez de l'argent rapidement et surement à vos proches</h1>
+
+            <button type="button" class="btn btn-outline button-envoyer-argent waves-effect">Envoyer d'argent</button>
+
+        </div>
+
+        <div class="col-md-6"  style="padding-bottom: 15px;" >
+            <form class="text-center border border-light p-3 form-envoie-argent">
+                <p class="h4 mb-4">Estimer les frais</p>
+                <input type="text" id="montantAEnvoyer" class="form-control mb-4 form-control-lg" placeholder="Montant à envoyer">
+                <input type="text" id="paysDestinataire" class="form-control mb-4 form-control-lg" placeholder="Pays destinataire">
+                <button class="btn btn-block my-4 couleur-bouton-principal" type="submit">Estimer les frais</button>
+            </form>
+        </div>
     </div>
-    <a th:href="@{/transferts/}" class="button-link">Envoyer de l'argent</a>
+
+</div>
 </div>
 
+<div style="padding-bottom: 80px"></div>
+
+<div class="container">
+    <h1 class="text-center">Nos principaux points de retraits</h1>
+    <div style="padding-bottom: 10px"></div>
+    <div class="card-deck">
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck">
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+
+        <div class="card mb-3 hoverable">
+            <div class="card-body">
+                <h4 class="card-title">Cosa rond-point</h4>
+                <p class="card-text">petite description</p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <div th:replace="fragments/footer.html :: footer"></div>
 </html>

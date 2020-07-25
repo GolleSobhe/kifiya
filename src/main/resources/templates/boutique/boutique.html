@@ -29,15 +29,12 @@
                     <tr th:each="boutique : ${boutiques}">
                         <td><span th:text="${boutique.ville}"> Ville </span></td>
                         <td><span th:text="${boutique.nom}"> Point de vente </span></td>
-                        <td><span th:text="${boutique.email}"> Email </span></td>
-                        <td><span th:text="${boutique.telephone}"> Numéro de téléphone </span></td>
-                        <td><span th:text="${boutique.date}"> Date de création </span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
-            <form action="#" th:action="@{/boutiques}" th:object="${boutique}" method="post">
+            <form action="#" th:action="@{/admin/boutiques}" th:object="${boutique}" method="post">
                 <div class="form-row">
                     <div class="col-xs-12 col-md-3"></div>
                     <div class="col-xs-12 col-md-6"><h5>Ajouter point de vente</h5></div>
@@ -48,29 +45,16 @@
                     <div class="form-group col-md-6">
                         <label for="ville">Ville</label>
                         <input type="text" class="form-control form-control-lg" id="ville" placeholder="Ville"
-                               th:field="*{ville}"
-                        >
+                               th:field="*{ville}">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="pointDeVente">Point de vente</label>
                         <input type="text" class="form-control form-control-lg" id="pointDeVente" placeholder="Point de vente"
-                               th:field="*{nom}"
-                        >
+                               th:field="*{nom}">
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control form-control-lg" id="email" placeholder="Email"
-                               th:field="*{email}"
-                        >
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="telephone">Numero de telephone</label>
-                        <input type="tel" class="form-control form-control-lg" id="telephone" placeholder="Num Tel"
-                               th:field="*{telephone}"
-                        >
-                    </div>
+
                 </div>
 
                 <div class="form-row">
