@@ -21,6 +21,23 @@ footer {
     font-size: 16px;
 }
 
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+header, footer {
+flex-shrink: 0;
+}
+
+main {
+  flex-grow:1;
+  background-color: #2ecc71;
+}
+
+
+
 input[type="number"] {
   -webkit-appearance: textfield;
     -moz-appearance: textfield;
