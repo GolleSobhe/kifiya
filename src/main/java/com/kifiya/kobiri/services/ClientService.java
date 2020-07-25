@@ -72,7 +72,7 @@ public class ClientService {
 
     public List<Beneficiaire> listerBeneficiares(){
         //recuperer email du client connecte
-        String email = null;
+        String email = "sobhe@gmail.com";
         return beneficiaireRepository.listerBeneficiaires(email);
     }
 

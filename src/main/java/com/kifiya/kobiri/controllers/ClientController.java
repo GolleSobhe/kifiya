@@ -1,6 +1,7 @@
 package com.kifiya.kobiri.controllers;
 
 import com.kifiya.kobiri.models.Beneficiaire;
+import com.kifiya.kobiri.models.Boutique;
 import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.ClientService;
@@ -34,13 +35,18 @@ public class ClientController {
     }
 
     @RequestMapping(value = {"/transferts"}, method = RequestMethod.POST)
-    public String initierTransfert(@RequestParam(value = "montantEuros") Long montant, Model model){
+    public String initierTransfert(@RequestParam(value = "montantEuros") Long montant,
+                                   @RequestParam(value = "pointDeRetrait") String pointDeRetrait,
+                                   @RequestParam(value = "taux") Long taux, Model model){
         /**
          * recuperer le taux apres
          */
+        Boutique boutique = new Boutique();
+        boutique.setNom(pointDeRetrait);
         Transfert transfert = new Transfert();
         transfert.setMontantEuros(montant);
-        transfert.setTaux((long) 10600);
+        transfert.setBoutique(boutique);
+        transfert.setTaux((long) taux);
         /**
          * Recuperer l'utilisateur connecter
          * id
@@ -49,12 +55,7 @@ public class ClientController {
          * list beneficiaire
          */
         Client client = new Client();
-        List<Beneficiaire> beneficiaires = new ArrayList<Beneficiaire>
-                (Arrays.asList(new Beneficiaire[]{
-                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000", ""),
-                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222", ""),
-                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222", "")}));
-        client.setBeneficiaires(beneficiaires);
+        client.setBeneficiaires(clientService.listerBeneficiares());
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());

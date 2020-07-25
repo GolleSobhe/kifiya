@@ -12,12 +12,18 @@ insert into BOUTIQUE(nom,ville,description)
 values('Cosa1','Conakry','La boutique de Cosa');
 insert into BOUTIQUE(nom,ville,description)
 values('Kipe1','Conakry','La boutique de Kipe');
+insert into BOUTIQUE(nom,ville,description)
+values('Fiya Hollo','Mamou','La boutique de petel');
 
 insert into ADMIN(email,nom,prenom,password,telephone,adresse,ville,pays,est_valide)
 values('admin@gmail.com','BAH','Abdou','password','0606060606','1 rue du Bonheur','Bomboli','France','YES');
 
 insert into BENEFICIAIRE(nom,prenom,telephone,client_id)
 values('Bah','Mariam','+224623097612','teliwal@gmail.com');
+insert into BENEFICIAIRE(nom,prenom,telephone,client_id)
+values('Fiya','Hollo','+224623097612','sobhe@gmail.com');
+insert into BENEFICIAIRE(nom,prenom,telephone,client_id)
+values('Noh','Feti','+224623097612','sobhe1@gmail.com');
 
 insert into CONNEXION(login,password,role)
 values('teliwal@gmail.com','password','CLIENT');

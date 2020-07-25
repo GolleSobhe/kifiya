@@ -20,16 +20,28 @@
                     <div class="col-md-6" style="padding-bottom: 15px;">
                         <h1 style="color: white; font-weight: bold;">Envoyez de l'argent rapidement et surement à vos proches</h1>
 
-                        <button type="button" class="btn btn-outline button-envoyer-argent waves-effect">Envoyer d'argent</button>
-
                     </div>
 
                     <div class="col-md-6"  style="padding-bottom: 15px;" >
-                        <form class="text-center border border-light p-3 form-envoie-argent">
-                            <p class="h4 mb-4">Estimer les frais</p>
-                            <input type="text" id="montantAEnvoyer" class="form-control mb-4 form-control-lg" placeholder="Montant à envoyer">
-                            <input type="text" id="paysDestinataire" class="form-control mb-4 form-control-lg" placeholder="Pays destinataire">
-                            <button class="btn btn-block my-4 couleur-bouton-principal" type="submit">Estimer les frais</button>
+                        <form class="border border-light p-3 form-envoie-argent" th:action="@{client/transferts}" method="post">
+                            <input type="hidden" name="taux" th:value="${taux}">
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Montant en €</div>
+                                </div>
+                                <input type="number" min="0" th:name="montantEuros">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" th:text="${'1€ = '+taux+' GNF'}">1€ = 10600 GNF</span>
+                                </div>
+                            </div>
+                            <label class="my-1 mr-2" for="pointDeRetrait">Point de retrait</label>
+                            <select class="custom-select my-1 mr-sm-2" id="pointDeRetrait" th:name="pointDeRetrait">
+                                <option value="" selected>Choisir le point de retrait</option>
+                                <option th:each="boutique : ${boutiques}"
+                                        th:value="${boutique.nom}"
+                                        th:utext="${boutique.ville + ' ' + boutique.description}"/>
+                            </select>
+                            <button class="btn btn-block my-4 couleur-bouton-principal" type="submit">Envoyer de l'argent</button>
                         </form>
                     </div>
                 </div>
@@ -42,61 +54,14 @@
             <h1 class="text-center">Nos principaux points de retraits</h1>
             <div style="padding-bottom: 10px"></div>
             <div class="card-deck">
-                <div class="card mb-3 hoverable">
-                    <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
-                    </div>
+                <div class="container" th:if="${boutiques.empty}">
+                    <h3 class="text-center">Pas de boutique disponible</h3>
                 </div>
-
-                <div class="card mb-3 hoverable">
+                <div class="card mb-3 hoverable" th:each="boutique : ${boutiques}">
                     <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
-                    </div>
-                </div>
-
-                <div class="card mb-3 hoverable">
-                    <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
-                    </div>
-                </div>
-
-                <div class="card mb-3 hoverable">
-                    <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-deck">
-                <div class="card mb-3 hoverable">
-                    <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
-                    </div>
-                </div>
-
-                <div class="card mb-3 hoverable">
-                    <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
-                    </div>
-                </div>
-
-                <div class="card mb-3 hoverable">
-                    <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
-                    </div>
-                </div>
-
-                <div class="card mb-3 hoverable">
-                    <div class="card-body">
-                        <h4 class="card-title">Cosa rond-point</h4>
-                        <p class="card-text">petite description</p>
+                        <h4 class="card-title" th:text="${boutique.nom}">Fiya Hollo</h4>
+                        <h5 class="card-title" th:text="${boutique.ville}">Fiya Hollo</h5>
+                        <p class="card-text" th:text="${boutique.description}">petite description</p>
                     </div>
                 </div>
             </div>

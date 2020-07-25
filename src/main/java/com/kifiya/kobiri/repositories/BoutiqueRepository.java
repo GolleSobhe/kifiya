@@ -23,7 +23,7 @@ public class BoutiqueRepository {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public List<Boutique> findAll() {
+    public List<Boutique> listerBoutiques() {
         return namedParameterJdbcTemplate.query(SELECT, (resultSet, i) -> {
             Boutique boutique = new Boutique();
             boutique.setNom(resultSet.getString("nom"));
