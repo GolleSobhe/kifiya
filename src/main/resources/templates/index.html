@@ -23,18 +23,17 @@
                     </div>
 
                     <div class="col-md-6"  style="padding-bottom: 15px;" >
-                        <form class="border border-light p-3 form-envoie-argent" th:action="@{client/transferts}" method="post">
+                        <form id="formTransfert" class="border border-light p-3 form-envoie-argent" th:action="@{client/transferts}" method="post">
                             <input type="hidden" name="taux" th:value="${taux}">
                             <div class="form-row">
                                 <div class="input-group mb-2 mr-sm-2">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
-                                            <div class="input-group-text">Montant en €</div>
+                                            <div class="input-group-text" for="montantEuros">Montant en €</div>
                                         </div>
-                                        <input type="number" min="0" class="form-control"
-                                               oninvalid="this.setCustomValidity('Le montant de l'envoi doit être supérieur à 0,00 EUR')"
-                                               oninput="setCustomValidity('')"
-                                               th:name="montantEuros" required>
+                                        <input type="number" min="0" class="form-control" id="montantEuros"
+                                               onblur="checkPasswordValidity();"
+                                               th:name="montantEuros" value="100" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text" th:text="${'1€ = '+taux+' GNF'}">1€ = 10600 GNF</span>
                                         </div>
@@ -80,5 +79,15 @@
     </main>
     <div th:replace="fragments/footer.html :: footer"></div>
 </div>
+<script>
+    function checkPasswordValidity(){
+        var montant = document.getElementById("montantEuros");
+        if (!montant.checkValidity()) {
+            montant.setCustomValidity("Le montant de l envoi doit être supérieur à 0,00 EUR.");
+        } else {
+            montant.setCustomValidity("");
+        }
+    }
+</script>
 </body>
 </html>
