@@ -7,26 +7,32 @@
 
     <header th:insert="fragments/header :: header"></header>
 </head>
-<body>
-<div align="center" style="margin-top: 40px">
-    <h2>Ajouter un Gerant</h2><br/>
-    <form th:object="${gerant}" th:action="@{/admin/gerant}" method="post">
-        <p>
-            <label>Nom :</label>
-            <input type="text" style="width:50%" th:field="*{nom}"/></p>
-        <p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Erreur sur le nom</p>
-        <p>
-            <label>Prenom :</label>
-            <input type="text" style="width:50%" th:field="*{prenom}"/></p>
-        <p th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}">Erreur sur le prenom</p>
-        <p>
-            <label>Telephone :</label>
-            <input type="text" style="width:50%" th:field="*{telephone}"/></p>
-        <p th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Erreur sur le prenom</p>
-        <button>Envoyer</button>
-    </form>
+<body style="padding-top: 50px;">
+<div class="wrapper">
+    <header th:insert="fragments/header :: header"> </header>
+    <main>
+        <div align="center" style="margin-top: 40px">
+            <h2>Ajouter un Gerant</h2><br/>
+            <form th:object="${gerant}" th:action="@{/admin/gerant}" method="post">
+                <p>
+                    <label>Nom :</label>
+                    <input type="text" style="width:50%" th:field="*{nom}"/></p>
+                <p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Erreur sur le nom</p>
+                <p>
+                    <label>Prenom :</label>
+                    <input type="text" style="width:50%" th:field="*{prenom}"/></p>
+                <p th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}">Erreur sur le prenom</p>
+                <p>
+                    <label>Telephone :</label>
+                    <input type="text" style="width:50%" th:field="*{telephone}"/></p>
+                <p th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Erreur sur le prenom</p>
+                <button>Envoyer</button>
+            </form>
+        </div>
+    </main>
+    <div style="margin-top:90px"></div>
+    <div th:replace="fragments/footer.html :: footer"></div>
 </div>
+
 </body>
-<div style="margin-top:90px"></div>
-<div th:replace="fragments/footer.html :: footer"></div>
 </html>

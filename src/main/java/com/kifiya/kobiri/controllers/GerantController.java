@@ -22,7 +22,7 @@ public class GerantController {
     @GetMapping(value ={"/", ""})
     public String acceuil(Model model){
         model.addAttribute("statistique", gerantService.obtenirStatistique());
-        return "gerant/index";
+        return "gerant/accueil-gerant";
     }
 
     @GetMapping(value ="/connexion")

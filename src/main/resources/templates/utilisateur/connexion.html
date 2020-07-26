@@ -5,11 +5,12 @@
         <title>Connexion</title>
 
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-
-        <header th:insert="fragments/header :: header"> </header>
     </head>
 
-    <body>
+    <body style="padding-top: 50px;">
+    <div class="wrapper">
+        <header th:insert="fragments/header :: header"> </header>
+        <main>
             <div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
                 <h2>Connexion</h2>
                 <form th:action="@{/utilisateur/connexion}" role="form" th:method="post">
@@ -30,6 +31,8 @@
 				    </span>
                 </form>
             </div>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+    </div>
     </body>
-    <div th:replace="fragments/footer.html :: footer"></div>
 </html>
