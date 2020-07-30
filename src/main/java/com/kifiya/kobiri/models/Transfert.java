@@ -23,8 +23,11 @@ public class Transfert {
     @NotNull(message = "*Veuillez selectionner un bénéficiaire")
     Beneficiaire beneficiaire;
 
-    @NotNull(message = "*Veuillez selectionner un bénéficiaire")
+    @NotNull(message = "*Veuillez selectionner un client")
     Client client;
+
+    @NotNull(message = "*Veuillez selectionner un point de retrait")
+    Boutique boutique;
 
     @NotNull(message = "*Code de recuperation")
     String code;

@@ -6,86 +6,89 @@
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 
-    <header th:insert="fragments/header :: header"> </header>
 </head>
 
-<body>
-<div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
-    <h2>Créer un compte</h2>
-    <form action="#" th:action="@{/utilisateur/inscription}" th:object="${utilisateur}" method="post">
-        <div  th:if="${confirmationMessage}" class="alert alert-success"
-                role="alert" th:text=${confirmationMessage}>
-        </div>
+<body style="padding-top: 50px;">
+<div class="wrapper">
+    <header th:insert="fragments/header :: header"> </header>
+    <main>
+        <div class="card container jumbotron container-fluid mx-auto col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
+            <h2>Créer un compte</h2>
+            <form action="#" th:action="@{/utilisateur/inscription}" th:object="${utilisateur}" method="post">
+                <div  th:if="${confirmationMessage}" class="alert alert-success"
+                      role="alert" th:text=${confirmationMessage}>
+                </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="nom">Nom</label>
-                <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom"
-                       th:field="*{nom}"
-                >
-            </div>
-            <div class="form-group col-md-6">
-                <label for="prenom">Prenom</label>
-                <input type="text" class="form-control form-control-lg" id="prenom" placeholder="Prenom"
-                       th:field="*{prenom}"
-                >
-            </div>
-        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom"
+                               th:field="*{nom}"
+                        >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="prenom">Prenom</label>
+                        <input type="text" class="form-control form-control-lg" id="prenom" placeholder="Prenom"
+                               th:field="*{prenom}"
+                        >
+                    </div>
+                </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="email">Email</label>
-                <input type="email" class="form-control form-control-lg" id="email" placeholder="Email"
-                       th:field="*{email}"
-                >
-            </div>
-            <div class="form-group col-md-6">
-                <label for="motDePasse">Numero de téléphone</label>
-                <input type="tel" class="form-control form-control-lg" id="motDePasse" placeholder="Num Tel"
-                       th:field="*{telephone}"
-                >
-            </div>
-        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control form-control-lg" id="email" placeholder="Email"
+                               th:field="*{email}"
+                        >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="motDePasse">Numero de téléphone</label>
+                        <input type="tel" class="form-control form-control-lg" id="motDePasse" placeholder="Num Tel"
+                               th:field="*{telephone}"
+                        >
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <label for="adresse">Adresse</label>
-            <input type="text" class="form-control form-control-lg" id="adresse" placeholder="Adresse"
-                   th:field="*{adresse}"
-            >
-        </div>
+                <div class="form-group">
+                    <label for="adresse">Adresse</label>
+                    <input type="text" class="form-control form-control-lg" id="adresse" placeholder="Adresse"
+                           th:field="*{adresse}"
+                    >
+                </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="pays">Pays</label>
-                <select id="pays" class="form-control form-control-lg"
-                        th:field="*{pays}"
-                >
-                    <option th:value="Default">Selectionner un pays...</option>
-                    <option th:value="Guinée" selected>Guinée</option>
-                </select>
-            </div>
-            <div class="form-group col-md-5">
-                <label for="ville">Ville</label>
-                <input type="text" class="form-control form-control-lg" id="ville" placeholder="Ville"
-                       th:field="*{ville}"
-                >
-            </div>
-            <div class="form-group col-md-3">
-                <label for="codePostale">Code postale</label>
-                <input type="text" class="form-control form-control-lg" id="codePostale" placeholder="XXXXX" maxlength="5"
-                       th:field="*{codePostale}"
-                >
-            </div>
-        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="pays">Pays</label>
+                        <select id="pays" class="form-control form-control-lg"
+                                th:field="*{pays}"
+                        >
+                            <option th:value="Default">Selectionner un pays...</option>
+                            <option th:value="Guinée" selected>Guinée</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="ville">Ville</label>
+                        <input type="text" class="form-control form-control-lg" id="ville" placeholder="Ville"
+                               th:field="*{ville}"
+                        >
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="codePostale">Code postale</label>
+                        <input type="text" class="form-control form-control-lg" id="codePostale" placeholder="XXXXX" maxlength="5"
+                               th:field="*{codePostale}"
+                        >
+                    </div>
+                </div>
 
-        <div class="form-row">
-            <div class="col-xs-12 col-md-3"></div>
-            <div class="col-xs-12 col-md-6"><input type="submit" value="Créer un compte" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
-            <div class="col-xs-12 col-md-3"></div>
+                <div class="form-row">
+                    <div class="col-xs-12 col-md-3"></div>
+                    <div class="col-xs-12 col-md-6"><input type="submit" value="Créer un compte" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                    <div class="col-xs-12 col-md-3"></div>
+                </div>
+            </form>
         </div>
-    </form>
+    </main>
+    <div th:replace="fragments/footer.html :: footer"></div>
 </div>
-
 </body>
-<div th:replace="fragments/footer.html :: footer"></div>
 </html>

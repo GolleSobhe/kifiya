@@ -38,7 +38,7 @@ public class AdminService {
     }
 
     public List<Boutique> listerBoutiques() {
-        return boutiqueRepository.findAll();
+        return boutiqueRepository.listerBoutiques();
     }
 
     public int nombreDeBoutiques() {

@@ -21,12 +21,28 @@ footer {
     font-size: 16px;
 }
 
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+header, footer {
+flex-shrink: 0;
+}
+
+main {
+  flex-grow:1;
+}
+
+
+
 input[type="number"] {
   -webkit-appearance: textfield;
     -moz-appearance: textfield;
           appearance: textfield;
-    max-width: 8rem;
-    min-width: 5 rem;
+    max-width: 12rem;
+    min-width: 8 rem;
     padding: .5rem;
     border: solid #ddd;
     font-size: 1rem;
@@ -129,9 +145,6 @@ input[type=number]::-webkit-outer-spin-button {
  Contact
 */
 
-.right-info {
-    background: rgb(83, 160, 122);
-}
 
 .sendButton {
 		background: #25274d;
@@ -269,10 +282,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 .form-envoie-argent {
     background: white;
-}
-
-.form-envoie-argent :hover {
-    color: white;
 }
 
 .couleur-bouton-principal {

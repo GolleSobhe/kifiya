@@ -5,103 +5,89 @@
     <title>fiyahollo</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
-    <link href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" rel="stylesheet" media="screen"/>
-    <link href="../../static/css/kobiri.css" th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
-    <header th:insert="fragments/navbar :: navbar"> </header>
 </head>
 
 <body style="padding-top: 50px;">
-<div class="view img-fluid" style="width: 100%; background-size: cover; background-image: url(https://webv2cmsprod.aws.moneygram.com/WEB/V11/MGO/FR/UNAUTHHOME/FR/pmp_MG_19-06239_MGO_v2_landmark_hero_France_1440x660-min-min.jpg);">
+<div class="wrapper">
+    <header th:insert="fragments/header :: header"> </header>
+    <main>
+        <div class="view img-fluid container" style="width: 100%; background-size: cover; background-image: url(https://webv2cmsprod.aws.moneygram.com/WEB/V11/MGO/FR/UNAUTHHOME/FR/pmp_MG_19-06239_MGO_v2_landmark_hero_France_1440x660-min-min.jpg);">
 
-    <div style="padding-bottom: 80px"></div>
+            <div style="padding-bottom: 80px"></div>
 
-    <div class="container">
-    <div class="row">
-        <div class="col-md-6" style="padding-bottom: 15px;">
-            <h1 style="color: white; font-weight: bold;">Envoyez de l'argent rapidement et surement à vos proches</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6" style="padding-bottom: 15px;">
+                        <h1 style="color: white; font-weight: bold;">Envoyez de l'argent rapidement et surement à vos proches</h1>
 
-            <button type="button" class="btn btn-outline button-envoyer-argent waves-effect">Envoyer d'argent</button>
+                    </div>
 
+                    <div class="col-md-6"  style="padding-bottom: 15px;" >
+                        <form id="formTransfert" class="border border-light p-3 form-envoie-argent" th:action="@{client/transferts}" method="post">
+                            <input type="hidden" name="taux" th:value="${taux}">
+                            <div class="form-row">
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text" for="montantEuros">Montant en €</div>
+                                        </div>
+                                        <input type="number" min="0" class="form-control" id="montantEuros"
+                                               onblur="checkPasswordValidity();"
+                                               th:name="montantEuros" value="100" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" th:text="${'1€ = '+taux+' GNF'}">1€ = 10600 GNF</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="my-1 mr-2" for="pointDeRetrait">Point de retrait</label>
+                                <select class="custom-select browser-default" id="pointDeRetrait" th:name="pointDeRetrait"
+                                        oninvalid="this.setCustomValidity('Choisisez un point de retrait.')"
+                                        oninput="setCustomValidity('')" required>
+                                    <option disabled selected value="">Choisir le point de retrait</option>
+                                    <option th:each="boutique : ${boutiques}"
+                                            th:value="${boutique.nom}"
+                                            th:utext="${boutique.ville + ' ' + boutique.description}"/>
+                                </select>
+                            </div>
+                            <button class="btn btn-block my-4 couleur-bouton-principal" type="submit">Envoyer de l'argent</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
         </div>
+        <div style="padding-bottom: 80px"></div>
 
-        <div class="col-md-6"  style="padding-bottom: 15px;" >
-            <form class="text-center border border-light p-3 form-envoie-argent">
-                <p class="h4 mb-4">Estimer les frais</p>
-                <input type="text" id="montantAEnvoyer" class="form-control mb-4 form-control-lg" placeholder="Montant à envoyer">
-                <input type="text" id="paysDestinataire" class="form-control mb-4 form-control-lg" placeholder="Pays destinataire">
-                <button class="btn btn-block my-4 couleur-bouton-principal" type="submit">Estimer les frais</button>
-            </form>
+        <div class="container">
+            <h1 class="text-center">Nos principaux points de retraits</h1>
+            <div style="padding-bottom: 10px"></div>
+            <div class="card-deck">
+                <div class="container" th:if="${boutiques.empty}">
+                    <h3 class="text-center">Pas de boutique disponible</h3>
+                </div>
+                <div class="card mb-3 hoverable" th:each="boutique : ${boutiques}">
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="${boutique.nom}">Fiya Hollo</h4>
+                        <h5 class="card-title" th:text="${boutique.ville}">Fiya Hollo</h5>
+                        <p class="card-text" th:text="${boutique.description}">petite description</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
+    </main>
+    <div th:replace="fragments/footer.html :: footer"></div>
 </div>
-</div>
-
-<div style="padding-bottom: 80px"></div>
-
-<div class="container">
-    <h1 class="text-center">Nos principaux points de retraits</h1>
-    <div style="padding-bottom: 10px"></div>
-    <div class="card-deck">
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="card-deck">
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-
-        <div class="card mb-3 hoverable">
-            <div class="card-body">
-                <h4 class="card-title">Cosa rond-point</h4>
-                <p class="card-text">petite description</p>
-            </div>
-        </div>
-    </div>
-</div>
+<script>
+    function checkPasswordValidity(){
+        var montant = document.getElementById("montantEuros");
+        if (!montant.checkValidity()) {
+            montant.setCustomValidity("Le montant de l envoi doit être supérieur à 0,00 EUR.");
+        } else {
+            montant.setCustomValidity("");
+        }
+    }
+</script>
 </body>
-<div th:replace="fragments/footer.html :: footer"></div>
 </html>
