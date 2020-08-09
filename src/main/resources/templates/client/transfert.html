@@ -105,45 +105,49 @@
         <div id="formBeneficiaire" class="container container-fluid mx-auto col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-3">
             <button id="formButton" class="btn btn-success"> Ajouter Bénéficiaire </button>
             <br>
-            <div id="formAddBeneficiaire" class="container">
+            <div id="formAddBeneficiaire" >
                 <form th:action="@{/client/beneficiaires}" th:object="${beneficiaire}" method="post">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="nom">Nom</label>
-                                <input type="text" class="form-control form-control-lg" id="nom" placeholder="Nom"
-                                       th:field="*{nom}">
-                                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="form-group">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" class="form-control form-type-input" id="nom" placeholder="Nom"
+                                           th:field="*{nom}">
+                                    <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="col">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
                                 <div class="form-group">
                                     <label for="prenom">Prenom</label>
-                                    <input type="text" class="form-control form-control-lg" id="prenom" placeholder="Prenom"
+                                    <input type="text" class="form-control form-type-input" id="prenom" placeholder="Prenom"
                                            th:field="*{prenom}">
                                     <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <label for="telephone">Telephone</label>
-                            <div class="input-group input-group-lg">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <div class="form-group">
+                                    <label for="telephone">Telephone</label>
+                                    <div class="input-group input-group-lg">
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
                                     <span>+224</span>
                                 </span>
-                                <input type="tel" id="telephone" class="form-control" aria-label="Phone Number" placeholder="Large">
-                                <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+                                        <input type="tel" id="telephone" class="form-control form-type-input" aria-label="Phone Number">
+                                        <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-xs-12 col-md-3"></div>
-                        <div class="col-xs-12 col-md-6"><input type="submit" value="Ajouter" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
-                        <div class="col-xs-12 col-md-3"></div>
+                        <div class="form-row">
+                            <div class="col-xs-12 col-md-3"></div>
+                            <div class="col-xs-12 col-md-6"><input type="submit" value="Ajouter" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                            <div class="col-xs-12 col-md-3"></div>
+                        </div>
                     </div>
                 </form>
             </div>

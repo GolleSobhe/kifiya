@@ -36,7 +36,10 @@ main {
   text-align: center;
 }
 
-
+.form-type-input{
+    height: 60px;
+    font-size: 30px;
+}
 
 input[type="number"] {
   -webkit-appearance: textfield;
