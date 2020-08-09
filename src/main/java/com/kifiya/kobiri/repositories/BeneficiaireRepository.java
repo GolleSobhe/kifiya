@@ -5,25 +5,27 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 @Repository
 public class BeneficiaireRepository {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    MapSqlParameterSource params = new MapSqlParameterSource();
 
     private final String CREER_BENEFICIAIRE = "Insert into BENEFICIAIRE(nom,prenom,telephone,client_id) " +
             "values(:nom, :prenom, :telephone, :client_id)";
 
     private final String RECHERCHER_BENEFICIARES = "Select nom,prenom,telephone from BENEFICIAIRE " +
             "where client_id = :client_id";
+    private static final String BENEFICIAIRE_EXISTE = "Select telephone from BENEFICIAIRE  where telephone = :telephone";;
 
     public BeneficiaireRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     public void ajouterBeneficiaire(Beneficiaire beneficiaire){
-        MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("nom",beneficiaire.getNom());
         params.addValue("prenom",beneficiaire.getPrenom());
         params.addValue("telephone",beneficiaire.getTelephone());
@@ -32,7 +34,6 @@ public class BeneficiaireRepository {
     }
 
     public List<Beneficiaire>  listerBeneficiaires(String clientId){
-        MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("client_id",clientId);
         return namedParameterJdbcTemplate.query(RECHERCHER_BENEFICIARES,params,(resultSet, i) -> {
             Beneficiaire beneficiaire = new Beneficiaire();
@@ -43,4 +44,8 @@ public class BeneficiaireRepository {
         });
     }
 
+    public boolean beneficiaireExists(String telephone) {
+        params.addValue("telephone",telephone);
+        return namedParameterJdbcTemplate.query(BENEFICIAIRE_EXISTE,params, ResultSet::next);
+    }
 }

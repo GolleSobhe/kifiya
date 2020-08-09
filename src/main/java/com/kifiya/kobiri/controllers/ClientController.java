@@ -71,6 +71,15 @@ public class ClientController {
         Transfert transfert = new Transfert();
         transfert.setMontantEuros((long) 500);
         transfert.setTaux((long) 10600);
+        if (clientService.beneficiaireExists(beneficiaire.getTelephone())) {
+            bindingResult.rejectValue("telephone", null, "Il ya un beneficiaire enregistré avec ce numero");
+            model.addAttribute("transfert", transfert);
+            model.addAttribute("beneficiaire", new Beneficiaire());
+            return "client/transfert";
+
+        }
+        clientService.ajouterBeneficiaire(beneficiaire);
+
         /**
          * Recuperer l'utilisateur connecter
          * id
@@ -84,6 +93,7 @@ public class ClientController {
                         new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000", ""),
                         new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222", ""),
                         new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222", "")}));
+
         beneficiaires.add(beneficiaire);
         client.setBeneficiaires(beneficiaires);
         transfert.setClient(client);
@@ -92,7 +102,6 @@ public class ClientController {
         if(bindingResult.hasErrors()){
             return "client/transfert";
         }
-        //clientService.ajouter(beneficiaire);
         return "client/transfert";
     }
 

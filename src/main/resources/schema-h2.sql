@@ -4,12 +4,9 @@ create table TRANSFERT
 	date_transfert datetime not null,
 	date_validation datetime,
 	montant_euros integer not null,
-	montant bigint not null,
 	taux double,
-	prenom_beneficiaire varchar(80) not null,
-	nom_beneficiare varchar(40) not null,
-	telephone_beneficiaire varchar(40) not null,
 	client_id varchar(60) not null,
+	beneficiaire_id varchar(60) not null,
 	gerant_id varchar (50),
 	primary key (code)
 );
@@ -77,7 +74,8 @@ create table BENEFICIAIRE
     nom varchar(50),
     prenom varchar(100),
     telephone varchar(15),
-    client_id varchar(60)
+    client_id varchar(60),
+    primary key(telephone)
 );
 
 create table CONNEXION
