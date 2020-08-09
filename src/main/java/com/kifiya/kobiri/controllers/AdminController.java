@@ -20,12 +20,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
-    @GetMapping(value = "/")
-    public String index(){
-        return "admin/admin";
-    }
-
-    @GetMapping(value = "/accueil")
+    @GetMapping(value = {"/", "index", "acceuil"})
     public String getAdminStatistiques(Model model) {
         int nbTransfertsEncours = adminService.determinerNombreDeTransfertsEnCours();
         int nbTransfertsRendus = adminService.determinerNombreDeTransfertsRendus();
