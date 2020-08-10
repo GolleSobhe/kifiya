@@ -71,6 +71,7 @@ public class ClientController {
         Transfert transfert = new Transfert();
         transfert.setMontantEuros((long) 500);
         transfert.setTaux((long) 10600);
+        /**
         if (clientService.beneficiaireExists(beneficiaire.getTelephone())) {
             bindingResult.rejectValue("telephone", null, "Il ya un beneficiaire enregistré avec ce numero");
             model.addAttribute("transfert", transfert);
@@ -78,6 +79,7 @@ public class ClientController {
             return "client/transfert";
 
         }
+         **/
         clientService.ajouterBeneficiaire(beneficiaire);
 
         /**

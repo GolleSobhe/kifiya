@@ -95,7 +95,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 #montantEuros {
     text-align: center;
-    height: calc(4.5em + -0.25rem + 2px);
+    height: calc(2.5em + -0.25rem + 2px);
+    font-size: 30px;
+    width: 30px;
 }
 
 /*****************************************************************************************************

@@ -15,7 +15,7 @@
 <body style="padding-top: 50px;">
 <div class="wrapper">
     <main>
-        <div>
+        <section>
             <div class="stepwizard col-md-offset-3">
                 <div class="stepwizard-row setup-panel">
                     <div class="stepwizard-step">
@@ -32,169 +32,136 @@
                     </div>
                 </div>
             </div>
-            <form name="transfert-client" action="" th:object="${transfert}" method="post">
-                <input type="hidden" name="beneficiaire">
-                <div class="row setup-content" id="step-1">
-                    <div class="col-xs-6 col-md-offset-3">
+            <div class="row setup-content" id="step-1">
+                <div class="container">
+                    <div class="row">
                         <div class="col-md-12">
                             <h2>Liste des bénéficiaire</h2>
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Nom et prenom</th>
-                                    <th scope="col">Numéro de téléphone</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr  th:if="${transfert.client.beneficiaires.empty}">
-                                    <td colspan="2"> Pas de beneficiaire disponible</td>
-                                </tr>
-                                <tr th:each="beneficiaire : ${transfert.client.beneficiaires}">
+                            <form th:action="@{/client/beneficiaires}" th:object="${beneficiaire}" method="post">
+                                <fieldset>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Nom et prenom</th>
+                                            <th scope="col">Téléphone</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr  th:if="${transfert.client.beneficiaires.empty}">
+                                            <td colspan="2"> Pas de beneficiaire disponible</td>
+                                        </tr>
+                                        <tr th:each="beneficiaire : ${transfert.client.beneficiaires}">
 
-                                    <td><span th:text="${beneficiaire.nom  + ' ' + beneficiaire.prenom}"> Nom et prenom </span></td>
-                                    <td><span th:text="${beneficiaire.telephone}"> numero de telephone </span></td>
-                                    <td>
-                                        <button th:attr="data-id=${beneficiaire.id},
+                                            <td><span th:text="${beneficiaire.nom  + ' ' + beneficiaire.prenom}"> Nom et prenom </span></td>
+                                            <td><span th:text="${beneficiaire.telephone}"> numero de telephone </span></td>
+                                            <td>
+                                                <button class="button-choisir nextBtn" th:attr="data-id=${beneficiaire.id},
                                                          data-nom=${beneficiaire.nom},
                                                          data-prenom=${beneficiaire.prenom},
                                                          data-telephone=${beneficiaire.telephone}"
-                                                class="btn btn-primary nextBtn btn-lg pull-right button-etape1-suiv" type="button" >Choisir</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="row setup-content" id="step-2">
-                    <div class="col-xs-6 col-md-offset-3">
-                        <div class="col-md-12">
-                            <h3> RÉCAPITULATIF</h3>
-                            <table class="table table-striped table-bordered">
-                                <tbody>
-                                <tr>
-                                    <td><span id="beneficiaire-nom-prenom"> Beneficiaire</span><span id="beneficiaire-telephone"> numero de telephone </span></td>
-                                    <td><span th:text="${transfert.montantEuros * transfert.taux}">0 GNF</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span>Frais de transfert </span></td>
-                                    <td><span>+ 2,50 €</span></td>
-                                </tr>
-                                <tr><td>Point de retrait</td><td>Mamou Petel 622000000</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <button class="btn btn-primary backBtn btn-lg pull-left button-etape2-prec" type="button" >Précédent</button>
-                        <button class="btn btn-primary nextBtn btn-lg pull-right button-etape2-suiv" type="button" >Suivant</button>
-                    </div>
-                </div>
-                <div class="row setup-content" id="step-3">
-                    <div class="col-xs-6 col-md-offset-3">
-                        <div class="col-md-12">
-                            <h3> Step 3</h3>
-                            <div>
-                                Informations bancaire
-                            </div>
-                            <button class="btn btn-primary backBtn btn-lg pull-left button-etape3-prec" type="button" >Précédent</button>
-                            <button class="btn btn-success btn-lg pull-right button-etape3-suiv" type="submit">Valider le transaction</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div id="formBeneficiaire" class="container container-fluid mx-auto col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-3">
-            <button id="formButton" class="btn btn-success"> Ajouter Bénéficiaire </button>
-            <br>
-            <div id="formAddBeneficiaire" >
-                <form th:action="@{/client/beneficiaires}" th:object="${beneficiaire}" method="post">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6 mx-auto">
-                                <div class="form-group">
-                                    <label for="nom">Nom</label>
-                                    <input type="text" class="form-control form-type-input" id="nom" placeholder="Nom"
-                                           th:field="*{nom}">
-                                    <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mx-auto">
-                                <div class="form-group">
-                                    <label for="prenom">Prenom</label>
-                                    <input type="text" class="form-control form-type-input" id="prenom" placeholder="Prenom"
-                                           th:field="*{prenom}">
-                                    <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mx-auto">
-                                <div class="form-group">
-                                    <label for="telephone">Telephone</label>
-                                    <div class="input-group input-group-lg">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
-                                    <span>+224</span>
-                                </span>
-                                        <input type="tel" id="telephone" class="form-control form-type-input" aria-label="Phone Number">
-                                        <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+                                                        type="button" >Choisir</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container container-fluid mx-auto col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-3">
+                                        <button id="formButton" class="btn btn-success" type="button"> Ajouter Bénéficiaire </button>
+                                        <br>
+                                        <div id="formAddBeneficiaire" class="container">
+                                            <div class="row">
+                                                <div class="col-md-6 mx-auto">
+                                                    <div class="form-group">
+                                                        <label for="nom">Nom</label>
+                                                        <input type="text" class="form-control form-type-input" id="nom" placeholder="Nom"
+                                                               th:field="*{nom}">
+                                                        <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mx-auto">
+                                                    <div class="form-group">
+                                                        <label for="prenom">Prenom</label>
+                                                        <input type="text" class="form-control form-type-input" id="prenom" placeholder="Prenom"
+                                                               th:field="*{prenom}">
+                                                        <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mx-auto">
+                                                    <div class="form-group">
+                                                        <label for="telephone">Telephone</label>
+                                                        <div class="input-group input-group-lg">
+                                                            <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+                                                                <span>+224</span>
+                                                            </span>
+                                                            <input type="tel" id="telephone" class="form-control form-type-input" aria-label="Phone Number">
+                                                            <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-xs-12 col-md-3"></div>
+                                                <div class="col-xs-12 col-md-6"><input type="submit" value="Ajouter" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                                                <div class="col-xs-12 col-md-3"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-xs-12 col-md-3"></div>
-                            <div class="col-xs-12 col-md-6"><input type="submit" value="Ajouter" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
-                            <div class="col-xs-12 col-md-3"></div>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+            <div class="row setup-content" id="step-2">
+                <div class="col-xs-6 col-md-offset-3">
+                    <div class="col-md-12">
+                        <h3> RÉCAPITULATIF</h3>
+                        <table class="table table-striped table-bordered">
+                            <tbody>
+                            <tr>
+                                <td><span id="beneficiaire-nom-prenom"> Beneficiaire</span><span id="beneficiaire-telephone"> numero de telephone </span></td>
+                                <td><span th:text="${transfert.montantEuros * transfert.taux}">0 GNF</span></td>
+                            </tr>
+                            <tr>
+                                <td><span>Frais de transfert </span></td>
+                                <td><span>+ 2,50 €</span></td>
+                            </tr>
+                            <tr><td>Point de retrait</td><td>Mamou Petel 622000000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary backBtn btn-lg pull-left button-etape2-prec" type="button" >Précédent</button>
+                    <button class="btn btn-primary nextBtn btn-lg pull-right button-etape2-suiv" type="button" >Suivant</button>
+                </div>
+            </div>
+            <div class="row setup-content" id="step-3">
+                <div class="col-xs-6 col-md-offset-3">
+                    <div class="col-md-12">
+                        <h3> Step 3</h3>
+                        <div>
+                            Informations bancaire
+                        </div>
+                        <button class="btn btn-primary backBtn btn-lg pull-left button-etape3-prec" type="button" >Précédent</button>
+                        <button class="btn btn-success btn-lg pull-right button-etape3-suiv" type="submit">Valider le transaction</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <div th:replace="fragments/footer.html :: footer"></div>
 </div>
 <script>
         $( document ).ready(function () {
-            $( ".button-etape1-suiv" ).click(function (e) {
-                e.preventDefault();
-                var beneficiaire = {
-                                    "id":        $('.button-etape1-suiv[data-id]').data('id'),
-                                    "nom":       $('.button-etape1-suiv[data-nom]').data('nom'),
-                                    "prenom":    $('.button-etape1-suiv[data-prenom]').data('prenom'),
-                                    "telephone": $('.button-etape1-suiv[data-id]').data('telephone')
-                                    };
-                $("input[name=beneficiaire]").val(beneficiaire);
-                $("#beneficiaire-nom-prenom").html(beneficiaire.nom +" "+ beneficiaire.nom);
-                $("#beneficiaire-telephone").html(beneficiaire.telephone);
-                $("#formBeneficiaire").css("display","none");
-            });
-
-            $( ".button-etape2-suiv" ).click(function (e) {
-                e.preventDefault();
-                $("#formBeneficiaire").css("display","none");
-            });
-
-            $( ".button-etape2-prec" ).click(function (e) {
-                e.preventDefault();
-                $("#formBeneficiaire").css("display","block");
-            });
-
-            $( ".button-etape3-suiv" ).click(function (e) {
-                e.preventDefault();
-                $("#formBeneficiaire").css("display","none");
-            });
-
-            $( ".button-etape3-prec" ).click(function (e) {
-                e.preventDefault();
-                $( "#formBeneficiaire" ).css("display","none");
-            });
-
             $( "#formButton" ).click(function() {
-               $( "#formAddBeneficiaire" ).toggle();
+               $( "#formAddBeneficiaire" ).toggle('slow', function(){
+                    var visible = ($(this).is(':hidden'));
+                     //$(".button-choisir").prop("disabled",visible);
+               });
             });
-
         })
     </script>
 </body>

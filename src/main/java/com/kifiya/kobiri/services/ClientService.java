@@ -76,7 +76,4 @@ public class ClientService {
         return beneficiaireRepository.listerBeneficiaires(email);
     }
 
-    public boolean beneficiaireExists(String telephone) {
-        return beneficiaireRepository.beneficiaireExists(telephone);
-    }
 }
