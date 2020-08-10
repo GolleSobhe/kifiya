@@ -22,7 +22,7 @@ public class Beneficiaire {
     String nom;
     @NotEmpty(message = "*veuillez fournir le prenom")
     String prenom;
-    @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
+    @Pattern(regexp = "\\d{3}[- .]?\\d{2}[- .]?\\d{2}[- .]?\\d{2}$")
     String telephone;
 
     String clientId;

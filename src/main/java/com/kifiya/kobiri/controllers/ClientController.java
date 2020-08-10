@@ -65,45 +65,19 @@ public class ClientController {
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
     public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
                                       BindingResult bindingResult, Model model){
-        /**
-         * recuperer le taux apres
-         */
+        if(bindingResult.hasErrors()){
+            return "client/transfert";
+        }
         Transfert transfert = new Transfert();
         transfert.setMontantEuros((long) 500);
         transfert.setTaux((long) 10600);
-        /**
-        if (clientService.beneficiaireExists(beneficiaire.getTelephone())) {
-            bindingResult.rejectValue("telephone", null, "Il ya un beneficiaire enregistré avec ce numero");
-            model.addAttribute("transfert", transfert);
-            model.addAttribute("beneficiaire", new Beneficiaire());
-            return "client/transfert";
-
-        }
-         **/
-        clientService.ajouterBeneficiaire(beneficiaire);
-
-        /**
-         * Recuperer l'utilisateur connecter
-         * id
-         * email
-         * droit{client}
-         * list beneficiaire
-         */
-        Client client = new Client();
-        List<Beneficiaire> beneficiaires = new ArrayList<Beneficiaire>
-                (Arrays.asList(new Beneficiaire[]{
-                        new Beneficiaire((long) 0, "fiya", "Hollo", "0022462200000", ""),
-                        new Beneficiaire((long) 1, "Holo", "No feti", "00224625222222", ""),
-                        new Beneficiaire((long) 2, "Ham mayi", "No feti", "00224625222222", "")}));
-
+        List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
         beneficiaires.add(beneficiaire);
+        Client client = new Client();
         client.setBeneficiaires(beneficiaires);
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());
-        if(bindingResult.hasErrors()){
-            return "client/transfert";
-        }
         return "client/transfert";
     }
 

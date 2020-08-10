@@ -19,11 +19,11 @@ insert into ADMIN(email,nom,prenom,password,telephone,adresse,ville,pays,est_val
 values('admin@gmail.com','BAH','Abdou','password','0606060606','1 rue du Bonheur','Bomboli','France','YES');
 
 insert into BENEFICIAIRE(nom,prenom,telephone,client_id)
-values('Bah','Mariam','+224623097612','teliwal@gmail.com');
+values('Bah','Mariam','623-09-76-12','teliwal@gmail.com');
 insert into BENEFICIAIRE(nom,prenom,telephone,client_id)
-values('Fiya','Hollo','+224623097613','sobhe@gmail.com');
+values('Fiya','Hollo','623-09-76-13','sobhe@gmail.com');
 insert into BENEFICIAIRE(nom,prenom,telephone,client_id)
-values('Noh','Feti','+224623097614','sobhe1@gmail.com');
+values('Noh','Feti','623-09-76-14','sobhe1@gmail.com');
 
 insert into CONNEXION(login,password,role)
 values('teliwal@gmail.com','password','CLIENT');

@@ -59,6 +59,11 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
+input[type="tel"] {
+    font-size: 2em;
+    font-weight: bold;
+}
+
 #header-logo {
 	width: 140px;
 	height: 48px;

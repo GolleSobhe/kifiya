@@ -8,6 +8,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript" src="../static/js/kobiri.js" th:src="@{/js/kobiri.js}"></script>
     <link src="../static/css/kobiri.css" th:href="@{/css/kobiri.css}" rel="stylesheet" media="screen"/>
 
@@ -97,7 +98,8 @@
                                                                 <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
                                                                 <span>+224</span>
                                                             </span>
-                                                            <input type="tel" id="telephone" class="form-control form-type-input" aria-label="Phone Number">
+                                                            <input type="tel" id="telephone" class="form-control form-type-input"
+                                                                   th:field="*{telephone}" data-inputmask="'mask': '699-99-99-99'">
                                                             <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
                                                         </div>
                                                     </div>
@@ -158,10 +160,10 @@
         $( document ).ready(function () {
             $( "#formButton" ).click(function() {
                $( "#formAddBeneficiaire" ).toggle('slow', function(){
-                    var visible = ($(this).is(':hidden'));
-                     //$(".button-choisir").prop("disabled",visible);
+                   $(".button-choisir").prop("disabled",$(this).is(':hidden'));
                });
             });
+            $('[type="tel"]').inputmask();
         })
     </script>
 </body>
