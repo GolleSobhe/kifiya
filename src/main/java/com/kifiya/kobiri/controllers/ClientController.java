@@ -65,6 +65,9 @@ public class ClientController {
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
     public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
                                       BindingResult bindingResult, Model model){
+        /**
+         * Gargder le montant et le taux dans le session
+         */
         if(bindingResult.hasErrors()){
             return "client/transfert";
         }

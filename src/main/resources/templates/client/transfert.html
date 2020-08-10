@@ -160,7 +160,7 @@
         $( document ).ready(function () {
             $( "#formButton" ).click(function() {
                $( "#formAddBeneficiaire" ).toggle('slow', function(){
-                   $(".button-choisir").prop("disabled",$(this).is(':hidden'));
+                   $(".button-choisir").prop("disabled",!($(this).is(':hidden')));
                });
             });
             $('[type="tel"]').inputmask();
