@@ -36,7 +36,11 @@ public class Transfert {
     @DecimalMin("10.00")
     Long montantEuros;
 
+    @NotNull
     Long taux;
+
+    @NotNull
+    Long frais;
 
     public String getClientId() {
         return client.getEmail();

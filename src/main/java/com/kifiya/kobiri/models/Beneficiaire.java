@@ -11,8 +11,8 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"non", "prenom", "telephone"})
-@ToString(of = {"nom", "prenom"})
+@EqualsAndHashCode(of = {"telephone", "clientId"})
+@ToString(of = {"nom", "prenom", "telephone"})
 @Data
 @Builder
 public class Beneficiaire {

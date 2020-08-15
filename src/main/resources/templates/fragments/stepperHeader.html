@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<section th:fragment="stepperHeader" class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <!-- Stepers Wrapper -->
+            <ul class="stepper stepper-horizontal">
+
+                <!-- First Step -->
+                <li class="completed">
+                    <a href="#!">
+                        <span class="circle">1</span>
+                        <span class="label">Bénéficiaire</span>
+                    </a>
+                </li>
+
+                <!-- Second Step -->
+                <li class="desable">
+                    <a href="#!">
+                        <span class="circle">2</span>
+                        <span class="label">Récapitulatif</span>
+                    </a>
+                </li>
+
+                <!-- Third Step -->
+                <li class="desable">
+                    <a href="#!">
+                        <span class="circle">3</span>
+                        <span class="label">Paiement</span>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- /.Stepers Wrapper -->
+
+        </div>
+    </div>
+    <!-- /.Horizontal Steppers -->
+</section>
+</body>
+</html>

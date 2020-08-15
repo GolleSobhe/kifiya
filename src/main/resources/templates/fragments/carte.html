@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="carte">
+    <h3>Information payement</h3>
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <img src="../static/img/carte-generic.svg" th:src="@{/img/carte-generic.svg}">
+            </div>
+            <div class="col-md-6 mx-auto">
+                <div class="form-group">
+                        <label for="ccnum">Numéro de carte de crédit</label>
+                        <input type="text" id="ccnum" class="form-control form-type-input"
+                               data-inputmask="'mask': '9999 9999 9999 9999     99/99  999'">
+                        <span th:if="${#fields.hasErrors('carte-credit')}" th:errors="*{carte-credit}"></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

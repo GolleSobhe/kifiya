@@ -65,23 +65,57 @@ public class ClientController {
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
     public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
                                       BindingResult bindingResult, Model model){
-        /**
-         * Gargder le montant et le taux dans le session
-         */
-        if(bindingResult.hasErrors()){
-            return "client/transfert";
-        }
         Transfert transfert = new Transfert();
+        //Recuperer le client connecte dans la session
+        Client client = new Client();
         transfert.setMontantEuros((long) 500);
         transfert.setTaux((long) 10600);
         List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
-        beneficiaires.add(beneficiaire);
-        Client client = new Client();
+        /**
+         * Garder le montant et le taux dans la session
+         */
+        if(bindingResult.hasErrors()){
+            client.setBeneficiaires(beneficiaires);
+            transfert.setClient(client);
+            model.addAttribute("transfert", transfert);
+            model.addAttribute("beneficiaire", new Beneficiaire());
+            return "client/transfert";
+        }
+        if(beneficiaires.contains(beneficiaire)) {
+            bindingResult.rejectValue("telephone", "error.user", "il ya béneficiaire enregistré avec ce numéro de telephone");
+        } else {
+            beneficiaires.add(beneficiaire);
+        }
         client.setBeneficiaires(beneficiaires);
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());
         return "client/transfert";
+    }
+
+    @RequestMapping(value = "/recapitulatif", method = RequestMethod.POST)
+    public String recapitulatif(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
+                                      BindingResult bindingResult, Model model){
+        Transfert transfert = new Transfert();
+        transfert.setMontantEuros((long) 500);
+        transfert.setTaux((long) 10600);
+        transfert.setBeneficiaire(beneficiaire);
+        model.addAttribute("transfert", transfert);
+        return "client/transfert-step2";
+    }
+
+    @RequestMapping(value = "/paiement", method = RequestMethod.POST)
+    public String paiement(@Valid @ModelAttribute("transfert") Transfert transfert,
+                                BindingResult bindingResult, Model model){
+        model.addAttribute("transfert", transfert);
+        return "client/transfert-step3";
+    }
+
+    @RequestMapping(value = "/paiement-carte", method = RequestMethod.POST)
+    public String paiementParCarte(@Valid @ModelAttribute("transfert") Transfert transfert,
+                           BindingResult bindingResult, Model model){
+        model.addAttribute("transfert", transfert);
+        return "redirect:index";
     }
 
 }
