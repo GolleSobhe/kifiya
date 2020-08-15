@@ -20,7 +20,7 @@
                 <input type="hidden" name="transfert" th:value="${transfert}">
                 <div class="row">
                     <div class="col-md-6 mx-auto">
-                        <img src="../static/img/carte-generic.svg" th:src="@{/img/carte-generic.svg}">
+                        <img id="carte-credit" src="../static/img/carte-generic.svg" th:src="@{/img/carte-generic.svg}">
                     </div>
                     <div class="col-md-6 mx-auto">
                         <div class="form-group">
@@ -55,6 +55,15 @@
 <script>
         $( document ).ready(function () {
             $('[type="text"]').inputmask();
+            $( "#ccnum" ).focus(function() {
+                $( "#carte-credit" ).attr('src','/img/carte-generic.svg');
+            });
+            $( "#cdate" ).focus(function() {
+                $( "#carte-credit" ).attr('src','/img/carte-generic.svg');
+            });
+            $( "#ccode" ).focus(function() {
+                $( "#carte-credit" ).attr('src','/img/carte-code.svg');
+            });
         })
 </script>
 </body>
