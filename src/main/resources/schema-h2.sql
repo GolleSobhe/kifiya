@@ -8,7 +8,7 @@ create table TRANSFERT
 	frais double not null,
 	client_id varchar(60) not null,
 	beneficiaire_id varchar(60) not null,
-	gerant_id varchar (50),
+	boutique_id varchar (50),
 	primary key (code)
 );
 

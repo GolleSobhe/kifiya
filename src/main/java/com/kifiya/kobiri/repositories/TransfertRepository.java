@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Repository
 public class TransfertRepository {
 
-    private final String AJOUTER = "insert into TRANSFERT(code,date_transfert,montant,montant_euros,prenom_beneficiaire," +
-            "nom_beneficiare,telephone_beneficiaire,client_id) " +
-            "values (:code, :date_transfert, :montant, :montant_euros, :prenom, :nom, :telephone, :client_id)";
+    private final String AJOUTER = "insert into TRANSFERT(code,date_transfert,montant_euros,taux, frais, beneficiaire_id," +
+            "boutique_id,client_id) " +
+            "values (:code, :date_transfert, :montant_euros, :taux, :frais, :beneficiaire_id, :boutique_id, :client_id)";
 
     private static final String RENDRE = "update TRANSFERT set date_validation = :date_validation, " +
             "gerant_id = :gerant_id where code = :code";

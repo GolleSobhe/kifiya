@@ -13,48 +13,63 @@
             <div class="col-md-12">
                 <h3> RÉCAPITULATIF</h3>
                 <form th:action="@{/client/paiement}" th:object="${transfert}" method="post">
-                    <table class="table table-striped table-bordered">
-                        <tbody>
-                        <tr>
-                            <td><span> Bénéficiaire</span></td>
-                            <td><span th:text="${transfert.beneficiaire.prenom  + ' ' + transfert.beneficiaire.nom
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                            <div class="form-row">
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group h-100">
+                                        <input type="number" min="0" class="form-control" id="montantEuros"
+                                               onblur="checkPasswordValidity();"
+                                               th:field="*{montantEuros}" required>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" th:text="${'taux 1€ = '+transfert.taux+' GNF'}">0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-7">
+                            <h2>Synthèse</h2>
+                            <table class="table table-striped table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td><span> Bénéficiaire</span></td>
+                                    <td><span th:text="${transfert.beneficiaire.prenom  + ' ' + transfert.beneficiaire.nom
             + ' ' + transfert.beneficiaire.telephone}">Prenom Nom telephone</span>
-                                <input type="hidden" name="beneficiaire" th:value="${transfert.beneficiaire}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Vous envoyez</td>
-                            <td>
-                                <span th:text="${transfert.montantEuros + '€ avec un' +  transfert.taux}">0 GNF</span>
-                                <input type="hidden" name="montantEuros" th:value="${transfert.montantEuros}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Montant GNF</td>
-                            <td>
-                                <span th:text="${transfert.montantEuros * transfert.taux}">0 GNF</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span>Frais de transfert </span></td>
-                            <td>
-                                <span th:text="${transfert.frais}"> 5 €</span>
-                                <input type="hidden" name="frais" th:value="${transfert.frais}">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Point de retrait</td>
-                            <td>
-                                <span>Mamou Petel 622000000</span>
-                                <input type="hidden" name="boutique" th:value="${transfert.boutique}">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="form-row">
-                        <div class="col-xs-12 col-md-3"></div>
-                        <div class="col-xs-12 col-md-6"><input type="submit" value="Valider"></div>
-                        <div class="col-xs-12 col-md-3"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Vous envoyez</td>
+                                    <td>
+                                        <span th:text="${transfert.montantEuros + ' €'}">0 GNF</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Montant GNF</td>
+                                    <td>
+                                        <span th:text="${transfert.montantEuros * transfert.taux +' GNF'}">0 GNF</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span>Frais de transfert </span></td>
+                                    <td>
+                                        <span th:text="${transfert.frais}"> 5 €</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Point de retrait</td>
+                                    <td>
+                                        <span th:text="${transfert.boutique.ville + '-' +  transfert.boutique.nom}">Mamou Petel </span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3"><input type="button" value="Précédent"></div>
+                        <div class="col-xs-12 col-md-6"></div>
+                        <div class="col-xs-12 col-md-3"><input type="submit" value="Valider"></div>
                     </div>
                 </form>
             </div>
@@ -63,16 +78,14 @@
     <div th:replace="fragments/footer.html :: footer"></div>
 </div>
 <script>
-/*
-        $( document ).ready(function () {
-            $( "#formButton" ).click(function() {
-               $( "#formAddBeneficiaire" ).toggle('slow', function(){
-                   $(".button-choisir").prop("disabled",!($(this).is(':hidden')));
-               });
-            });
-            $('[type="tel"]').inputmask();
-        })
-*/
+function checkPasswordValidity(){
+    var montant = document.getElementById("montantEuros");
+    if (!montant.checkValidity()) {
+        montant.setCustomValidity("Le montant de l envoi doit être supérieur à 0,00 EUR.");
+    } else {
+        montant.setCustomValidity("");
+    }
+}
 </script>
 </body>
 </html>

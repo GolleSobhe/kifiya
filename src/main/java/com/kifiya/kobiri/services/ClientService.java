@@ -4,10 +4,13 @@ import com.kifiya.kobiri.exception.ExpiryTokenException;
 import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.Beneficiaire;
 import com.kifiya.kobiri.models.Client;
+import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.models.VerificationToken;
 import com.kifiya.kobiri.repositories.BeneficiaireRepository;
 import com.kifiya.kobiri.repositories.ClientRepository;
+import com.kifiya.kobiri.repositories.TransfertRepository;
 import com.kifiya.kobiri.repositories.VerificationTokenRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,12 +29,15 @@ public class ClientService {
 
     private final VerificationTokenRepository verificationTokenRepository;
 
+    private final TransfertRepository transfertRepository;
+
     public ClientService(ClientRepository clientRepository, EmailService emailService,
-                         VerificationTokenRepository verificationTokenRepository, BeneficiaireRepository beneficiaireRepository) {
+                         VerificationTokenRepository verificationTokenRepository, BeneficiaireRepository beneficiaireRepository, TransfertRepository transfertRepository) {
         this.clientRepository = clientRepository;
         this.emailService = emailService;
         this.verificationTokenRepository = verificationTokenRepository;
         this.beneficiaireRepository = beneficiaireRepository;
+        this.transfertRepository = transfertRepository;
     }
 
     public void ajouter(Client client,String appUrl) {
@@ -76,4 +82,11 @@ public class ClientService {
         return beneficiaireRepository.listerBeneficiaires(email);
     }
 
+    public void ajouterTransfert(Transfert transfert) {
+        //Moidification apres creation de la page de connexion
+        if(!beneficiaireRepository.beneficiaireExists(transfert.getTelephoneBeneficiaire(), "sobhe@gmail.com")){
+            beneficiaireRepository.ajouterBeneficiaire(transfert.getBeneficiaire());
+        }
+        transfertRepository.creer(transfert);
+    }
 }

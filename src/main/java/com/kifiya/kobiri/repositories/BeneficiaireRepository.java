@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 @Repository
@@ -17,6 +18,9 @@ public class BeneficiaireRepository {
 
     private final String RECHERCHER_BENEFICIARES = "Select nom,prenom,telephone from BENEFICIAIRE " +
             "where client_id = :client_id";
+
+    private final String BENEFICIAIRE_EXISTE = "Select telephone from BENEFICIAIRE where telephone = :telephone "+
+            "and client_id = :client_id";
 
     public BeneficiaireRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -41,6 +45,13 @@ public class BeneficiaireRepository {
             beneficiaire.setTelephone(resultSet.getString("telephone"));
             return beneficiaire;
         });
+    }
+
+    public boolean beneficiaireExists(String telephone, String client_id){
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("telephone",telephone);
+        params.addValue("client_id",client_id);
+        return namedParameterJdbcTemplate.query(BENEFICIAIRE_EXISTE,params, ResultSet::next);
     }
 
 }

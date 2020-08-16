@@ -96,10 +96,14 @@ public class ClientController {
     @RequestMapping(value = "/recapitulatif", method = RequestMethod.POST)
     public String recapitulatif(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
                                       BindingResult bindingResult, Model model){
+        /**
+         * Recuperer les inforamations dans la session
+         */
         Transfert transfert = new Transfert();
         transfert.setMontantEuros((long) 500);
         transfert.setTaux((long) 10600);
         transfert.setBeneficiaire(beneficiaire);
+        transfert.setBoutique(new Boutique("Petel", "Mamou", ""));
         model.addAttribute("transfert", transfert);
         return "client/transfert-step2";
     }
@@ -114,7 +118,9 @@ public class ClientController {
     @RequestMapping(value = "/paiement-carte", method = RequestMethod.POST)
     public String paiementParCarte(@Valid @ModelAttribute("transfert") Transfert transfert,
                            BindingResult bindingResult, Model model){
-        model.addAttribute("transfert", transfert);
+        //reinitialiser la variable de la session
+        //model.addAttribute("transfert", transfert);
+        clientService.ajouterTransfert(transfert);
         return "redirect:index";
     }
 
