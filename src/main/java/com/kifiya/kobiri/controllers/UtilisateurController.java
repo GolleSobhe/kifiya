@@ -5,7 +5,6 @@ import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.ClientService;
-import com.kifiya.kobiri.services.TransfertService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

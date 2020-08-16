@@ -39,10 +39,11 @@ public class TransfertRepository {
         params.addValue("code", transfert.getCode());
         params.addValue("date_transfert", LocalDateTime.now());
         params.addValue("montant_euros", transfert.getMontantEuros());
-        params.addValue("prenom", transfert.getPrenomBeneficiaire());
-        params.addValue("nom", transfert.getNomBeneficiaire());
-        params.addValue("telephone", transfert.getTelephoneBeneficiaire());
-        params.addValue("client_id", transfert.getClientId());
+        params.addValue("taux", transfert.getTaux());
+        params.addValue("frais", transfert.getFrais());
+        params.addValue("beneficiaire_id", transfert.getBeneficiaire().getId());
+        params.addValue("boutique_id", transfert.getBoutique().getNom());
+        params.addValue("client_id", transfert.getClient().getEmail());
         namedParameterJdbcTemplate.update(AJOUTER, params);
     }
 

@@ -41,21 +41,5 @@ public class Transfert {
 
     @NotNull
     Long frais;
-
-    public String getClientId() {
-        return client.getEmail();
-    }
-
-    public String getPrenomBeneficiaire(){
-        return beneficiaire.getPrenom();
-    }
-
-    public String getNomBeneficiaire(){
-        return beneficiaire.getNom();
-    }
-
-    public String getTelephoneBeneficiaire(){
-        return beneficiaire.getTelephone();
-    }
 }
 

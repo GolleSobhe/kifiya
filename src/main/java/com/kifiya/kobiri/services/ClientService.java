@@ -2,10 +2,7 @@ package com.kifiya.kobiri.services;
 
 import com.kifiya.kobiri.exception.ExpiryTokenException;
 import com.kifiya.kobiri.exception.InvalidTokenException;
-import com.kifiya.kobiri.models.Beneficiaire;
-import com.kifiya.kobiri.models.Client;
-import com.kifiya.kobiri.models.Transfert;
-import com.kifiya.kobiri.models.VerificationToken;
+import com.kifiya.kobiri.models.*;
 import com.kifiya.kobiri.repositories.BeneficiaireRepository;
 import com.kifiya.kobiri.repositories.ClientRepository;
 import com.kifiya.kobiri.repositories.TransfertRepository;
@@ -16,10 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
 public class ClientService {
+    private Random random = new Random();
+    private StringBuilder sb = new StringBuilder();
 
     private final BeneficiaireRepository beneficiaireRepository;
 
@@ -84,9 +84,41 @@ public class ClientService {
 
     public void ajouterTransfert(Transfert transfert) {
         //Moidification apres creation de la page de connexion
-        if(!beneficiaireRepository.beneficiaireExists(transfert.getTelephoneBeneficiaire(), "sobhe@gmail.com")){
-            beneficiaireRepository.ajouterBeneficiaire(transfert.getBeneficiaire());
+        /**
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+         Utilisateur utilisateurAuth = (Utilisateur) auth.getPrincipal();
+         Client client = new Client();
+         client.setId(utilisateurAuth.getId());
+         client.setPrenom(utilisateurAuth.getPrenom());
+         client.setNom(utilisateurAuth.getNom());
+         client.setEmail(utilisateurAuth.getEmail());
+         client.setPassword(utilisateurAuth.getPassword());
+         transfert.setResponsable(client);
+         */
+
+        transfert.setBoutique(new Boutique("cosa1", "Conakry", ""));
+        Beneficiaire beneficiaire = new Beneficiaire("Fiya", "Hollo", "623-09-76-13");
+        beneficiaire.setId((long) 1);
+        transfert.setBeneficiaire(beneficiaire);
+        transfert.setMontantEuros((long) 500);
+        transfert.setTaux((long) 10600);
+        transfert.setFrais((long) 5);
+        Client client = new Client();
+        client.setEmail("sobhe@gmail.com");
+        transfert.setClient(client);
+        transfert.setCode(getHexa(8));
+        Boolean beneficiaireExist = beneficiaireRepository.beneficiaireExists(transfert.getBeneficiaire().getTelephone(), transfert.getClient().getEmail());
+        if(!beneficiaireExist){
+            Long idBeneficiaire = beneficiaireRepository.ajouterBeneficiaire(transfert.getBeneficiaire());
+            transfert.getBeneficiaire().setId(idBeneficiaire);
         }
         transfertRepository.creer(transfert);
+    }
+
+    private String getHexa(int nombreCaractere){
+        while(sb.length() < nombreCaractere){
+            sb.append(Integer.toHexString(random.nextInt()));
+        }
+        return sb.toString().substring(0, nombreCaractere);
     }
 }

@@ -72,11 +72,12 @@ create table VERIFICATION_TOKEN
 
 create table BENEFICIAIRE
 (
+    id long,
     nom varchar(50),
     prenom varchar(100),
     telephone varchar(15),
     client_id varchar(60),
-    primary key(telephone)
+    primary key(telephone, client_id)
 );
 
 create table CONNEXION
