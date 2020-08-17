@@ -7,7 +7,6 @@ import com.kifiya.kobiri.repositories.BeneficiaireRepository;
 import com.kifiya.kobiri.repositories.ClientRepository;
 import com.kifiya.kobiri.repositories.TransfertRepository;
 import com.kifiya.kobiri.repositories.VerificationTokenRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
