@@ -265,6 +265,7 @@ input[type="tel"] {
 
 .btn {
     border-radius: 10em !important;
+    width: 100%;
 }
 
 .button-envoyer-argent {
