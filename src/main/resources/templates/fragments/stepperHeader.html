@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<section th:fragment="stepperHeader" class="container">
+<section th:fragment="stepperHeader(step2,step3)" class="container">
     <div class="row">
         <div class="col-md-12">
 
@@ -13,7 +13,7 @@
             <ul class="stepper stepper-horizontal">
 
                 <!-- First Step -->
-                <li class="completed">
+                <li class="active">
                     <a href="#!">
                         <span class="circle">1</span>
                         <span class="label">Bénéficiaire</span>
@@ -21,7 +21,7 @@
                 </li>
 
                 <!-- Second Step -->
-                <li class="desable">
+                <li class="" th:classappend="${step2} ? active : desable">
                     <a href="#!">
                         <span class="circle">2</span>
                         <span class="label">Récapitulatif</span>
@@ -29,7 +29,7 @@
                 </li>
 
                 <!-- Third Step -->
-                <li class="desable">
+                <li class="" th:classappend="${step3} ? active : desable">
                     <a href="#!">
                         <span class="circle">3</span>
                         <span class="label">Paiement</span>
