@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Repository
 public class TransfertRepository {
 
-    private final String AJOUTER = "insert into TRANSFERT(code,date_transfert,montant,montant_euros,prenom_beneficiaire," +
-            "nom_beneficiare,telephone_beneficiaire,client_id) " +
-            "values (:code, :date_transfert, :montant, :montant_euros, :prenom, :nom, :telephone, :client_id)";
+    private final String AJOUTER = "insert into TRANSFERT(code,date_transfert,montant_euros,taux, frais, beneficiaire_id," +
+            "boutique_id,client_id) " +
+            "values (:code, :date_transfert, :montant_euros, :taux, :frais, :beneficiaire_id, :boutique_id, :client_id)";
 
     private static final String RENDRE = "update TRANSFERT set date_validation = :date_validation, " +
             "gerant_id = :gerant_id where code = :code";
@@ -39,10 +39,11 @@ public class TransfertRepository {
         params.addValue("code", transfert.getCode());
         params.addValue("date_transfert", LocalDateTime.now());
         params.addValue("montant_euros", transfert.getMontantEuros());
-        params.addValue("prenom", transfert.getPrenomBeneficiaire());
-        params.addValue("nom", transfert.getNomBeneficiaire());
-        params.addValue("telephone", transfert.getTelephoneBeneficiaire());
-        params.addValue("client_id", transfert.getClientId());
+        params.addValue("taux", transfert.getTaux());
+        params.addValue("frais", transfert.getFrais());
+        params.addValue("beneficiaire_id", transfert.getBeneficiaire().getId());
+        params.addValue("boutique_id", transfert.getBoutique().getNom());
+        params.addValue("client_id", transfert.getClient().getEmail());
         namedParameterJdbcTemplate.update(AJOUTER, params);
     }
 

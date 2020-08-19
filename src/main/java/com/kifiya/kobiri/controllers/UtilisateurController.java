@@ -5,7 +5,6 @@ import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.ClientService;
-import com.kifiya.kobiri.services.TransfertService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,11 +21,9 @@ public class UtilisateurController {
 
     private final ClientService clientService;
 
-    private final TransfertService transfertService;
 
-    public UtilisateurController(ClientService clientService,TransfertService transfertService) {
+    public UtilisateurController(ClientService clientService) {
         this.clientService = clientService;
-        this.transfertService = transfertService;
     }
 
     @GetMapping(value = "utilisateur/inscription")
@@ -75,7 +72,6 @@ public class UtilisateurController {
             //Ajouter le message d'erreur sur le model
             return"transfert/transfert";
         }*/
-        transfertService.ajouter(transfert);
         model.addAttribute("transfert", transfert);
         model.addAttribute("confirmationMessage", "Argent enoyé et un e-mail de confirmation a été envoyé à ");
         return "transfert/transfert";

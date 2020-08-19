@@ -8,21 +8,27 @@ import javax.validation.constraints.Pattern;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"non", "prenom", "telephone"})
-@ToString(of = {"nom", "prenom"})
+@EqualsAndHashCode(of = {"telephone", "clientId"})
+@ToString(of = {"nom", "prenom", "telephone"})
 @Data
-@Builder
+
 public class Beneficiaire {
 
     Long id;
+
+    @NonNull
     @NotEmpty(message = "*veuillez fournir le nom")
     String nom;
+
+    @NonNull
     @NotEmpty(message = "*veuillez fournir le prenom")
     String prenom;
-    @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
+
+    @NonNull
+    @Pattern(regexp = "\\d{3}[- .]?\\d{2}[- .]?\\d{2}[- .]?\\d{2}$")
     String telephone;
 
     String clientId;

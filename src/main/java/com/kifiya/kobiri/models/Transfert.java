@@ -36,22 +36,10 @@ public class Transfert {
     @DecimalMin("10.00")
     Long montantEuros;
 
+    @NotNull
     Long taux;
 
-    public String getClientId() {
-        return client.getEmail();
-    }
-
-    public String getPrenomBeneficiaire(){
-        return beneficiaire.getPrenom();
-    }
-
-    public String getNomBeneficiaire(){
-        return beneficiaire.getNom();
-    }
-
-    public String getTelephoneBeneficiaire(){
-        return beneficiaire.getTelephone();
-    }
+    @NotNull
+    Long frais;
 }
 
