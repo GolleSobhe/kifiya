@@ -90,6 +90,8 @@ public class ClientController {
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());
+        model.addAttribute("step2", false);
+        model.addAttribute("step3", false);
         return "client/transfert";
     }
 
@@ -105,6 +107,8 @@ public class ClientController {
         transfert.setBeneficiaire(beneficiaire);
         transfert.setBoutique(new Boutique("Petel", "Mamou", ""));
         model.addAttribute("transfert", transfert);
+        model.addAttribute("step2", true);
+        model.addAttribute("step3", false);
         return "client/transfert-step2";
     }
 
@@ -112,6 +116,8 @@ public class ClientController {
     public String paiement(@Valid @ModelAttribute("transfert") Transfert transfert,
                                 BindingResult bindingResult, Model model){
         model.addAttribute("transfert", transfert);
+        model.addAttribute("step2", true);
+        model.addAttribute("step3", true);
         return "client/transfert-step3";
     }
 
