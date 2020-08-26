@@ -17,8 +17,7 @@ import java.util.List;
 @Setter
 @Data
 @SuperBuilder
-
-public class Client{
+public class Client extends Utilisateur{
 
     @NonNull
     @NotBlank(message = "*veuillez fournir votre nom")
@@ -28,14 +27,9 @@ public class Client{
     @NotBlank(message = "*veuillez fournir votre prenom")
     String prenom;
 
-    @NonNull
-    @Email(message = "*veuillez fournir un email valide")
-    @NotBlank(message = "*veuillez fournir votre email")
-    String email;
-
     String password;
 
-    //@NonNull
+    @NonNull
     @Pattern(regexp = "(\\+33|0033|0)[0-9]{9}")
     String telephone;
 

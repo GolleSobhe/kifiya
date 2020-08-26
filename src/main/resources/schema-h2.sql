@@ -1,6 +1,6 @@
 create table TRANSFERT
 (
-	code varchar(36) not null,
+	code varchar(8) not null,
 	date_transfert datetime not null,
 	date_validation datetime,
 	montant_euros integer not null,
@@ -17,27 +17,24 @@ create table CLIENT
 	email varchar(60),
 	nom varchar(55),
 	prenom varchar(100),
-	password varchar(50),
 	telephone varchar(30),
 	adresse varchar(100),
 	code_postale varchar(10),
 	ville varchar(50),
 	pays varchar(50),
-	est_valide varchar(3),
 	primary key (email)
 );
 
 create table GERANT
 (
-    login varchar(50),
+    email varchar(50),
     nom varchar(55),
 	prenom varchar(100),
-	password varchar(50),
 	adresse varchar(100),
 	code varchar(8),
 	telephone varchar(30),
 	ville varchar(50),
-	primary key (login)
+	primary key (email)
 );
 
 create table BOUTIQUE
@@ -53,12 +50,10 @@ create table ADMIN
     email varchar(60),
 	nom varchar(55),
 	prenom varchar(100),
-	password varchar(50),
 	telephone varchar(30),
 	adresse varchar(100),
 	ville varchar(50),
 	pays varchar(50),
-	est_valide varchar(3),
 	primary key(email)
 );
 
@@ -82,8 +77,9 @@ create table BENEFICIAIRE
 
 create table CONNEXION
 (
- login varchar(50) not null,
+ email varchar(150) not null,
  password varchar(100) not null,
- role varchar(10) not null,
- primary key(login)
+ active boolean,
+ role varchar(12) not null,
+ primary key(email)
 );

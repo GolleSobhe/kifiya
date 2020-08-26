@@ -41,11 +41,10 @@ public class GerantRepository {
 
     public void creer(Gerant gerant){
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("login",gerant.getLogin());
+        params.addValue("login",gerant.getEmail());
         params.addValue("nom",gerant.getNom());
         params.addValue("prenom",gerant.getPrenom());
         params.addValue("telephone",gerant.getTelephone());
-        params.addValue("password",gerant.getPassword());
         params.addValue("code",gerant.getCode());
         params.addValue("adresse",gerant.getAdresse());
         params.addValue("ville",gerant.getVille());
@@ -59,7 +58,7 @@ public class GerantRepository {
                 Gerant gerant = new Gerant();
                 gerant.setNom(resultSet.getString("nom"));
                 gerant.setPrenom(resultSet.getString("prenom"));
-                gerant.setPassword(resultSet.getString("password"));
+                //gerant.setPassword(resultSet.getString("password"));
                 return gerant;
             }
             return null;

@@ -26,7 +26,7 @@ class UtilisateurTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
-
+/**
     @Test
     void testNomVide() {
         Utilisateur utilisateur = Utilisateur.builder().nom("").prenom("Hollo").email("sobe@gmail.com").password("Sobhe")
@@ -69,5 +69,5 @@ class UtilisateurTest {
                 .active(true).confirmationToken("").build();
         assertTrue(validator.validate(utilisateur).size() == 0);
     }
-
+*/
 }

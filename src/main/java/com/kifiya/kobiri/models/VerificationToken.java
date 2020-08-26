@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Data
+@Builder
 public class VerificationToken {
 
     public VerificationToken(String idUser) {

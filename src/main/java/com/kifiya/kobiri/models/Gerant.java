@@ -4,10 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -16,9 +13,7 @@ import javax.validation.constraints.Size;
 @Setter
 @Data
 @SuperBuilder
-public class Gerant{
-
-    String login;
+public class Gerant extends Utilisateur{
 
     @NonNull
     @NotBlank(message = "*veuillez fournir votre nom")
@@ -27,8 +22,6 @@ public class Gerant{
     @NonNull
     @NotBlank(message = "*veuillez fournir votre prenom")
     String prenom;
-
-    String password;
 
     @Pattern(regexp = "(\\+224|00224)[0-9]{9}")
     String telephone;
@@ -41,8 +34,8 @@ public class Gerant{
     //@NotEmpty(message = "*veuillez fournir votre adresse")
     String adresse;
 
-    //@NonNull
-    //@Size(min = 8, max = 8)
+    @NonNull
+    @Size(min = 8, max = 8)
     private String code;
 
 }
