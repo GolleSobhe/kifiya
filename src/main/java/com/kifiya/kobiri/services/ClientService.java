@@ -96,8 +96,8 @@ public class ClientService {
          */
 
         transfert.setBoutique(new Boutique("cosa1", "Conakry", ""));
-        Beneficiaire beneficiaire = new Beneficiaire("Fiya", "Hollo", "623-09-76-13");
-        beneficiaire.setId((long) 1);
+        Beneficiaire beneficiaire = Beneficiaire.builder().
+                nom("Fiya").prenom("Hollo").telephone("623-09-76-13").build();
         transfert.setBeneficiaire(beneficiaire);
         transfert.setMontantEuros((long) 500);
         transfert.setTaux((long) 10600);
@@ -108,8 +108,8 @@ public class ClientService {
         transfert.setCode(getHexa(8));
         Boolean beneficiaireExist = beneficiaireRepository.beneficiaireExists(transfert.getBeneficiaire().getTelephone(), transfert.getClient().getEmail());
         if(!beneficiaireExist){
-            Long idBeneficiaire = beneficiaireRepository.ajouterBeneficiaire(transfert.getBeneficiaire());
-            transfert.getBeneficiaire().setId(idBeneficiaire);
+            String telephone = beneficiaireRepository.ajouterBeneficiaire(transfert.getBeneficiaire());
+            transfert.getBeneficiaire().setTelephone(telephone);
         }
         transfertRepository.creer(transfert);
     }

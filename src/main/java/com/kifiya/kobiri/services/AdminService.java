@@ -28,7 +28,7 @@ public class AdminService {
 
     public void ajouterGerant(Gerant gerant){
         //gerant.setPassword(bCryptPasswordEncoder.encode(DEFAULT_PASSWORD));
-        gerant.setLogin("login");
+        gerant.setEmail("login");
         gerantRepository.creer(gerant);
     }
 

@@ -41,7 +41,7 @@ public class TransfertRepository {
         params.addValue("montant_euros", transfert.getMontantEuros());
         params.addValue("taux", transfert.getTaux());
         params.addValue("frais", transfert.getFrais());
-        params.addValue("beneficiaire_id", transfert.getBeneficiaire().getId());
+        params.addValue("beneficiaire_id", transfert.getBeneficiaire().getTelephone());
         params.addValue("boutique_id", transfert.getBoutique().getNom());
         params.addValue("client_id", transfert.getClient().getEmail());
         namedParameterJdbcTemplate.update(AJOUTER, params);

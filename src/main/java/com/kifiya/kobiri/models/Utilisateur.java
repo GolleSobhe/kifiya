@@ -15,32 +15,21 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"email"})
-@ToString(of = {"id", "nom", "prenom", "telephone", "email"})
+@ToString(of = {"email", "password", "role", "active"})
 @Data
 @SuperBuilder
 public class Utilisateur {
-
-    Long id;
-
-    @NonNull
-    @NotBlank(message = "*veuillez fournir votre nom")
-    String nom;
-
-    @NonNull
-    @NotBlank(message = "*veuillez fournir votre prenom")
-    String prenom;
 
     @NonNull
     @Email(message = "*Please provide a valid Email")
     @NotBlank(message = "*veuillez fournir votre email")
     String email;
 
+    @NotBlank(message = "*veuillez fournir votre password")
     String password;
 
     boolean active;
 
-    String confirmationToken;
-
-    List<Role> roles;
+    String role;
 
 }

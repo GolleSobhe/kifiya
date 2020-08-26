@@ -1,12 +1,15 @@
-insert into CLIENT(email,nom,prenom,password,telephone,adresse,code_postale,ville,pays,est_valide)
-values('teliwal@gmail.com','telly','Diallo','password','+33752031094','38 rue Saint Roch','31400','Toulouse','France','OUI');
-insert into CLIENT(email,nom,prenom,password,telephone,adresse,code_postale,ville,pays,est_valide)
-values('sobhe@gmail.com','Sobhe','Golle','password','+33752031094','23 rue da la Riche','31400','Toulouse','France','NON');
+insert into CLIENT(email,nom,prenom,telephone,adresse,code_postale,ville,pays)
+values('teliwal@gmail.com','telly','Diallo','+33752031094','38 rue Saint Roch','31400','Toulouse','France');
+insert into CLIENT(email,nom,prenom,telephone,adresse,code_postale,ville,pays)
+values('sobhe@gmail.com','Sobhe','Golle','+33752031094','23 rue da la Riche','31400','Toulouse','France');
 
-insert into GERANT(login,nom,prenom,password,adresse,code,telephone,ville)
-values('myLogin','Kikala','Sare','password','Cosa','12345678','+224622001122','Conakry');
-insert into GERANT(login,nom,prenom,password,adresse,code,telephone,ville)
-values('gerant','Fiya','Hollo','password','Kipe','12345678','+224622001121','Conakry');
+insert into GERANT(email,nom,prenom,adresse,code,telephone,ville)
+values('sobhe1@gmail.com','Kikala','Sare','Cosa','12345678','+224622001122','Conakry');
+insert into GERANT(email,nom,prenom,adresse,code,telephone,ville)
+values('sobhe2@gmail.com','Fiya','Hollo','Kipe','12345678','+224622001121','Conakry');
+
+insert into ADMIN(email,nom,prenom,telephone,adresse,ville,pays)
+values('admin@gmail.com','BAH','Abdou','0606060606','1 rue du Bonheur','Bomboli','France');
 
 insert into BOUTIQUE(nom,ville,description)
 values('Cosa1','Conakry','La boutique de Cosa');
@@ -15,9 +18,6 @@ values('Kipe1','Conakry','La boutique de Kipe');
 insert into BOUTIQUE(nom,ville,description)
 values('Fiya Hollo','Mamou','La boutique de petel');
 
-insert into ADMIN(email,nom,prenom,password,telephone,adresse,ville,pays,est_valide)
-values('admin@gmail.com','BAH','Abdou','password','0606060606','1 rue du Bonheur','Bomboli','France','YES');
-
 insert into BENEFICIAIRE(id,nom,prenom,telephone,client_id)
 values(0,'Bah','Mariam','623-09-76-12','teliwal@gmail.com');
 insert into BENEFICIAIRE(id,nom,prenom,telephone,client_id)
@@ -25,10 +25,14 @@ values(1,'Fiya','Hollo','623-09-76-13','sobhe@gmail.com');
 insert into BENEFICIAIRE(id,nom,prenom,telephone,client_id)
 values(2,'Noh','Feti','623-09-76-14','sobhe1@gmail.com');
 
-insert into CONNEXION(login,password,role)
-values('teliwal@gmail.com','password','CLIENT');
-insert into CONNEXION(login,password,role)
-values('myLogin','password','GERANT');
-insert into CONNEXION(login,password,role)
-values('admin@gmail.com','password','ADMIN');
+insert into CONNEXION(email,password,active,role)
+values('teliwal@gmail.com','password','1','ROLE_CLIENT');
+insert into CONNEXION(email,password,active,role)
+values('sobhe@gmail.com','password','1','ROLE_CLIENT');
+insert into CONNEXION(email,password,active,role)
+values('sobhe1@gmail.com','password','1','ROLE_GERANT');
+insert into CONNEXION(email,password,active,role)
+values('sobhe2@gmail.com','password','1','ROLE_GERANT');
+insert into CONNEXION(email,password,active,role)
+values('admin@gmail.com','password','1','ROLE_ADMIN');
 
