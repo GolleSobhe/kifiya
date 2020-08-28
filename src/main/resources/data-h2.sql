@@ -26,13 +26,13 @@ insert into BENEFICIAIRE(id,nom,prenom,telephone,client_id)
 values(2,'Noh','Feti','623-09-76-14','sobhe1@gmail.com');
 
 insert into CONNEXION(email,password,active,role)
-values('teliwal@gmail.com','password','1','ROLE_CLIENT');
+values('teliwal@gmail.com','$2a$10$FXh5s2hFiU9RbOkF660AEOj87u5pI1zCreIFRUjrSDUttfYysYS0q','1','CLIENT');
 insert into CONNEXION(email,password,active,role)
-values('sobhe@gmail.com','password','1','ROLE_CLIENT');
+values('sobhe@gmail.com','$2a$10$FXh5s2hFiU9RbOkF660AEOj87u5pI1zCreIFRUjrSDUttfYysYS0q','1','CLIENT');
 insert into CONNEXION(email,password,active,role)
-values('sobhe1@gmail.com','password','1','ROLE_GERANT');
+values('sobhe1@gmail.com','$2a$10$FXh5s2hFiU9RbOkF660AEOj87u5pI1zCreIFRUjrSDUttfYysYS0q','1','GERANT');
 insert into CONNEXION(email,password,active,role)
-values('sobhe2@gmail.com','password','1','ROLE_GERANT');
+values('sobhe2@gmail.com','$2a$10$FXh5s2hFiU9RbOkF660AEOj87u5pI1zCreIFRUjrSDUttfYysYS0q','1','GERANT');
 insert into CONNEXION(email,password,active,role)
-values('admin@gmail.com','password','1','ROLE_ADMIN');
+values('admin@gmail.com','$2a$10$FXh5s2hFiU9RbOkF660AEOj87u5pI1zCreIFRUjrSDUttfYysYS0q','1','ADMIN');
 

@@ -10,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 @Component
@@ -25,7 +27,8 @@ public class CustomUserAuthenticationProvider  implements AuthenticationProvider
         if(utilisateur == null){
             throw new BadCredentialsException("hop laa");
         }
-        return new UsernamePasswordAuthenticationToken(utilisateur,null, Collections.emptyList());
+        final Authentication result = super.authenticate(auth);
+        return new UsernamePasswordAuthenticationToken(utilisateur,utilisateur.getPassword(), utilisateur.getRole());
     }
 
     @Override

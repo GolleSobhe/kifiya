@@ -23,6 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/index", "acceuil", "/utilisateur/inscription", "/utilisateur/confirmation").permitAll()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/client/**").hasAuthority("CLIENT")
+                .antMatchers("/gerant/**").hasAuthority("GERANT")
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .formLogin()
