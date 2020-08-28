@@ -80,6 +80,6 @@ create table CONNEXION
  email varchar(150) not null,
  password varchar(100) not null,
  active boolean,
- role varchar(12) not null,
+ role varchar(6) not null,
  primary key(email)
 );
