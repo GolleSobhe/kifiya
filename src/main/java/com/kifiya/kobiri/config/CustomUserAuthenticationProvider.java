@@ -8,6 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class CustomUserAuthenticationProvider  implements AuthenticationProvider
 
     @Autowired
     UtilisateurService utilisateurService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
@@ -27,8 +31,10 @@ public class CustomUserAuthenticationProvider  implements AuthenticationProvider
         if(utilisateur == null){
             throw new BadCredentialsException("hop laa");
         }
-        final Authentication result = super.authenticate(auth);
-        return new UsernamePasswordAuthenticationToken(utilisateur,utilisateur.getPassword(), utilisateur.getRole());
+        if(bCryptPasswordEncoder.matches(password, utilisateur.getPassword())){
+            return new UsernamePasswordAuthenticationToken(utilisateur.getEmail(),utilisateur.getPassword(), Collections.emptyList());
+        }
+        return null;
     }
 
     @Override
