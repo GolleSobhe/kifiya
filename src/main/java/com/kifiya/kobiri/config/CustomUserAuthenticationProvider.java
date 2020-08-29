@@ -8,12 +8,11 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 @Component
 public class CustomUserAuthenticationProvider  implements AuthenticationProvider {
@@ -32,7 +31,14 @@ public class CustomUserAuthenticationProvider  implements AuthenticationProvider
             throw new BadCredentialsException("hop laa");
         }
         if(bCryptPasswordEncoder.matches(password, utilisateur.getPassword())){
-            return new UsernamePasswordAuthenticationToken(utilisateur.getEmail(),utilisateur.getPassword(), Collections.emptyList());
+            var autorithies = new HashSet<GrantedAuthority>();
+            autorithies.add(new GrantedAuthority() {
+                @Override
+                public String getAuthority() {
+                    return "ROLE_"+ utilisateur.getRole();
+                }
+            });
+            return new UsernamePasswordAuthenticationToken(utilisateur.getEmail(),utilisateur.getPassword(), autorithies);
         }
         return null;
     }
