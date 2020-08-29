@@ -14,8 +14,6 @@ import java.sql.SQLException;
 
 @Repository
 public class UtilisateurRepository {
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -32,9 +30,7 @@ public class UtilisateurRepository {
                     utilisateur.setEmail(resultSet.getString(1));
                     utilisateur.setPassword(resultSet.getString(2));
                     utilisateur.setRole(resultSet.getString(3));
-                    if(bCryptPasswordEncoder.matches(password, utilisateur.getPassword())){
-                        return utilisateur;
-                    }
+                    return utilisateur;
                 }
                 return null;
             }
