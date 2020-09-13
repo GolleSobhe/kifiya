@@ -83,3 +83,10 @@ create table CONNEXION
  role varchar(6) not null,
  primary key(email)
 );
+
+create table PARAMETRE
+(
+    id long not null,
+	taux double not null,
+	frais double not null,
+);

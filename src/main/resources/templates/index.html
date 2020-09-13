@@ -23,8 +23,7 @@
                     </div>
 
                     <div class="col-md-6"  style="padding-bottom: 15px;" >
-                        <form id="formTransfert" class="border border-light p-3 form-envoie-argent" th:action="@{client/transferts}" method="post">
-                            <input type="hidden" name="taux" th:value="${taux}">
+                        <form id="formTransfert" class="border border-light p-3 form-envoie-argent" th:action="@{client/recapitulatif}" method="post">
                             <div class="form-row">
                                 <div class="input-group mb-2 mr-sm-2">
                                     <div class="input-group">
@@ -35,7 +34,7 @@
                                                onblur="checkPasswordValidity();"
                                                th:name="montantEuros" value="100" required>
                                         <div class="input-group-append">
-                                            <span class="input-group-text" th:text="${'taux 1€ = '+taux+' GNF'}">1€ = 10600 GNF</span>
+                                            <span class="input-group-text" th:text="${'taux 1€ = '+parametre.get('taux')+' GNF'}">1€ = 10600 GNF</span>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +45,7 @@
                                         oninvalid="this.setCustomValidity('Choisisez un point de retrait.')"
                                         oninput="setCustomValidity('')" required>
                                     <option disabled selected value="">Choisir le point de retrait</option>
-                                    <option th:each="boutique : ${boutiques}"
+                                    <option th:each="boutique : ${parametre.get('boutiques')}"
                                             th:value="${boutique.nom}"
                                             th:utext="${boutique.ville + ' ' + boutique.description}"/>
                                 </select>
@@ -64,10 +63,10 @@
             <h1 class="text-center">Nos principaux points de retraits</h1>
             <div style="padding-bottom: 10px"></div>
             <div class="card-deck">
-                <div class="container" th:if="${boutiques.empty}">
+                <div class="container" th:if="${parametre.get('boutiques').empty}">
                     <h3 class="text-center">Pas de boutique disponible</h3>
                 </div>
-                <div class="card mb-3 hoverable" th:each="boutique : ${boutiques}">
+                <div class="card mb-3 hoverable" th:each="boutique : ${parametre.get('boutiques')}">
                     <div class="card-body">
                         <h4 class="card-title" th:text="${boutique.nom}">Fiya Hollo</h4>
                         <h5 class="card-title" th:text="${boutique.ville}">Fiya Hollo</h5>

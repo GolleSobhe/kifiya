@@ -3,15 +3,13 @@ package com.kifiya.kobiri.services;
 import com.kifiya.kobiri.exception.ExpiryTokenException;
 import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.*;
-import com.kifiya.kobiri.repositories.BeneficiaireRepository;
-import com.kifiya.kobiri.repositories.ClientRepository;
-import com.kifiya.kobiri.repositories.TransfertRepository;
-import com.kifiya.kobiri.repositories.VerificationTokenRepository;
+import com.kifiya.kobiri.repositories.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -30,13 +28,19 @@ public class ClientService {
 
     private final TransfertRepository transfertRepository;
 
+    private final IndexService indexRepository;
+
     public ClientService(ClientRepository clientRepository, EmailService emailService,
-                         VerificationTokenRepository verificationTokenRepository, BeneficiaireRepository beneficiaireRepository, TransfertRepository transfertRepository) {
+                         VerificationTokenRepository verificationTokenRepository,
+                         BeneficiaireRepository beneficiaireRepository,
+                         TransfertRepository transfertRepository,
+                         IndexService indexRepository) {
         this.clientRepository = clientRepository;
         this.emailService = emailService;
         this.verificationTokenRepository = verificationTokenRepository;
         this.beneficiaireRepository = beneficiaireRepository;
         this.transfertRepository = transfertRepository;
+        this.indexRepository = indexRepository;
     }
 
     public void ajouter(Client client,String appUrl) {
@@ -100,8 +104,8 @@ public class ClientService {
                 nom("Fiya").prenom("Hollo").telephone("623-09-76-13").build();
         transfert.setBeneficiaire(beneficiaire);
         transfert.setMontantEuros((long) 500);
-        transfert.setTaux((long) 10600);
-        transfert.setFrais((long) 5);
+        //transfert.setTaux((long) 10600);
+        //transfert.setFrais((long) 5);
         Client client = new Client();
         client.setEmail("sobhe@gmail.com");
         transfert.setClient(client);
@@ -119,5 +123,9 @@ public class ClientService {
             sb.append(Integer.toHexString(random.nextInt()));
         }
         return sb.toString().substring(0, nombreCaractere);
+    }
+
+    public Map<String, Object> obtenirParametre() {
+        return indexRepository.obtenirPrametre();
     }
 }

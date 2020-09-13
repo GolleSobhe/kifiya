@@ -37,9 +37,9 @@ public class Transfert {
     Long montantEuros;
 
     @NotNull
-    Long taux;
+    Double taux;
 
     @NotNull
-    Long frais;
+    Double frais;
 }
 

@@ -66,7 +66,7 @@ public class TransfertRepository {
             transfert.setDateTransfert(resultSet.getTimestamp("date_transfert").toLocalDateTime());
             transfert.setDateValidation(resultSet.getTimestamp("date_validation").toLocalDateTime());
             transfert.setMontantEuros(resultSet.getLong("montant_euros"));
-            transfert.setTaux(resultSet.getLong("taux"));
+            transfert.setTaux(resultSet.getDouble("taux"));
             transfert.setCode(resultSet.getString("code"));
             return transfert;
         });
