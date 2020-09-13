@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Map;
+
 @Controller
 public class IndexController {
 
@@ -16,8 +18,7 @@ public class IndexController {
 
     @RequestMapping(value = {"/", "index", "acceuil"}, method = RequestMethod.GET)
     public String index(Model model){
-        model.addAttribute("taux", 10600);
-        model.addAttribute("boutiques", indexService.listerBoutiques());
+        model.addAttribute("parametre", indexService.obtenirPrametre());
         return "index";
     }
 

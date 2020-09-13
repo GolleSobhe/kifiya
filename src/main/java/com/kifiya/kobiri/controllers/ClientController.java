@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/client")
@@ -34,10 +35,12 @@ public class ClientController {
         return "client/accueil-client";
     }
 
-    @RequestMapping(value = {"/transferts"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/recapitulatif"}, method = RequestMethod.POST)
     public String initierTransfert(@RequestParam(value = "montantEuros") Long montant,
                                    @RequestParam(value = "pointDeRetrait") String pointDeRetrait,
-                                   @RequestParam(value = "taux") Long taux, Model model){
+                                   Model model){
+        Map<String, Object> parametre = clientService.obtenirParametre();
+        //model.addAttribute("boutiques", clientService.listerBoutiques());
         /**
          * recuperer le taux apres
          */
@@ -46,7 +49,8 @@ public class ClientController {
         Transfert transfert = new Transfert();
         transfert.setMontantEuros(montant);
         transfert.setBoutique(boutique);
-        transfert.setTaux((long) taux);
+        transfert.setTaux(Double.parseDouble(parametre.get("taux").toString()));
+        transfert.setFrais(Double.parseDouble(parametre.get("frais").toString())*montant);
         /**
          * Recuperer l'utilisateur connecter
          * id
@@ -54,11 +58,11 @@ public class ClientController {
          * droit{client}
          * list beneficiaire
          */
-        Client client = new Client();
-        client.setBeneficiaires(clientService.listerBeneficiares());
-        transfert.setClient(client);
+        //Client client = new Client();
+        //client.setBeneficiaires(clientService.listerBeneficiares());
+        //transfert.setClient(client);
         model.addAttribute("transfert", transfert);
-        model.addAttribute("beneficiaire", new Beneficiaire());
+        model.addAttribute("boutiques", parametre.get("boutiques"));
         return "client/transfert";
     }
 
@@ -68,8 +72,8 @@ public class ClientController {
         Transfert transfert = new Transfert();
         //Recuperer le client connecte dans la session
         Client client = new Client();
-        transfert.setMontantEuros((long) 500);
-        transfert.setTaux((long) 10600);
+        //transfert.setMontantEuros((long) 500);
+        //transfert.setTaux((long) 10600);
         List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
         /**
          * Garder le montant et le taux dans la session
@@ -95,7 +99,7 @@ public class ClientController {
         return "client/transfert";
     }
 
-    @RequestMapping(value = "/recapitulatif", method = RequestMethod.POST)
+    @RequestMapping(value = "/recapitulatif1", method = RequestMethod.POST)
     public String recapitulatif(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
                                       BindingResult bindingResult, Model model){
         /**
@@ -103,7 +107,7 @@ public class ClientController {
          */
         Transfert transfert = new Transfert();
         transfert.setMontantEuros((long) 500);
-        transfert.setTaux((long) 10600);
+        //transfert.setTaux((long) 10600);
         transfert.setBeneficiaire(beneficiaire);
         transfert.setBoutique(new Boutique("Petel", "Mamou", ""));
         model.addAttribute("transfert", transfert);

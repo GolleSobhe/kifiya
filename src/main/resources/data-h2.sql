@@ -36,3 +36,4 @@ values('sobhe2@gmail.com','$2a$10$FXh5s2hFiU9RbOkF660AEOj87u5pI1zCreIFRUjrSDUttf
 insert into CONNEXION(email,password,active,role)
 values('admin@gmail.com','$2a$10$FXh5s2hFiU9RbOkF660AEOj87u5pI1zCreIFRUjrSDUttfYysYS0q','1','ADMIN');
 
+insert into PARAMETRE(id,taux,frais) values(0,10600, 0.05);

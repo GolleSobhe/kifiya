@@ -13,6 +13,7 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode(of = {"nom"})
 @Data
 @Builder
 public class Boutique {
