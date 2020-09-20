@@ -26,44 +26,34 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String acceuil(Model model){
-        /**
-         * recuperer le taux apres
-         */
-        model.addAttribute("taux", 10600);
-        return "client/accueil-client";
-    }
-
     @RequestMapping(value = {"/recapitulatif"}, method = RequestMethod.POST)
     public String initierTransfert(@RequestParam(value = "montantEuros") Long montant,
                                    @RequestParam(value = "pointDeRetrait") String pointDeRetrait,
                                    Model model){
         Map<String, Object> parametre = clientService.obtenirParametre();
-        //model.addAttribute("boutiques", clientService.listerBoutiques());
-        /**
-         * recuperer le taux apres
-         */
-        Boutique boutique = new Boutique();
-        boutique.setNom(pointDeRetrait);
-        Transfert transfert = new Transfert();
-        transfert.setMontantEuros(montant);
-        transfert.setBoutique(boutique);
-        transfert.setTaux(Double.parseDouble(parametre.get("taux").toString()));
-        transfert.setFrais(Double.parseDouble(parametre.get("frais").toString())*montant);
-        /**
-         * Recuperer l'utilisateur connecter
-         * id
-         * email
-         * droit{client}
-         * list beneficiaire
-         */
-        //Client client = new Client();
-        //client.setBeneficiaires(clientService.listerBeneficiares());
-        //transfert.setClient(client);
+        Transfert transfert = Transfert.builder()
+                .boutique(Boutique.builder().nom(pointDeRetrait).build())
+                .taux(Double.parseDouble(parametre.get("taux").toString()))
+                .frais(Double.parseDouble(parametre.get("frais").toString())*montant)
+                .montantEuros(montant)
+                .build();
         model.addAttribute("transfert", transfert);
         model.addAttribute("boutiques", parametre.get("boutiques"));
         return "client/transfert";
+    }
+
+    @RequestMapping(value = "/transfert", method = RequestMethod.POST)
+    public String changerTransfert(@ModelAttribute("transfert") Transfert transfert, Model model){
+        List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
+        //transfert.setClient(Client.builder().beneficiaires(beneficiaires).build());
+        Client client = new Client();
+        client.setBeneficiaires(beneficiaires);
+        transfert.setClient(client);
+        model.addAttribute("transfert", transfert);
+        model.addAttribute("beneficiaire", new Beneficiaire());
+        model.addAttribute("step2", false);
+        model.addAttribute("step3", false);
+        return "client/transfert-beneficiaire";
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)

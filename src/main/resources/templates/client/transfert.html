@@ -12,38 +12,35 @@
         <div class="container">
             <div class="col-md-12">
                 <h3> RÉCAPITULATIF</h3>
-                <form th:action="@{/client/paiement}" th:object="${transfert}" method="post">
+                <form th:action="@{/client/transfert}" th:object="${transfert}" method="post">
                     <div class="row">
                         <div class="col-xs-12 col-md-5">
-                            <form id="formTransfert" class="border border-light p-3 form-envoie-argent"
-                                  th:action="@{client/transferts}" th:object="${transfert}" method="post">
-                                <div class="form-row">
-                                    <div class="input-group mb-2 mr-sm-2">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text" for="montantEuros">Montant en €</div>
-                                            </div>
-                                            <input type="number" min="0" class="form-control" id="montantEuros"
+                            <div class="form-row">
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                             <div class="input-group-text" for="montantEuros">Montant en €</div>
+                                        </div>
+                                        <input type="number" min="0" class="form-control" id="montantEuros"
                                                    onblur="checkPasswordValidity();"
                                                    th:field="*{montantEuros}" value="100" required>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" th:text="${'taux 1€ = '+transfert.taux+' GNF'}">1€ = 10600 GNF</span>
-                                            </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" th:text="${'taux 1€ = '+transfert.taux+' GNF'}">1€ = 10600 GNF</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="my-1 mr-2" for="pointDeRetrait">Point de retrait</label>
-                                    <select class="custom-select browser-default" id="pointDeRetrait" th:field="*{boutique.nom}"
+                            </div>
+                            <div class="form-group">
+                                <label class="my-1 mr-2" for="pointDeRetrait">Point de retrait</label>
+                                <select class="custom-select browser-default" id="pointDeRetrait" th:field="*{boutique.nom}"
                                             oninvalid="this.setCustomValidity('Choisisez un point de retrait.')"
                                             oninput="setCustomValidity('')" required>
                                         <option disabled selected value="">Choisir le point de retrait</option>
                                         <option th:each="boutique : ${boutiques}"
                                                 th:value="${boutique.nom}"
                                                 th:utext="${boutique.ville + ' ' + boutique.description}"/>
-                                    </select>
-                                </div>
-                            </form>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-xs-12 col-md-7">
                             <ul class="list-group">
