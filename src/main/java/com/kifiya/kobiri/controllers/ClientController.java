@@ -57,36 +57,16 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
-    public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
+    public String ajouterBeneficiaire(@ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
         Transfert transfert = new Transfert();
         transfert.setBeneficiaire(beneficiaire);
-        model.addAttribute("transfert", transfert);
-        model.addAttribute("beneficiaire", new Beneficiaire());
         model.addAttribute("step2", true);
         model.addAttribute("step3", true);
         return "client/transfert-step3";
     }
 
-    @RequestMapping(value = "/recapitulatif1", method = RequestMethod.POST)
-    public String recapitulatif(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
-                                      BindingResult bindingResult, Model model){
-        /**
-         * Recuperer les inforamations dans la session
-         */
-        Transfert transfert = new Transfert();
-        transfert.setMontantEuros((long) 500);
-        //transfert.setTaux((long) 10600);
-        transfert.setBeneficiaire(beneficiaire);
-        transfert.setBoutique(new Boutique("Petel", "Mamou", ""));
-        model.addAttribute("transfert", transfert);
-        model.addAttribute("step2", true);
-        model.addAttribute("step3", false);
-        return "client/transfert-step2";
-    }
-
     @RequestMapping(value = "/paiement", method = RequestMethod.POST)
-    public String paiement(@Valid @ModelAttribute("transfert") Transfert transfert,
-                                BindingResult bindingResult, Model model){
+    public String paiement(@Valid @ModelAttribute("transfert") Transfert transfert, Model model){
         model.addAttribute("transfert", transfert);
         model.addAttribute("step2", true);
         model.addAttribute("step3", true);
