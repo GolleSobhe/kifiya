@@ -41,7 +41,7 @@
                         </form>
                     </ul>
                     <div class="container container-fluid mx-auto col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-3">
-                        <button id="formButton" class="button-link" type="button"> Ajouter Bénéficiaire </button>
+                        <button id="formButton" class="button-link" type="button"> Ajouter un bénéficiaire </button>
                         <br>
                         <div id="formAddBeneficiaire" class="container">
                             <form th:action="@{/client/beneficiaires}" th:object="${beneficiaire}" method="post">
@@ -99,10 +99,9 @@
 </div>
 <script>
     $( document ).ready(function () {
+            $( "#formAddBeneficiaire" ).toggle();
             $( "#formButton" ).click(function() {
-               $( "#formAddBeneficiaire" ).toggle('slow', function(){
-                   $("#button-choisir").prop("disabled",!($(this).is(':hidden')));
-               });
+               $( "#formAddBeneficiaire" ).toggle();
             });
             $('[type="tel"]').inputmask();
             $( ".beneficiaire" ).click(function() {
