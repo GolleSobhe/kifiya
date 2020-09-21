@@ -51,42 +51,20 @@ public class ClientController {
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());
-        model.addAttribute("step2", false);
+        model.addAttribute("step2", true);
         model.addAttribute("step3", false);
         return "client/transfert-beneficiaire";
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
-    public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire,
-                                      BindingResult bindingResult, Model model){
+    public String ajouterBeneficiaire(@Valid @ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
         Transfert transfert = new Transfert();
-        //Recuperer le client connecte dans la session
-        Client client = new Client();
-        //transfert.setMontantEuros((long) 500);
-        //transfert.setTaux((long) 10600);
-        List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
-        /**
-         * Garder le montant et le taux dans la session
-         */
-        if(bindingResult.hasErrors()){
-            client.setBeneficiaires(beneficiaires);
-            transfert.setClient(client);
-            model.addAttribute("transfert", transfert);
-            model.addAttribute("beneficiaire", new Beneficiaire());
-            return "client/transfert";
-        }
-        if(beneficiaires.contains(beneficiaire)) {
-            bindingResult.rejectValue("telephone", "error.user", "il ya béneficiaire enregistré avec ce numéro de telephone");
-        } else {
-            beneficiaires.add(beneficiaire);
-        }
-        client.setBeneficiaires(beneficiaires);
-        transfert.setClient(client);
+        transfert.setBeneficiaire(beneficiaire);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());
-        model.addAttribute("step2", false);
-        model.addAttribute("step3", false);
-        return "client/transfert";
+        model.addAttribute("step2", true);
+        model.addAttribute("step3", true);
+        return "client/transfert-step3";
     }
 
     @RequestMapping(value = "/recapitulatif1", method = RequestMethod.POST)
