@@ -11,7 +11,7 @@ public class UtilisateurService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
-    public Utilisateur connexion(String email, String password) {
-        return  utilisateurRepository.connexion(email, password);
+    public Utilisateur connexion(String email) {
+        return  utilisateurRepository.connexion(email);
     }
 }
