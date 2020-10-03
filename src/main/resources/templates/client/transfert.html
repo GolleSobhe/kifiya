@@ -1,13 +1,12 @@
 <!DOCTYPE html >
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>FiyaHollo</title>
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 </head>
 <body style="padding-top: 50px;">
-<div class="wrapper" sec:authorize="isAuthenticated() and hasAnyAuthority('CLIENT')">
+<div class="wrapper">
     <main>
         <div th:replace="fragments/stepperHeader.html :: stepperHeader(${step2}, ${step3})"></div>
         <div class="container">
