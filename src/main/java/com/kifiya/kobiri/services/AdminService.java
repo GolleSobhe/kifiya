@@ -54,6 +54,6 @@ public class AdminService {
     }
 
     public int nombreDeGerants() {
-        return 0;
+        return this.gerantRepository.nombreGerants();
     }
 }
