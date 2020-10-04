@@ -3,6 +3,7 @@ package com.kifiya.kobiri.repositories;
 import com.kifiya.kobiri.models.Transfert;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -73,14 +74,17 @@ public class TransfertRepository {
     }
 
     public int determinerNombreDeTransfertsTotal() {
-        return 0;
+        String sql = "SELECT COUNT(*) FROM TRANSFERT";
+        return namedParameterJdbcTemplate.queryForObject(sql, (SqlParameterSource) null, Integer.class);
     }
 
     public int determinerNombreDeTransfertsEnCours() {
-        return 0;
+        String sql = "SELECT COUNT(*) FROM TRANSFERT where DATE_VALIDATION is null";
+        return namedParameterJdbcTemplate.queryForObject(sql, (SqlParameterSource) null, Integer.class);
     }
 
     public int determinerNombreDeTransfertsRendus() {
-        return 0;
+        String sql = "SELECT COUNT(*) FROM TRANSFERT where DATE_VALIDATION is not null";
+        return namedParameterJdbcTemplate.queryForObject(sql, (SqlParameterSource) null, Integer.class);
     }
 }

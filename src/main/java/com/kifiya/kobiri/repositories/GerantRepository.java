@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -17,8 +18,6 @@ import java.util.Map;
 
 @Repository
 public class GerantRepository {
-
-    MapSqlParameterSource parameters = new MapSqlParameterSource();
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -52,6 +51,7 @@ public class GerantRepository {
     }
 
     public Gerant connexion(String login) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("login", login);
         return namedParameterJdbcTemplate.query(CONNEXION, parameters, resultSet -> {
             if (resultSet.next()) {
@@ -63,6 +63,11 @@ public class GerantRepository {
             }
             return null;
         });
+    }
+
+    public int nombreGerants(){
+        String sql = "SELECT COUNT(*) FROM GERANT";
+        return namedParameterJdbcTemplate.queryForObject(sql, (SqlParameterSource) null, Integer.class);
     }
 
     public List<Transfert> trouverTransfertParStatus() {
@@ -80,6 +85,7 @@ public class GerantRepository {
     }
 
     public List<Transfert> rechercherTransfert(Long id) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("idGenant", id);
         return namedParameterJdbcTemplate.query(SELECT_HISTORIQUE, parameters, (resultSet,i) -> {
             Transfert transfert = new Transfert();
@@ -88,6 +94,7 @@ public class GerantRepository {
     }
 
     public Map<String, String> obtenirStatistique(Long id) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue("idGenant", id);
         return namedParameterJdbcTemplate.query(SELECT_STATISTIQUE, parameters, new ResultSetExtractor<Map>() {
             @Override
