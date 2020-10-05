@@ -5,11 +5,15 @@ import com.kifiya.kobiri.models.Boutique;
 import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.ClientService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,34 +47,31 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/transfert", method = RequestMethod.POST)
-    public String changerTransfert(@ModelAttribute("transfert") Transfert transfert, Model model){
+    public String changerTransfert(HttpSession httpSession, @ModelAttribute("transfert") Transfert transfert, Model model){
         List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
-        //transfert.setClient(Client.builder().beneficiaires(beneficiaires).build());
-        Client client = new Client();
-        client.setBeneficiaires(beneficiaires);
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client client = Client.builder()
+                .beneficiaires(beneficiaires)
+                .email(userDetails.getUsername())
+                .active(userDetails.isEnabled())
+                .nom("").prenom("").ville("").telephone("").adresse("").pays("")
+                .build();
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());
         model.addAttribute("step2", true);
         model.addAttribute("step3", false);
+        httpSession.setAttribute("transfert", transfert);
         return "client/transfert-beneficiaire";
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
-    public String ajouterBeneficiaire(@ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
-        Transfert transfert = new Transfert();
+    public String ajouterBeneficiaire(HttpSession httpSession, @ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
+        Transfert transfert = (Transfert) httpSession.getAttribute("transfert");
         transfert.setBeneficiaire(beneficiaire);
         model.addAttribute("step2", true);
         model.addAttribute("step3", true);
         return "client/transfert-carte";
-    }
-
-    @RequestMapping(value = "/paiement", method = RequestMethod.POST)
-    public String paiement(@Valid @ModelAttribute("transfert") Transfert transfert, Model model){
-        model.addAttribute("transfert", transfert);
-        model.addAttribute("step2", true);
-        model.addAttribute("step3", true);
-        return "client/transfert-step3";
     }
 
     @RequestMapping(value = "/paiement-carte", method = RequestMethod.POST)

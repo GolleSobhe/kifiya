@@ -27,8 +27,6 @@ public class Client extends Utilisateur{
     @NotBlank(message = "*veuillez fournir votre prenom")
     String prenom;
 
-    String password;
-
     @NonNull
     @Pattern(regexp = "(\\+33|0033|0)[0-9]{9}")
     String telephone;
