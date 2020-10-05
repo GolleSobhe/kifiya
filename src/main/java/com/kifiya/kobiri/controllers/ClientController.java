@@ -62,7 +62,7 @@ public class ClientController {
         transfert.setBeneficiaire(beneficiaire);
         model.addAttribute("step2", true);
         model.addAttribute("step3", true);
-        return "client/transfert-step3";
+        return "client/transfert-carte";
     }
 
     @RequestMapping(value = "/paiement", method = RequestMethod.POST)
