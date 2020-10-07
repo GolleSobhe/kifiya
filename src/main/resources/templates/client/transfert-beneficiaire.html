@@ -24,7 +24,7 @@
                             th:if="${transfert.client.beneficiaires.empty}">
                             <h3> Pas de beneficiaire disponible</h3>
                         </li>
-                        <form th:name="beneficiaire" th:action="@{/client/beneficiaires}" th:object="${beneficiaire}" method="post">
+                        <form name="beneficiaire" th:action="@{/client/beneficiaires}" th:object="${beneficiaire}" method="post">
                             <input type="hidden" th:field="*{telephone}">
                             <li class="list-group-item d-flex justify-content-between align-items-center"
                                 th:each="beneficiaire : ${transfert.client.beneficiaires}">
@@ -106,7 +106,7 @@
             });
             $('[type="tel"]').inputmask();
             $( ".beneficiaire" ).click(function() {
-                $("#beneficiaire input[name=telephone]").val($(this).data().telephone);
+                $("form[name=beneficiaire] input[name=telephone]").val($(this).data().telephone);
                 $("form[name=beneficiaire]").submit();
             });
     })

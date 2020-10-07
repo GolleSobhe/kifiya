@@ -69,6 +69,8 @@ public class ClientController {
     public String ajouterBeneficiaire(HttpSession httpSession, @ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
         Transfert transfert = (Transfert) httpSession.getAttribute("transfert");
         transfert.setBeneficiaire(beneficiaire);
+        httpSession.setAttribute("transfert", transfert);
+        model.addAttribute("transfert", transfert);
         model.addAttribute("step2", true);
         model.addAttribute("step3", true);
         return "client/transfert-carte";
@@ -77,8 +79,6 @@ public class ClientController {
     @RequestMapping(value = "/paiement-carte", method = RequestMethod.POST)
     public String paiementParCarte(@Valid @ModelAttribute("transfert") Transfert transfert,
                            BindingResult bindingResult, Model model){
-        //reinitialiser la variable de la session
-        //model.addAttribute("transfert", transfert);
         clientService.ajouterTransfert(transfert);
         return "redirect:index";
     }
