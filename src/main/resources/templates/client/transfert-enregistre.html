@@ -26,7 +26,7 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             Code de transfert
-                            <span th:text="${transfert.code}"> 0</span>
+                            <span style="text-transform: uppercase;" th:text="${transfert.code}"> 0</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             Frais de transfert
@@ -37,12 +37,10 @@
                             <span th:text="${transfert.beneficiaire.nom  + ' ' + transfert.beneficiaire.prenom + ' ' +
                             transfert.beneficiaire.telephone}"></span>
                         </li>
-                        <!--
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             Boutique:
-                            <span th:text="${transfert.boutique.nom  + ' ' + transfert.boutique.ville"></span>
+                            <span th:text="${transfert.boutique.nom  + ' ' + transfert.boutique.ville}"></span>
                         </li>
-                        -->
                     </ul>
                 </div>
             </div>

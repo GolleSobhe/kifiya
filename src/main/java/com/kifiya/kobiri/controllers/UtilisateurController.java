@@ -8,15 +8,13 @@ import com.kifiya.kobiri.services.ClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/utilisateur")
 public class UtilisateurController {
 
     private final ClientService clientService;
@@ -26,13 +24,13 @@ public class UtilisateurController {
         this.clientService = clientService;
     }
 
-    @GetMapping(value = "utilisateur/inscription")
+    @GetMapping(value = "/inscription")
     public String inscription(Model model){
         model.addAttribute("utilisateur",new Client());
         return "utilisateur/inscription";
     }
 
-    @PostMapping(value = "utilisateur/inscription")
+    @PostMapping(value = "/inscription")
     public String inscription(@Valid @ModelAttribute("utilisateur") Client client,
                                BindingResult result, HttpServletRequest request, Model model){
         if (result.hasErrors()) {
@@ -49,35 +47,22 @@ public class UtilisateurController {
         return "utilisateur/inscription";
     }
 
-    @GetMapping(value = "utilisateur/connexion")
+    @GetMapping(value = "/connexion")
     public String connexion(){
         return "utilisateur/connexion";
     }
 
-    @GetMapping(value = "utilisateur/contact")
+    @GetMapping(value = "/deconnexion")
+    public String deconnexion(){
+        return "redirect:/index";
+    }
+
+    @GetMapping(value = "/contact")
     public String contact(){
         return "utilisateur/contact";
     }
 
-    @GetMapping(value = "transferts")
-    public String faireTransfert(Model model){
-        model.addAttribute("transfert", new Transfert());
-        return "transfert/transfert";
-    }
-
-    @PostMapping(value =  "transferts")
-    public String postHistoric(@Valid @ModelAttribute("transfert") Transfert transfert,
-                               BindingResult result, Model model){
-        /*if (result.hasErrors() || !result.hasFieldErrors("client") || !result.hasFieldErrors("beneficiaire")) {
-            //Ajouter le message d'erreur sur le model
-            return"transfert/transfert";
-        }*/
-        model.addAttribute("transfert", transfert);
-        model.addAttribute("confirmationMessage", "Argent enoyé et un e-mail de confirmation a été envoyé à ");
-        return "transfert/transfert";
-    }
-
-    @GetMapping(value="utilisateur/confirmation")
+    @GetMapping(value="/confirmation")
     public String confirmation(Model model, @RequestParam("token") String token){
         try {
             clientService.validerInscription(token);
