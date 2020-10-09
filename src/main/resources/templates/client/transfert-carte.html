@@ -15,11 +15,7 @@
         <div class="container">
             <div class="col-md-12">
                 <h3>Information paiement</h3>
-                <form th:action="@{/client/paiement-carte}" th:object="${transfert}" method="post">
-                    <!--
-                               Supprimer apres car la variable se trouve dans la session
-                     -->
-                    <input type="hidden" name="transfert" th:value="${transfert}">
+                <form th:action="@{/client/paiement-carte}" th:object="${carte}" method="post">
                     <div class="row">
                         <div class="col-md-6 mx-auto">
                             <img id="carte-credit" src="../static/img/carte-generic.svg" th:src="@{/img/carte-generic.svg}">
@@ -27,18 +23,18 @@
                         <div class="col-md-6 mx-auto">
                             <div class="form-group">
                                 <label for="ccnum">Numéro de carte de crédit</label>
-                                <input type="text" id="ccnum"  class="form-control form-type-input"
+                                <input th:field="*{numero}" type="text" id="ccnum"  class="form-control form-type-input"
                                        data-inputmask="'mask': '9999 9999 9999 9999'">
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="cdate">Expiration (mm/yy)</label>
-                                    <input type="text" id="cdate" class="form-control form-type-input"
+                                    <input th:field="*{expiration}" type="text" id="cdate" class="form-control form-type-input"
                                            data-inputmask="'mask': '99/99'">
                                 </div>
                                 <div class="col">
                                     <label for="ccode">Code de securité</label>
-                                    <input type="text" id="ccode" class="form-control form-type-input"
+                                    <input th:field="*{securite}" type="text" id="ccode" class="form-control form-type-input"
                                            data-inputmask="'mask': '999'">
                                 </div>
                             </div>

@@ -85,37 +85,16 @@ public class ClientService {
         return beneficiaireRepository.listerBeneficiaires(email);
     }
 
-    public void ajouterTransfert(Transfert transfert) {
-        //Moidification apres creation de la page de connexion
-        /**
-         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-         Utilisateur utilisateurAuth = (Utilisateur) auth.getPrincipal();
-         Client client = new Client();
-         client.setId(utilisateurAuth.getId());
-         client.setPrenom(utilisateurAuth.getPrenom());
-         client.setNom(utilisateurAuth.getNom());
-         client.setEmail(utilisateurAuth.getEmail());
-         client.setPassword(utilisateurAuth.getPassword());
-         transfert.setResponsable(client);
-         */
-
-        transfert.setBoutique(new Boutique("cosa1", "Conakry", ""));
-        Beneficiaire beneficiaire = Beneficiaire.builder().
-                nom("Fiya").prenom("Hollo").telephone("623-09-76-13").build();
-        transfert.setBeneficiaire(beneficiaire);
-        transfert.setMontantEuros((long) 500);
-        //transfert.setTaux((long) 10600);
-        //transfert.setFrais((long) 5);
-        Client client = new Client();
-        client.setEmail("sobhe@gmail.com");
-        transfert.setClient(client);
+    public Transfert ajouterTransfert(Transfert transfert) {
         transfert.setCode(getHexa(8));
         Boolean beneficiaireExist = beneficiaireRepository.beneficiaireExists(transfert.getBeneficiaire().getTelephone(), transfert.getClient().getEmail());
         if(!beneficiaireExist){
-            String telephone = beneficiaireRepository.ajouterBeneficiaire(transfert.getBeneficiaire());
+            Beneficiaire beneficiaire = transfert.getBeneficiaire();
+            beneficiaire.setClientId(transfert.getClient().getEmail());
+            String telephone = beneficiaireRepository.ajouterBeneficiaire(beneficiaire);
             transfert.getBeneficiaire().setTelephone(telephone);
         }
-        transfertRepository.creer(transfert);
+        return transfertRepository.ajouterTransfert(transfert);
     }
 
     private String getHexa(int nombreCaractere){

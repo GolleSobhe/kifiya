@@ -1,0 +1,59 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FiyaHollo</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body style="padding-top: 50px;">
+<div class="wrapper">
+    <main>
+        <div th:replace="fragments/stepperHeader.html :: stepperHeader(${step2}, ${step3})"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 col-md-7">
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-action active list-group-active">
+                            RÉCAPITULATIF
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Vous envoyez
+                            <span th:text="${transfert.montantEuros + ' €'}">0 GNF</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Montant GNF
+                            <span th:text="${transfert.montantEuros * transfert.taux +' GNF'}">0 GNF</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Code de transfert
+                            <span th:text="${transfert.code}"> 0</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Frais de transfert
+                            <span th:text="${transfert.frais +' €'}"> 0 €</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Beneficiaire:
+                            <span th:text="${transfert.beneficiaire.nom  + ' ' + transfert.beneficiaire.prenom + ' ' +
+                            transfert.beneficiaire.telephone}"></span>
+                        </li>
+                        <!--
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Boutique:
+                            <span th:text="${transfert.boutique.nom  + ' ' + transfert.boutique.ville"></span>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-3"></div>
+                <div class="col-xs-12 col-md-6"><a class="btn btn-success button-link" th:href="@{../index}">Terminer</a></div>
+                <div class="col-xs-12 col-md-3"></div>
+            </div>
+        </div>
+    </main>
+    <div th:replace="fragments/footer.html :: footer"></div>
+</div>
+</body>
+</html>

@@ -1,9 +1,6 @@
 package com.kifiya.kobiri.controllers;
 
-import com.kifiya.kobiri.models.Beneficiaire;
-import com.kifiya.kobiri.models.Boutique;
-import com.kifiya.kobiri.models.Client;
-import com.kifiya.kobiri.models.Transfert;
+import com.kifiya.kobiri.models.*;
 import com.kifiya.kobiri.services.ClientService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
 @Controller
 @RequestMapping("/client")
@@ -70,17 +69,19 @@ public class ClientController {
         Transfert transfert = (Transfert) httpSession.getAttribute("transfert");
         transfert.setBeneficiaire(beneficiaire);
         httpSession.setAttribute("transfert", transfert);
-        model.addAttribute("transfert", transfert);
+        model.addAttribute("carte", new Carte());
         model.addAttribute("step2", true);
         model.addAttribute("step3", true);
         return "client/transfert-carte";
     }
 
     @RequestMapping(value = "/paiement-carte", method = RequestMethod.POST)
-    public String paiementParCarte(@Valid @ModelAttribute("transfert") Transfert transfert,
-                           BindingResult bindingResult, Model model){
-        clientService.ajouterTransfert(transfert);
-        return "redirect:index";
+    public String paiementParCarte(HttpSession httpSession, @Valid @ModelAttribute("carte") Carte carte, Model model){
+        Transfert transfert = (Transfert) httpSession.getAttribute("transfert");
+        assertNotNull(carte);
+        Transfert transfertSaved = clientService.ajouterTransfert(transfert);
+        model.addAttribute("transfert", transfertSaved);
+        return "client/transfert-enregistre";
     }
 
 }
