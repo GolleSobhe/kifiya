@@ -28,19 +28,14 @@ public class Client extends Utilisateur{
     String prenom;
 
     @NonNull
-    @Pattern(regexp = "(\\+33|0033|0)[0-9]{9}")
+    @NotBlank(message = "*veuillez fournir votre telephone")
+    @Pattern(regexp = "\\d{2}[- .]?\\d{2}[- .]?\\d{2}[- .]?\\d{2}[- .]?\\d{2}$")
     String telephone;
 
-    @NonNull
-    @NotEmpty(message = "*veuillez fournir votre adresse")
     String adresse;
 
-    @NonNull
-    @NotEmpty(message = "*veuillez fournir votre pays")
     String pays;
 
-    @NonNull
-    @NotEmpty(message = "*veuillez fournir votre ville")
     String ville;
 
     String codePostale;

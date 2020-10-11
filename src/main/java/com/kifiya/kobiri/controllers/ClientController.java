@@ -47,8 +47,8 @@ public class ClientController {
 
     @RequestMapping(value = "/transfert", method = RequestMethod.POST)
     public String changerTransfert(HttpSession httpSession, @ModelAttribute("transfert") Transfert transfert, Model model){
-        List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Beneficiaire> beneficiaires = clientService.listerBeneficiares(userDetails.getUsername());
         Client client = Client.builder()
                 .beneficiaires(beneficiaires)
                 .email(userDetails.getUsername())
