@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Créer un compte</title>
+    <title>Administration</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
 
@@ -29,12 +29,16 @@
                                 Statistiques
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Nombre de transferts en cours
+                                <a th:href="@{/admin/tranfertsEnCours}">Transferts en cours</a>
                                 <span class="badge badge-primary badge-pill" th:text="${nbTransfertsEncours}"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                Nombre de transferts rendus
+                                Transferts rendus
                                 <span class="badge badge-primary badge-pill" th:text="${nbTransfertsRendus}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Transferts desactives
+                                <span class="badge badge-primary badge-pill" th:text="${nbTransfertsDesactives}"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 Nombre de gérants
