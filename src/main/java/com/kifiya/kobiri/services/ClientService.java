@@ -52,7 +52,7 @@ public class ClientService {
         clientRepository.ajouter(client);
         VerificationToken verificationToken = new VerificationToken(client.getEmail());
         verificationTokenRepository.creerToken(verificationToken);
-        //emailService.sendValidationTokenToClient(appUrl,verificationToken.getToken(),client.getEmail());
+        emailService.sendValidationTokenToClient(appUrl,verificationToken.getToken(),client.getEmail());
     }
 
     public void checkToken(String token) throws InvalidTokenException, ExpiryTokenException{
