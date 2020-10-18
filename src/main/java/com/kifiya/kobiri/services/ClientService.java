@@ -4,6 +4,8 @@ import com.kifiya.kobiri.exception.ExpiryTokenException;
 import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.*;
 import com.kifiya.kobiri.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,44 +20,42 @@ public class ClientService {
     private Random random = new Random();
     private StringBuilder sb = new StringBuilder();
 
-    private final BeneficiaireRepository beneficiaireRepository;
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-    private final EmailService emailService;
+    @Autowired
+    private BeneficiaireRepository beneficiaireRepository;
 
-    private final ClientRepository clientRepository;
+    @Autowired
+    private EmailService emailService;
 
-    private final VerificationTokenRepository verificationTokenRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-    private final TransfertRepository transfertRepository;
+    @Autowired
+    private VerificationTokenRepository verificationTokenRepository;
 
-    private final IndexService indexRepository;
+    @Autowired
+    private TransfertRepository transfertRepository;
 
-    public ClientService(ClientRepository clientRepository, EmailService emailService,
-                         VerificationTokenRepository verificationTokenRepository,
-                         BeneficiaireRepository beneficiaireRepository,
-                         TransfertRepository transfertRepository,
-                         IndexService indexRepository) {
-        this.clientRepository = clientRepository;
-        this.emailService = emailService;
-        this.verificationTokenRepository = verificationTokenRepository;
-        this.beneficiaireRepository = beneficiaireRepository;
-        this.transfertRepository = transfertRepository;
-        this.indexRepository = indexRepository;
-    }
+    @Autowired
+    private IndexService indexRepository;
 
     public void ajouter(Client client,String appUrl) {
-        /**
-         if(utilisateur.getPassword() != null){
-         utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
-         }
-         */
-        clientRepository.save(client);
+
+        if(client.getPassword() != null){
+             client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
+        }else {
+            client.setPassword("password");
+        }
+        client.setActive(false);
+        client.setRole("CLIENT");
+        clientRepository.ajouter(client);
         VerificationToken verificationToken = new VerificationToken(client.getEmail());
         verificationTokenRepository.creerToken(verificationToken);
-        emailService.sendValidationTokenToClient(appUrl,verificationToken.getToken(),client.getEmail());
+        //emailService.sendValidationTokenToClient(appUrl,verificationToken.getToken(),client.getEmail());
     }
 
-    public void validerInscription(String token) throws InvalidTokenException, ExpiryTokenException {
+    public void checkToken(String token) throws InvalidTokenException, ExpiryTokenException{
         VerificationToken verificationToken = verificationTokenRepository.recupererToken(token);
         if(verificationToken == null){
             throw new InvalidTokenException();
@@ -63,7 +63,11 @@ public class ClientService {
         if(LocalDateTime.now().isAfter(verificationToken.getExpirationDate())){
             throw new ExpiryTokenException();
         }
-        clientRepository.validerClient(verificationToken.getIdUser());
+    }
+
+    public void validerInscription(String token, String password) {
+        VerificationToken verificationToken = verificationTokenRepository.recupererToken(token);
+        clientRepository.validerClient(verificationToken.getIdUser(), bCryptPasswordEncoder.encode(password));
         verificationTokenRepository.supprimerToken(token);
     }
 
@@ -105,4 +109,5 @@ public class ClientService {
     public Map<String, Object> obtenirParametre() {
         return indexRepository.obtenirPrametre();
     }
+
 }

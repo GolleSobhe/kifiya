@@ -1,7 +1,7 @@
 insert into CLIENT(email,nom,prenom,telephone,adresse,code_postale,ville,pays)
-values('teliwal@gmail.com','telly','Diallo','+33752031094','38 rue Saint Roch','31400','Toulouse','France');
+values('teliwal@gmail.com','telly','Diallo','07-52-03-10-94','38 rue Saint Roch','31400','Toulouse','France');
 insert into CLIENT(email,nom,prenom,telephone,adresse,code_postale,ville,pays)
-values('sobhe@gmail.com','Sobhe','Golle','+33752031094','23 rue da la Riche','31400','Toulouse','France');
+values('sobhe@gmail.com','Sobhe','Golle','07-52-03-10-94','23 rue da la Riche','31400','Toulouse','France');
 
 insert into GERANT(email,nom,prenom,adresse,code,telephone,ville)
 values('sobhe1@gmail.com','Kikala','Sare','Cosa','12345678','+224622001122','Conakry');

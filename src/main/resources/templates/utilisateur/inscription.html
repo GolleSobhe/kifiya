@@ -16,12 +16,10 @@
         <div class="container container-fluid mx-auto col-xs-12 col-sm-8 col-md-7 col-sm-offset-2 col-md-offset-3" style="margin-top:85px">
             <div class="col-md-12">
                 <h2>Créer un compte</h2>
+                <div  th:if="${confirmationMessage}" class="alert alert-success"
+                          role="alert" th:text=${confirmationMessage}>
+                </div>
                 <form th:action="@{/utilisateur/inscription}" th:object="${utilisateur}" method="post">
-                    <div class="row">
-                        <div  th:if="${confirmationMessage}" class="alert alert-success"
-                              role="alert" th:text=${confirmationMessage}>
-                        </div>
-                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nom">Nom</label>

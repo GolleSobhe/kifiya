@@ -11,11 +11,14 @@ import java.sql.ResultSet;
 @Repository
 public class ClientRepository {
 
-    private static final String CREER = "insert into CLIENT(email,nom,prenom,password,telephone,adresse,code_postale," +
-            "ville,pays,est_valide)" +
-            "values(:email, :nom, :prenom,:password, :telephone, :adresse, :code_postale, :ville, :pays, 'NON')";
+    private static final String AJOUTER_UTILISATEUR = "insert into CONNEXION(email,password,active,role) "+
+            "values(:email,:password,:active,:role);";
 
-    private static final String VALIDER_CLIENT = "Update CLIENT set est_valide = 'OUI' where email = :email";
+    private static final String AJOUTER_CLIENT = "insert into CLIENT(email,nom,prenom,telephone,adresse,code_postale,ville,pays) " +
+            "values(:email, :nom, :prenom, :telephone, :adresse, :code_postale, :ville, :pays);";
+
+
+    private static final String VALIDER_CLIENT = "Update CONNEXION set active = :active,password = :password  where email = :email";
 
     private static final String CLIENT_EXISTE = "Select email from CLIENT where email = :email";
 
@@ -28,7 +31,7 @@ public class ClientRepository {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public void save(Client client){
+    public void ajouter(Client client){
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("email",client.getEmail());
         params.addValue("nom",client.getNom());
@@ -39,12 +42,17 @@ public class ClientRepository {
         params.addValue("code_postale",client.getCodePostale());
         params.addValue("ville",client.getVille());
         params.addValue("pays",client.getPays());
-        namedParameterJdbcTemplate.update(CREER,params);
+        params.addValue("active",client.isActive());
+        params.addValue("role",client.getRole());
+        namedParameterJdbcTemplate.update(AJOUTER_UTILISATEUR,params);
+        namedParameterJdbcTemplate.update(AJOUTER_CLIENT,params);
     }
 
-    public void validerClient(String email){
+    public void validerClient(String email, String password){
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("email",email);
+        params.addValue("active", true);
+        params.addValue("password", password);
         namedParameterJdbcTemplate.update(VALIDER_CLIENT,params);
     }
 

@@ -3,8 +3,6 @@ package com.kifiya.kobiri.controllers;
 import com.kifiya.kobiri.exception.ExpiryTokenException;
 import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.Client;
-import com.kifiya.kobiri.models.Transfert;
-import com.kifiya.kobiri.models.Utilisateur;
 import com.kifiya.kobiri.services.ClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/utilisateur")
@@ -69,7 +66,7 @@ public class UtilisateurController {
     @GetMapping(value="/confirmation")
     public String confirmation(Model model, @RequestParam("token") String token){
         try {
-            clientService.validerInscription(token);
+            clientService.checkToken(token);
             model.addAttribute("confirmationToken", token);
         } catch (InvalidTokenException e) {
             model.addAttribute("invalidToken", "Oups! Il s'agit d'un lien de confirmation non valide.");
@@ -77,6 +74,12 @@ public class UtilisateurController {
             model.addAttribute("invalidToken", "Oups! le token a expiré.");
         }
         return "utilisateur/confirmation";
+    }
+
+    @RequestMapping(value = "/confirmation", method = RequestMethod.POST)
+    public String setMotDePass(@RequestParam("token") String token, @RequestParam("password") String password){
+        clientService.validerInscription(token, password);
+        return "redirect:/index";
     }
 
 }
