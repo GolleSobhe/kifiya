@@ -48,4 +48,8 @@ public class Client extends Utilisateur{
     String codePostale;
 
     List<Beneficiaire> beneficiaires;
+
+    public String toString(){
+        return prenom + " " + nom;
+    }
 }

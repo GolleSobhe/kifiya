@@ -3,6 +3,9 @@ values('teliwal@gmail.com','telly','Diallo','+33752031094','38 rue Saint Roch','
 insert into CLIENT(email,nom,prenom,telephone,adresse,code_postale,ville,pays)
 values('sobhe@gmail.com','Sobhe','Golle','+33752031094','23 rue da la Riche','31400','Toulouse','France');
 
+insert into TRANSFERT(code,date_transfert,montant_euros,taux,frais,client_id,etat_transfert,beneficiaire_id)
+values('1298HB',sysdate,100,0.23,1000,'sobhe@gmail.com','ENCOURS',1);
+
 insert into GERANT(email,nom,prenom,adresse,code,telephone,ville)
 values('sobhe1@gmail.com','Kikala','Sare','Cosa','12345678','+224622001122','Conakry');
 insert into GERANT(email,nom,prenom,adresse,code,telephone,ville)

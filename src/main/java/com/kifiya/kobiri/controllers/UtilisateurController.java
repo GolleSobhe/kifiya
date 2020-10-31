@@ -15,15 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class UtilisateurController {
 
     private final ClientService clientService;
 
-
     public UtilisateurController(ClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @GetMapping(value = "utilisateur/")
+    public String monCompte(Principal principal,Model model){
+        String user = principal.getName();
+        List<Transfert> allTransferts = clientService.mesTransferts(user);
+        model.addAttribute("transferts",allTransferts);
+        return "client/accueil";
     }
 
     @GetMapping(value = "utilisateur/inscription")
@@ -44,7 +53,7 @@ public class UtilisateurController {
         }
         String appUrl = request.getScheme() + "://" + request.getServerName() + ":" +
                 request.getServerPort() + request.getContextPath();
-        clientService.ajouter(client,appUrl);
+        clientService.inscription(client,appUrl);
         model.addAttribute("confirmationMessage", "Un e-mail de confirmation a été envoyé à " + client.getEmail());
         return "utilisateur/inscription";
     }

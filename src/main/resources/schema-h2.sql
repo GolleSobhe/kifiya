@@ -9,6 +9,7 @@ create table TRANSFERT
 	client_id varchar(60) not null,
 	beneficiaire_id varchar(60) not null,
 	boutique_id varchar (50),
+	etat_transfert varchar(20) not null,
 	primary key (code)
 );
 
