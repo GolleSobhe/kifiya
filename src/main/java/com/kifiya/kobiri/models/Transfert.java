@@ -41,5 +41,7 @@ public class Transfert {
 
     @NotNull
     Double frais;
+
+    EtatTransfert statut;
 }
 

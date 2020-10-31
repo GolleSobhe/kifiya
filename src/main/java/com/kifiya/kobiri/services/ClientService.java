@@ -17,6 +17,7 @@ import java.util.Random;
 @Service
 @Transactional
 public class ClientService {
+
     private Random random = new Random();
     private StringBuilder sb = new StringBuilder();
 
@@ -40,10 +41,11 @@ public class ClientService {
     @Autowired
     private IndexService indexRepository;
 
+
     public void ajouter(Client client,String appUrl) {
 
         if(client.getPassword() != null){
-             client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
+            client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
         }else {
             client.setPassword("password");
         }
@@ -97,6 +99,10 @@ public class ClientService {
             transfert.getBeneficiaire().setTelephone(telephone);
         }
         return transfertRepository.ajouterTransfert(transfert);
+    }
+
+    public List<Transfert> mesTransferts(String clientId){
+        return transfertRepository.transfertsClient(clientId);
     }
 
     private String getHexa(int nombreCaractere){

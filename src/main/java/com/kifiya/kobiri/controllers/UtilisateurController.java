@@ -3,6 +3,7 @@ package com.kifiya.kobiri.controllers;
 import com.kifiya.kobiri.exception.ExpiryTokenException;
 import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.Client;
+import com.kifiya.kobiri.models.Transfert;
 import com.kifiya.kobiri.services.ClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/utilisateur")
@@ -17,9 +21,16 @@ public class UtilisateurController {
 
     private final ClientService clientService;
 
-
     public UtilisateurController(ClientService clientService) {
         this.clientService = clientService;
+    }
+
+    @RequestMapping(value = {"", "/", "/index", "/acceuil"}, method = RequestMethod.GET)
+    public String monCompte(Principal principal,Model model){
+        String user = principal.getName();
+        List<Transfert> allTransferts = clientService.mesTransferts(user);
+        model.addAttribute("transferts",allTransferts);
+        return "client/accueil";
     }
 
     @RequestMapping(value = "/inscription", method = RequestMethod.GET)

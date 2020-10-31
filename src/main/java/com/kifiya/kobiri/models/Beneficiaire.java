@@ -30,4 +30,8 @@ public class Beneficiaire {
 
     @NonNull
     String clientId;
+
+    public String toString(){
+        return prenom + " " + nom;
+    }
 }

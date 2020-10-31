@@ -24,15 +24,30 @@ public class AdminController {
     public String getAdminStatistiques(Model model) {
         int nbTransfertsEncours = adminService.determinerNombreDeTransfertsEnCours();
         int nbTransfertsRendus = adminService.determinerNombreDeTransfertsRendus();
+        int nbTransfertsDesactives = adminService.determinerNombreDeTransfertsDesactives();
         int nbBoutiques = adminService.nombreDeBoutiques();
         int nbGerants = adminService.nombreDeGerants();
 
         model.addAttribute("nbTransfertsEncours", nbTransfertsEncours);
         model.addAttribute("nbTransfertsRendus", nbTransfertsRendus);
+        model.addAttribute("nbTransfertsDesactives", nbTransfertsDesactives);
         model.addAttribute("nbGerants", nbGerants);
         model.addAttribute("nbBoutiques", nbBoutiques);
 
         return "admin/accueil-admin";
+    }
+
+    @GetMapping(value = "/tranfertsEnCours")
+    public String transfertsEncours(Model model){
+        var transferts = adminService.listerTransfertsEncours();
+        model.addAttribute("transferts",transferts);
+        return "admin/transferts";
+    }
+
+    @PostMapping(value = "/desactiverTransfert")
+    public String desactiverTransfert(@RequestParam(value = "code",required = true) String codeTransfert){
+        adminService.desactiverTransfert(codeTransfert);
+        return "redirect:/admin/";
     }
 
     @GetMapping(value = "/gerant")
