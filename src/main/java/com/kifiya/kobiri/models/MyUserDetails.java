@@ -1,4 +1,4 @@
-package com.kifiya.kobiri.config;
+package com.kifiya.kobiri.models;
 
 import com.kifiya.kobiri.models.Utilisateur;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class UtilisateurConnecter implements UserDetails {
+public class MyUserDetails implements UserDetails {
 
     private final Utilisateur utilisateur;
 
-    public UtilisateurConnecter(Utilisateur utilisateur) {
+    public MyUserDetails(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
 
