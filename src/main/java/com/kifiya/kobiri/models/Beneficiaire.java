@@ -16,7 +16,7 @@ import javax.validation.constraints.Pattern;
 @Data
 @Builder
 public class Beneficiaire {
-
+    @NonNull
     @NotEmpty(message = "*veuillez fournir le nom")
     String nom;
 

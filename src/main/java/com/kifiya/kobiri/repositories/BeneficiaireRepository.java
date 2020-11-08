@@ -30,13 +30,12 @@ public class BeneficiaireRepository {
 
     public String ajouterBeneficiaire(Beneficiaire beneficiaire){
         MapSqlParameterSource params = new MapSqlParameterSource();
-        KeyHolder keyHolder = new GeneratedKeyHolder();
         params.addValue("nom",beneficiaire.getNom());
         params.addValue("prenom",beneficiaire.getPrenom());
         params.addValue("telephone",beneficiaire.getTelephone());
         params.addValue("client_id",beneficiaire.getClientId());
-        namedParameterJdbcTemplate.update(CREER_BENEFICIAIRE,params,  keyHolder, new String[]{"telephone"});
-        return keyHolder.getKey().toString();
+        namedParameterJdbcTemplate.update(CREER_BENEFICIAIRE,params);
+        return beneficiaire.getTelephone();
     }
 
     public List<Beneficiaire>  listerBeneficiaires(String clientId){

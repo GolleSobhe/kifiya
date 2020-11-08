@@ -1,20 +1,23 @@
 package com.kifiya.kobiri.controllers;
 
-import com.kifiya.kobiri.models.Beneficiaire;
-import com.kifiya.kobiri.models.Boutique;
-import com.kifiya.kobiri.models.Client;
-import com.kifiya.kobiri.models.Transfert;
+import com.kifiya.kobiri.models.*;
 import com.kifiya.kobiri.services.ClientService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 
 @Controller
 @RequestMapping("/client")
@@ -43,43 +46,42 @@ public class ClientController {
     }
 
     @RequestMapping(value = "/transfert", method = RequestMethod.POST)
-    public String changerTransfert(@ModelAttribute("transfert") Transfert transfert, Model model){
-        List<Beneficiaire> beneficiaires = clientService.listerBeneficiares();
-        //transfert.setClient(Client.builder().beneficiaires(beneficiaires).build());
-        Client client = new Client();
-        client.setBeneficiaires(beneficiaires);
+    public String changerTransfert(HttpSession httpSession, @ModelAttribute("transfert") Transfert transfert, Model model){
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Beneficiaire> beneficiaires = clientService.listerBeneficiares(userDetails.getUsername());
+        Client client = Client.builder()
+                .beneficiaires(beneficiaires)
+                .email(userDetails.getUsername())
+                .active(userDetails.isEnabled())
+                .nom("").prenom("").ville("").telephone("").adresse("").pays("")
+                .build();
         transfert.setClient(client);
         model.addAttribute("transfert", transfert);
         model.addAttribute("beneficiaire", new Beneficiaire());
         model.addAttribute("step2", true);
         model.addAttribute("step3", false);
+        httpSession.setAttribute("transfert", transfert);
         return "client/transfert-beneficiaire";
     }
 
     @RequestMapping(value = "/beneficiaires", method = RequestMethod.POST)
-    public String ajouterBeneficiaire(@ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
-        Transfert transfert = new Transfert();
+    public String ajouterBeneficiaire(HttpSession httpSession, @ModelAttribute("beneficiaire") Beneficiaire beneficiaire, Model model){
+        Transfert transfert = (Transfert) httpSession.getAttribute("transfert");
         transfert.setBeneficiaire(beneficiaire);
+        httpSession.setAttribute("transfert", transfert);
+        model.addAttribute("carte", new Carte());
         model.addAttribute("step2", true);
         model.addAttribute("step3", true);
-        return "client/transfert-step3";
-    }
-
-    @RequestMapping(value = "/paiement", method = RequestMethod.POST)
-    public String paiement(@Valid @ModelAttribute("transfert") Transfert transfert, Model model){
-        model.addAttribute("transfert", transfert);
-        model.addAttribute("step2", true);
-        model.addAttribute("step3", true);
-        return "client/transfert-step3";
+        return "client/transfert-carte";
     }
 
     @RequestMapping(value = "/paiement-carte", method = RequestMethod.POST)
-    public String paiementParCarte(@Valid @ModelAttribute("transfert") Transfert transfert,
-                           BindingResult bindingResult, Model model){
-        //reinitialiser la variable de la session
-        //model.addAttribute("transfert", transfert);
-        clientService.ajouterTransfert(transfert);
-        return "redirect:index";
+    public String paiementParCarte(HttpSession httpSession, @Valid @ModelAttribute("carte") Carte carte, Model model){
+        Transfert transfert = (Transfert) httpSession.getAttribute("transfert");
+        assertNotNull(carte);
+        Transfert transfertSaved = clientService.ajouterTransfert(transfert);
+        model.addAttribute("transfert", transfertSaved);
+        return "client/transfert-enregistre";
     }
 
 }

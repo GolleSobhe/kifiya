@@ -1,9 +1,11 @@
 package com.kifiya.kobiri.repositories;
 
+import com.kifiya.kobiri.models.Boutique;
 import com.kifiya.kobiri.models.Beneficiaire;
 import com.kifiya.kobiri.models.Client;
 import com.kifiya.kobiri.models.EtatTransfert;
 import com.kifiya.kobiri.models.Transfert;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -41,13 +43,16 @@ public class TransfertRepository {
             "from TRANSFERT t, CLIENT c, BENEFICIAIRE b where t.etat_transfert = :etat_transfert and " +
             "t.client_id = c.email and t.beneficiaire_id = b.id and c.email = b.client_id";
 
+    private static final String SELECT_BOUTIQUE ="select nom, ville from BOUTIQUE where nom = :nom";
+
+
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public TransfertRepository(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    public void creer(Transfert transfert) {
+    public Transfert ajouterTransfert(Transfert transfert) {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("code", transfert.getCode());
         params.addValue("date_transfert", LocalDateTime.now());
@@ -59,6 +64,12 @@ public class TransfertRepository {
         params.addValue("client_id", transfert.getClient().getEmail());
         params.addValue("etat_transfert", EtatTransfert.ENCOURS.name());
         namedParameterJdbcTemplate.update(AJOUTER, params);
+        Boutique boutique = namedParameterJdbcTemplate
+                .queryForObject(SELECT_BOUTIQUE,
+                        new MapSqlParameterSource("nom", transfert.getBoutique().getNom()),
+                        BeanPropertyRowMapper.newInstance(Boutique.class));
+        transfert.setBoutique(boutique);
+        return transfert;
     }
 
     public void rendreTransfert(String codeTransfert,String gerantId) {
@@ -82,9 +93,6 @@ public class TransfertRepository {
         params.addValue("code", code);
         return namedParameterJdbcTemplate.query(TRANSFERT_PAR_CODE, params, resultSet ->{
             Transfert transfert = new Transfert();
-            //transfert.setPrenom(resultSet.getString("prenom"));
-            //transfert.setNom(resultSet.getString("nom"));
-            //transfert.setTelephone(resultSet.getString("telephone"));
             transfert.setDateTransfert(resultSet.getTimestamp("date_transfert").toLocalDateTime());
             transfert.setDateValidation(resultSet.getTimestamp("date_validation").toLocalDateTime());
             transfert.setMontantEuros(resultSet.getLong("montant_euros"));

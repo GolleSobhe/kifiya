@@ -13,6 +13,8 @@
             <div class="col-md-12">
                 <h3> RÉCAPITULATIF</h3>
                 <form th:action="@{/client/transfert}" th:object="${transfert}" method="post">
+                    <input type="hidden" th:field="*{taux}">
+                    <input type="hidden" th:field="*{frais}">
                     <div class="row">
                         <div class="col-xs-12 col-md-5">
                             <div class="form-row">
@@ -57,7 +59,7 @@
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Frais de transfert
-                                    <span th:text="${transfert.frais +' €'}"> 5 €</span>
+                                    <span th:text="${transfert.frais +' €'}"> 0 €</span>
                                 </li>
                             </ul>
                         </div>

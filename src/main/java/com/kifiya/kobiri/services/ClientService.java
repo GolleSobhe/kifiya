@@ -4,6 +4,8 @@ import com.kifiya.kobiri.exception.ExpiryTokenException;
 import com.kifiya.kobiri.exception.InvalidTokenException;
 import com.kifiya.kobiri.models.*;
 import com.kifiya.kobiri.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,44 +21,43 @@ public class ClientService {
     private Random random = new Random();
     private StringBuilder sb = new StringBuilder();
 
-    private final BeneficiaireRepository beneficiaireRepository;
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-    private final EmailService emailService;
+    @Autowired
+    private BeneficiaireRepository beneficiaireRepository;
 
-    private final ClientRepository clientRepository;
+    @Autowired
+    private EmailService emailService;
 
-    private final VerificationTokenRepository verificationTokenRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-    private final TransfertRepository transfertRepository;
+    @Autowired
+    private VerificationTokenRepository verificationTokenRepository;
 
-    private final IndexService indexRepository;
+    @Autowired
+    private TransfertRepository transfertRepository;
 
-    public ClientService(ClientRepository clientRepository, EmailService emailService,
-                         VerificationTokenRepository verificationTokenRepository,
-                         BeneficiaireRepository beneficiaireRepository,
-                         TransfertRepository transfertRepository,
-                         IndexService indexRepository) {
-        this.clientRepository = clientRepository;
-        this.emailService = emailService;
-        this.verificationTokenRepository = verificationTokenRepository;
-        this.beneficiaireRepository = beneficiaireRepository;
-        this.transfertRepository = transfertRepository;
-        this.indexRepository = indexRepository;
-    }
+    @Autowired
+    private IndexService indexRepository;
 
-    public void inscription(Client client, String appUrl) {
-        /**
-         if(utilisateur.getPassword() != null){
-         utilisateur.setPassword(bCryptPasswordEncoder.encode(utilisateur.getPassword()));
-         }
-         */
-        clientRepository.save(client);
+
+    public void ajouter(Client client,String appUrl) {
+
+        if(client.getPassword() != null){
+            client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
+        }else {
+            client.setPassword("password");
+        }
+        client.setActive(false);
+        client.setRole("CLIENT");
+        clientRepository.ajouter(client);
         VerificationToken verificationToken = new VerificationToken(client.getEmail());
         verificationTokenRepository.creerToken(verificationToken);
         emailService.sendValidationTokenToClient(appUrl,verificationToken.getToken(),client.getEmail());
     }
 
-    public void validerInscription(String token) throws InvalidTokenException, ExpiryTokenException {
+    public void checkToken(String token) throws InvalidTokenException, ExpiryTokenException{
         VerificationToken verificationToken = verificationTokenRepository.recupererToken(token);
         if(verificationToken == null){
             throw new InvalidTokenException();
@@ -64,7 +65,11 @@ public class ClientService {
         if(LocalDateTime.now().isAfter(verificationToken.getExpirationDate())){
             throw new ExpiryTokenException();
         }
-        clientRepository.validerClient(verificationToken.getIdUser());
+    }
+
+    public void validerInscription(String token, String password) {
+        VerificationToken verificationToken = verificationTokenRepository.recupererToken(token);
+        clientRepository.validerClient(verificationToken.getIdUser(), bCryptPasswordEncoder.encode(password));
         verificationTokenRepository.supprimerToken(token);
     }
 
@@ -80,43 +85,20 @@ public class ClientService {
         beneficiaireRepository.ajouterBeneficiaire(beneficiaire);
     }
 
-    public List<Beneficiaire> listerBeneficiares(){
-        //recuperer email du client connecte
-        String email = "sobhe@gmail.com";
+    public List<Beneficiaire> listerBeneficiares(String email){
         return beneficiaireRepository.listerBeneficiaires(email);
     }
 
-    public void ajouterTransfert(Transfert transfert) {
-        //Moidification apres creation de la page de connexion
-        /**
-         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-         Utilisateur utilisateurAuth = (Utilisateur) auth.getPrincipal();
-         Client client = new Client();
-         client.setId(utilisateurAuth.getId());
-         client.setPrenom(utilisateurAuth.getPrenom());
-         client.setNom(utilisateurAuth.getNom());
-         client.setEmail(utilisateurAuth.getEmail());
-         client.setPassword(utilisateurAuth.getPassword());
-         transfert.setResponsable(client);
-         */
-
-        transfert.setBoutique(new Boutique("cosa1", "Conakry", ""));
-        Beneficiaire beneficiaire = Beneficiaire.builder().
-                nom("Fiya").prenom("Hollo").telephone("623-09-76-13").build();
-        transfert.setBeneficiaire(beneficiaire);
-        transfert.setMontantEuros((long) 500);
-        //transfert.setTaux((long) 10600);
-        //transfert.setFrais((long) 5);
-        Client client = new Client();
-        client.setEmail("sobhe@gmail.com");
-        transfert.setClient(client);
+    public Transfert ajouterTransfert(Transfert transfert) {
         transfert.setCode(getHexa(8));
         Boolean beneficiaireExist = beneficiaireRepository.beneficiaireExists(transfert.getBeneficiaire().getTelephone(), transfert.getClient().getEmail());
         if(!beneficiaireExist){
-            String telephone = beneficiaireRepository.ajouterBeneficiaire(transfert.getBeneficiaire());
+            Beneficiaire beneficiaire = transfert.getBeneficiaire();
+            beneficiaire.setClientId(transfert.getClient().getEmail());
+            String telephone = beneficiaireRepository.ajouterBeneficiaire(beneficiaire);
             transfert.getBeneficiaire().setTelephone(telephone);
         }
-        transfertRepository.creer(transfert);
+        return transfertRepository.ajouterTransfert(transfert);
     }
 
     public List<Transfert> mesTransferts(String clientId){
@@ -133,4 +115,5 @@ public class ClientService {
     public Map<String, Object> obtenirParametre() {
         return indexRepository.obtenirPrametre();
     }
+
 }
